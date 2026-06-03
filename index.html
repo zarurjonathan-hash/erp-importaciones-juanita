@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ERP Importaciones Juanita - V3 Conectado</title>
+  <style>
+    :root{
+      --bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;
+      --sage:#c2d8b7;--sage2:#d6e5cf;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;
+      --shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px;
+    }
+    *{box-sizing:border-box} body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
+    .app{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.sidebar{background:linear-gradient(180deg,var(--sage),#b4cdab);padding:22px 16px;position:sticky;top:0;height:100vh;overflow:auto;color:var(--ink)}
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:24px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#edf6e8,#98b98d);display:flex;align-items:center;justify-content:center;font-weight:900}.brand h1{font-size:16px;margin:0}.brand p{margin:2px 0 0;font-size:12px;color:#4f5d52}
+    .navGroup{margin:18px 0 8px;color:#536254;font-size:11px;text-transform:uppercase;letter-spacing:.8px;padding:0 10px}.navItem{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:13px;color:#243024;cursor:pointer;margin:3px 0;font-size:14px}.navItem:hover,.navItem.active{background:rgba(85,107,47,.14);font-weight:800}.navIcon{width:24px;height:24px;border-radius:9px;background:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;font-size:13px}
+    .main{padding:22px;overflow:auto}.topbar{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px}.title h2{margin:0;font-size:28px}.title p{margin:4px 0 0;color:var(--muted)}.userBox{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 12px;display:flex;align-items:center;gap:10px;box-shadow:var(--shadow)}.avatar{width:34px;height:34px;border-radius:50%;background:var(--olive);color:white;display:flex;align-items:center;justify-content:center;font-weight:800}
+    .section{display:none}.section.active{display:block}.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px}.metric{min-height:120px}.metric .label{color:var(--muted);font-size:13px}.metric .value{font-size:30px;font-weight:900;margin:8px 0 4px}.metric .note{font-size:12px;color:var(--muted)}
+    .moduleHeader{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:14px}.moduleHeader h3{margin:0;font-size:22px}.moduleHeader p{margin:4px 0 0;color:var(--muted)}.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}button{border:0;border-radius:12px;padding:10px 13px;background:var(--olive);color:white;font-weight:700;cursor:pointer}button.secondary{background:white;color:var(--olive);border:1px solid var(--line)}button.danger{background:var(--red)}
+    table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;border:1px solid var(--line);border-radius:15px;background:white}th,td{padding:12px;border-bottom:1px solid var(--line);text-align:left;font-size:14px;vertical-align:middle}th{background:var(--soft);font-size:12px;color:#4d594e;text-transform:uppercase;letter-spacing:.5px}tr:last-child td{border-bottom:0}.chip{display:inline-flex;padding:5px 9px;border-radius:999px;font-size:12px;font-weight:800}.chip.green{background:#e5f4eb;color:var(--green)}.chip.orange{background:#fff0df;color:var(--orange)}.chip.red{background:#fde7e7;color:var(--red)}.chip.blue{background:#e7efff;color:var(--blue)}.chip.gray{background:#eef0ee;color:#59635b}
+    .formGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}label{display:block;font-size:12px;color:var(--muted);font-weight:800;margin:0 0 6px;text-transform:uppercase;letter-spacing:.4px}input,select,textarea{width:100%;border:1px solid var(--line);border-radius:12px;padding:10px;font-size:14px;outline:none;background:white}textarea{min-height:78px;resize:vertical}.mockImage{width:54px;height:42px;border-radius:8px;background:linear-gradient(135deg,#e6f1ff,#ffd9e8,#e6ffef);border:1px solid var(--line)}
+    .docPreview{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}.docTop{background:var(--sage);padding:14px 16px;display:flex;justify-content:space-between;align-items:center}.docBody{padding:16px}.miniTable{width:100%;border-collapse:collapse;margin-top:10px}.miniTable th,.miniTable td{border:1px solid var(--line);padding:7px;font-size:12px}.guideScreen{display:grid;grid-template-columns:330px 1fr;gap:16px}.scanBox{background:linear-gradient(135deg,#d6e5cf,#b4cdab);border-radius:18px;padding:18px}.bigStatus{font-size:42px;font-weight:900;margin:8px 0}.version{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:800;color:var(--olive);margin-bottom:12px}
+    @media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.grid4,.grid3,.grid2,.formGrid,.guideScreen{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V3 Conectado</p></div></div>
+    <div class="navGroup">Principal</div>
+    <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
+    <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
+    <div class="navItem" data-view="muestras"><div class="navIcon">🧪</div>Muestras</div>
+    <div class="navItem" data-view="marketplace"><div class="navIcon">🏷️</div>Marketplace</div>
+    <div class="navItem" data-view="produccion"><div class="navIcon">🏭</div>Producción</div>
+    <div class="navGroup">Operación</div>
+    <div class="navItem" data-view="almacen"><div class="navIcon">📦</div>Almacén</div>
+    <div class="navItem" data-view="inventarios"><div class="navIcon">🧾</div>Inventarios</div>
+    <div class="navItem" data-view="documentos"><div class="navIcon">🖨️</div>Documentos</div>
+    <div class="navItem" data-view="archivos"><div class="navIcon">📁</div>Archivos</div>
+    <div class="navGroup">Administración</div>
+    <div class="navItem" data-view="clientes"><div class="navIcon">👥</div>Clientes</div>
+    <div class="navItem" data-view="compras"><div class="navIcon">🛒</div>Compras</div>
+    <div class="navItem" data-view="finanzas"><div class="navIcon">💰</div>Finanzas</div>
+    <div class="navItem" data-view="reportes"><div class="navIcon">📈</div>Reportes</div>
+    <div class="navItem" data-view="config"><div class="navIcon">⚙️</div>Configuración</div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
+
+    <section id="dashboard" class="section active">
+      <span class="version">VERSIÓN ACTUAL: V4 CLIENTES + PEDIDOS</span>
+      <div class="grid4">
+        <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
+        <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
+        <div class="card metric"><div class="label">Pedidos activos</div><div class="value">48</div><div class="note">Dato demo</div></div>
+        <div class="card metric"><div class="label">Guías pendientes</div><div class="value">326</div><div class="note">Dato demo</div></div>
+      </div><br>
+      <div class="grid2"><div class="card"><h3>Estado técnico</h3><table><thead><tr><th>Prueba</th><th>Resultado</th></tr></thead><tbody><tr><td>Archivo cargado</td><td><span class="chip green">V4 correcto</span></td></tr><tr><td>URL Supabase</td><td>https://sqlkkdxdpnjcuxkfouhc.supabase.co</td></tr><tr><td>Módulo funcional</td><td>Clientes + Pedidos</td></tr></tbody></table></div><div class="card"><h3>Siguientes módulos</h3><table><thead><tr><th>Módulo</th><th>Estatus</th></tr></thead><tbody><tr><td>Pedidos</td><td><span class="chip green">Funcional V4</span></td></tr><tr><td>Muestras</td><td>Después de pedidos</td></tr><tr><td>Marketplace</td><td>Después de inventario base</td></tr></tbody></table></div></div>
+    </section>
+
+    <section id="clientes" class="section">
+      <div class="moduleHeader"><div><h3>Clientes</h3><p>Primera prueba real: guardar y leer clientes desde Supabase.</p></div><button onclick="cargarClientes()">Actualizar</button></div>
+      <div class="card"><h3>Nuevo cliente</h3><div class="formGrid"><div><label>Nombre comercial</label><input id="clienteNombre" placeholder="Ej. Cliente ABC"></div><div><label>Razón social</label><input id="clienteRazon" placeholder="Ej. CLIENTE ABC SA DE CV"></div><div><label>RFC</label><input id="clienteRfc" placeholder="RFC"></div><div><label>Contacto</label><input id="clienteContacto" placeholder="Nombre del contacto"></div><div><label>Teléfono</label><input id="clienteTelefono" placeholder="Teléfono"></div><div><label>Email</label><input id="clienteEmail" placeholder="correo@cliente.com"></div></div><br><label>Dirección</label><textarea id="clienteDireccion" placeholder="Dirección completa"></textarea><br><br><label>Notas</label><textarea id="clienteNotas" placeholder="Condiciones, comentarios o datos importantes"></textarea><br><br><div class="actions"><button onclick="guardarCliente()">Guardar cliente</button><button class="secondary" onclick="limpiarClienteForm()">Limpiar</button></div><p id="clienteMsg" style="color:var(--muted);font-weight:700"></p></div><br>
+      <div class="card"><h3>Clientes registrados en Supabase</h3><table><thead><tr><th>Nombre</th><th>Razón social</th><th>Contacto</th><th>Teléfono</th><th>Email</th><th>Estatus</th></tr></thead><tbody id="clientesTbody"><tr><td colspan="6">Cargando clientes...</td></tr></tbody></table></div>
+    </section>
+
+    <section id="pedidos" class="section">
+      <div class="moduleHeader"><div><h3>Pedidos</h3><p>Crear y leer pedidos desde Supabase. V4 funcional básica.</p></div><button onclick="cargarPedidos()">Actualizar</button></div>
+      <div class="card">
+        <h3>Nuevo pedido</h3>
+        <div class="formGrid">
+          <div><label>Tipo de pedido</label><select id="pedidoTipo"><option>Sublimado</option><option>Ropa personalizada</option><option>Promocionales</option><option>Maquila</option><option>Solo impresión</option><option>Venta de tela</option><option>Marketplace</option></select></div>
+          <div><label>Cliente</label><select id="pedidoCliente"><option value="">Cargando clientes...</option></select></div>
+          <div><label>Fecha de entrega</label><input id="pedidoFechaEntrega" type="date"></div>
+          <div><label>Producto</label><input id="pedidoProducto" placeholder="Ej. Playera, tela, promocional"></div>
+          <div><label>Tela</label><input id="pedidoTela" placeholder="Ej. French Terry Algodón"></div>
+          <div><label>Cantidad total</label><input id="pedidoCantidad" type="number" step="0.01" placeholder="0"></div>
+          <div><label>Unidad</label><select id="pedidoUnidad"><option>Piezas</option><option>Metros</option><option>Rollos</option><option>Paquetes</option></select></div>
+          <div><label>Lado sublimación</label><input id="pedidoLado" placeholder="Derecho / reverso / ambos"></div>
+          <div><label>Área inicial</label><select id="pedidoArea"><option value="">Automática / sin asignar</option></select></div>
+        </div>
+        <br>
+        <label>Indicaciones generales</label><textarea id="pedidoIndicaciones" placeholder="Instrucciones generales del pedido"></textarea>
+        <br><br>
+        <div class="actions"><button onclick="guardarPedido()">Guardar pedido</button><button class="secondary" onclick="limpiarPedidoForm()">Limpiar</button></div>
+        <p id="pedidoMsg" style="color:var(--muted);font-weight:700"></p>
+      </div>
+      <br>
+      <div class="card"><h3>Pedidos registrados en Supabase</h3><table><thead><tr><th>Folio</th><th>Tipo</th><th>Cliente</th><th>Producto</th><th>Tela</th><th>Cantidad</th><th>Entrega</th><th>Estatus</th></tr></thead><tbody id="pedidosTbody"><tr><td colspan="8">Cargando pedidos...</td></tr></tbody></table></div>
+    </section>
+
+    <section id="muestras" class="section"><div class="moduleHeader"><div><h3>Muestras</h3><p>Módulo independiente con folio, creador, tipo de muestra, archivos y resultado.</p></div><button>+ Nueva muestra</button></div><div class="card"><table><thead><tr><th>Folio</th><th>Tipo</th><th>Cliente</th><th>Creador</th><th>Área</th><th>Estatus</th></tr></thead><tbody><tr><td>MSU-0001</td><td>Sublimado tela</td><td>Cliente A</td><td>Vendedor</td><td>Impresión</td><td><span class="chip orange">En proceso</span></td></tr></tbody></table></div></section>
+
+    <section id="marketplace" class="section"><div class="moduleHeader"><div><h3>Marketplace</h3><p>Importación de ventas, guías, sets, surtido, faltantes y entregas.</p></div><div class="actions"><button>Importar Excel</button><button class="secondary">Escanear guía</button></div></div><div class="guideScreen"><div class="scanBox"><h3>Escaneo de guía</h3><p>La pantalla mostrará qué lleva cada etiqueta.</p><label>Número de guía</label><input value="SHEIN-938475928"><div class="bigStatus">4 pzas</div><p>2 productos individuales · 1 set desglosado</p></div><div class="card"><h3>Productos de la guía</h3><table><thead><tr><th>Imagen</th><th>SKU vendido</th><th>Producto</th><th>Talla</th><th>Cant.</th><th>Stock</th><th>Faltante</th></tr></thead><tbody><tr><td><div class="mockImage"></div></td><td>SET-003-M</td><td>Set 3 playeras</td><td>M</td><td>1</td><td>0</td><td><span class="chip red">Fabricar 1</span></td></tr></tbody></table></div></div></section>
+
+    <section id="produccion" class="section"><div class="moduleHeader"><div><h3>Producción</h3><p>Colas por área con estatus, avance, responsables e incidencias.</p></div></div><div class="card"><table><thead><tr><th>Folio</th><th>Tipo</th><th>Área</th><th>Responsable</th><th>Avance</th><th>Problema</th></tr></thead><tbody><tr><td>PED-SUB-0008</td><td>Sublimado</td><td>Impresión</td><td>Operador 1</td><td>60%</td><td>No</td></tr></tbody></table></div></section>
+    <section id="almacen" class="section"><div class="moduleHeader"><div><h3>Almacén</h3><p>Entradas, salidas, packing list, entregas y movimientos.</p></div><button>+ Nota</button></div><div class="card"><h3>Packing list</h3><table><thead><tr><th>Rollo</th><th>Ancho</th><th>Metros</th><th>Obs.</th></tr></thead><tbody><tr><td>R-001</td><td>1.60</td><td>80</td><td>OK</td></tr></tbody></table></div></section>
+    <section id="inventarios" class="section"><div class="moduleHeader"><div><h3>Inventarios</h3><p>Prendas, sets, tela, papel, film, tinta, hilos, bolsas e insumos.</p></div><button>+ Movimiento</button></div><div class="card"><table><thead><tr><th>Tipo</th><th>SKU/Código</th><th>Descripción</th><th>Unidad</th><th>Stock</th><th>Alerta</th></tr></thead><tbody><tr><td>Prenda</td><td>PLY-101-M</td><td>Playera diseño 101</td><td>pza</td><td>-1</td><td><span class="chip red">Fabricar</span></td></tr></tbody></table></div></section>
+    <section id="documentos" class="section"><div class="moduleHeader"><div><h3>Documentos propuestos</h3><p>Vistas preliminares para dar visto bueno antes de generar PDFs reales.</p></div></div><div class="grid2"><div class="docPreview"><div class="docTop"><strong>PDF Completo de Pedido</strong><span>PED-SUB-0008</span></div><div class="docBody"><table class="miniTable"><tr><th>Imagen</th><th>Diseño</th><th>Cantidad</th><th>Indicaciones</th></tr><tr><td><div class="mockImage"></div></td><td>DIS-001</td><td>1</td><td>Imprimir tal cual</td></tr></table></div></div><div class="docPreview"><div class="docTop"><strong>Hoja Viajera</strong><span>Seguimiento</span></div><div class="docBody"><table class="miniTable"><tr><th>Área</th><th>Inicio</th><th>Fin</th><th>Problema</th></tr><tr><td>Almacén</td><td>OK</td><td>OK</td><td>No</td></tr><tr><td>Impresión</td><td>OK</td><td>-</td><td>No</td></tr></table></div></div></div></section>
+    <section id="archivos" class="section"><div class="moduleHeader"><div><h3>Archivos</h3><p>Diseños, moldes, PDFs, órdenes, comprobantes y evidencia.</p></div><button>+ Subir archivo</button></div><div class="card"><p>Base documental pendiente de conectar.</p></div></section>
+    <section id="compras" class="section"><div class="moduleHeader"><div><h3>Compras</h3><p>Compra de insumos, proveedores, cuentas por pagar y entradas a almacén.</p></div><button>+ Compra</button></div><div class="card"><p>Módulo pendiente de conectar.</p></div></section>
+    <section id="finanzas" class="section"><div class="moduleHeader"><div><h3>Administración / Finanzas</h3><p>Cobranza, pagos, caja chica, cuentas por cobrar, cuentas por pagar y gastos.</p></div></div><div class="grid4"><div class="card metric"><div class="label">Por cobrar</div><div class="value">$284k</div><div class="note">Demo</div></div><div class="card metric"><div class="label">Por pagar</div><div class="value">$196k</div><div class="note">Demo</div></div><div class="card metric"><div class="label">Caja chica</div><div class="value">$8.2k</div><div class="note">Demo</div></div><div class="card metric"><div class="label">Gastos mes</div><div class="value">$857k</div><div class="note">Demo</div></div></div></section>
+    <section id="reportes" class="section"><div class="moduleHeader"><div><h3>Reportes</h3><p>Ventas, producción, inventario, marketplace, cobranza y dirección.</p></div></div><div class="grid3"><div class="card"><h3>Ventas por SKU</h3><p>Reporte semanal.</p></div><div class="card"><h3>Producción por área</h3><p>Metros, piezas, pedidos terminados.</p></div><div class="card"><h3>Faltantes</h3><p>SKU, imagen, stock y cantidad a fabricar.</p></div></div></section>
+    <section id="config" class="section"><div class="moduleHeader"><div><h3>Configuración</h3><p>Roles, permisos, tipos de pedido, áreas, folios y catálogos.</p></div></div><div class="card"><p>Configuración pendiente de conectar.</p></div></section>
+  </main>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://sqlkkdxdpnjcuxkfouhc.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxbGtrZHhkcG5qY3V4a2ZvdWhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTAxNjUsImV4cCI6MjA5NjAyNjE2NX0.sfrMQgfWFJNgY89jFqLJa9mww_pL8x59ziaZ2n96ALo";
+const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","Alta y control de pedidos por tipo."],muestras:["Muestras","Control independiente de muestras."],marketplace:["Marketplace","Importación de ventas, guías, surtido y faltantes."],produccion:["Producción","Seguimiento por áreas y hoja viajera digital."],almacen:["Almacén","Entradas, salidas, packing list y entregas."],inventarios:["Inventarios","Stock de prendas, tela, papel, film, tinta, bolsas e insumos."],documentos:["Documentos","Propuestas visuales de PDFs y formatos imprimibles."],archivos:["Archivos","Diseños, moldes, PDFs, órdenes y comprobantes."],clientes:["Clientes","Base de clientes conectada a Supabase."],compras:["Compras","Proveedores, insumos y cuentas por pagar."],finanzas:["Administración / Finanzas","Cobranza, pagos, caja chica y reportes financieros."],reportes:["Reportes","Indicadores operativos, comerciales y financieros."],config:["Configuración","Roles, permisos, catálogos y folios."]};
+
+function showView(id){
+  document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active')});
+  document.querySelectorAll('.navItem').forEach(function(n){n.classList.remove('active')});
+  document.getElementById(id).classList.add('active');
+  var nav=document.querySelector('.navItem[data-view="'+id+'"]'); if(nav) nav.classList.add('active');
+  document.getElementById('pageTitle').textContent=titles[id][0]; document.getElementById('pageSubtitle').textContent=titles[id][1];
+  if(id==='clientes') cargarClientes();
+  if(id==='pedidos'){ cargarClientesParaPedido(); cargarAreasParaPedido(); cargarPedidos(); }
+}
+function initNavigation(){document.querySelectorAll('.navItem').forEach(function(n){n.addEventListener('click',function(){showView(this.getAttribute('data-view'))})})}
+function safe(v){return String(v||'').replace(/[&<>"']/g,function(m){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]})}
+function setDbStatus(ok,msg){var s=document.getElementById('dbStatus'),n=document.getElementById('dbNote'); if(!s||!n)return; s.textContent=ok?'OK':'ERROR'; s.style.color=ok?'var(--green)':'var(--red)'; n.textContent=msg||''}
+async function probarConexion(){try{var res=await db.from('clientes').select('id',{count:'exact',head:true}); if(res.error) throw res.error; setDbStatus(true,'Supabase conectado'); document.getElementById('clientesCount').textContent=res.count||0}catch(err){console.error(err); setDbStatus(false,err.message); document.getElementById('clientesCount').textContent='--'}}
+function limpiarClienteForm(){['clienteNombre','clienteRazon','clienteRfc','clienteContacto','clienteTelefono','clienteEmail','clienteDireccion','clienteNotas'].forEach(function(id){document.getElementById(id).value=''}); document.getElementById('clienteMsg').textContent=''}
+async function guardarCliente(){var msg=document.getElementById('clienteMsg'); var nombre=document.getElementById('clienteNombre').value.trim(); if(!nombre){msg.style.color='var(--red)';msg.textContent='Escribe el nombre del cliente.';return} var nuevo={nombre:nombre,razon_social:document.getElementById('clienteRazon').value.trim()||null,rfc:document.getElementById('clienteRfc').value.trim()||null,contacto:document.getElementById('clienteContacto').value.trim()||null,telefono:document.getElementById('clienteTelefono').value.trim()||null,email:document.getElementById('clienteEmail').value.trim()||null,direccion:document.getElementById('clienteDireccion').value.trim()||null,notas:document.getElementById('clienteNotas').value.trim()||null,activo:true}; msg.style.color='var(--muted)';msg.textContent='Guardando cliente...'; try{var res=await db.from('clientes').insert([nuevo]).select(); if(res.error) throw res.error; msg.style.color='var(--green)';msg.textContent='Cliente guardado correctamente.'; limpiarClienteForm(); await cargarClientes(); await probarConexion()}catch(err){console.error(err); msg.style.color='var(--red)'; msg.textContent='Error al guardar: '+err.message}}
+async function cargarClientes(){var tbody=document.getElementById('clientesTbody'); if(!tbody)return; tbody.innerHTML='<tr><td colspan="6">Cargando clientes...</td></tr>'; try{var res=await db.from('clientes').select('id,nombre,razon_social,contacto,telefono,email,activo,created_at').order('created_at',{ascending:false}).limit(50); if(res.error) throw res.error; var data=res.data||[]; if(data.length===0){tbody.innerHTML='<tr><td colspan="6">Todavía no hay clientes registrados.</td></tr>'; return} tbody.innerHTML=data.map(function(c){return '<tr><td><b>'+safe(c.nombre)+'</b></td><td>'+safe(c.razon_social)+'</td><td>'+safe(c.contacto)+'</td><td>'+safe(c.telefono)+'</td><td>'+safe(c.email)+'</td><td>'+(c.activo?'<span class="chip green">Activo</span>':'<span class="chip gray">Inactivo</span>')+'</td></tr>'}).join('')}catch(err){console.error(err); tbody.innerHTML='<tr><td colspan="6" style="color:var(--red);font-weight:700">Error al cargar clientes: '+safe(err.message)+'</td></tr>'}}
+
+async function cargarClientesParaPedido(){
+  var sel=document.getElementById('pedidoCliente'); if(!sel)return;
+  try{
+    var res=await db.from('clientes').select('id,nombre,razon_social').eq('activo',true).order('nombre',{ascending:true});
+    if(res.error) throw res.error;
+    var data=res.data||[];
+    if(data.length===0){sel.innerHTML='<option value="">No hay clientes. Crea uno primero.</option>';return;}
+    sel.innerHTML='<option value="">Selecciona cliente</option>'+data.map(function(c){return '<option value="'+safe(c.id)+'" data-nombre="'+safe(c.nombre)+'">'+safe(c.nombre)+(c.razon_social?' - '+safe(c.razon_social):'')+'</option>'}).join('');
+  }catch(err){console.error(err); sel.innerHTML='<option value="">Error cargando clientes</option>';}
+}
+async function cargarAreasParaPedido(){
+  var sel=document.getElementById('pedidoArea'); if(!sel)return;
+  try{
+    var res=await db.from('areas_produccion').select('id,nombre').eq('activo',true).order('orden',{ascending:true});
+    if(res.error) throw res.error;
+    var data=res.data||[];
+    sel.innerHTML='<option value="">Automática / sin asignar</option>'+data.map(function(a){return '<option value="'+safe(a.id)+'">'+safe(a.nombre)+'</option>'}).join('');
+  }catch(err){console.error(err); sel.innerHTML='<option value="">Error cargando áreas</option>';}
+}
+function generarFolioPedido(tipo){
+  var map={'Sublimado':'SUB','Ropa personalizada':'ROP','Promocionales':'PRO','Maquila':'MAQ','Solo impresión':'IMP','Venta de tela':'TEL','Marketplace':'MKT'};
+  var pref=map[tipo]||'PED';
+  var d=new Date();
+  return 'PED-'+pref+'-'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0')+String(d.getSeconds()).padStart(2,'0');
+}
+function limpiarPedidoForm(){
+  ['pedidoProducto','pedidoTela','pedidoCantidad','pedidoLado','pedidoIndicaciones'].forEach(function(id){var el=document.getElementById(id); if(el)el.value=''});
+  var f=document.getElementById('pedidoFechaEntrega'); if(f)f.value='';
+  var c=document.getElementById('pedidoCliente'); if(c)c.value='';
+  var a=document.getElementById('pedidoArea'); if(a)a.value='';
+  var msg=document.getElementById('pedidoMsg'); if(msg)msg.textContent='';
+}
+async function guardarPedido(){
+  var msg=document.getElementById('pedidoMsg');
+  var tipo=document.getElementById('pedidoTipo').value;
+  var clienteSel=document.getElementById('pedidoCliente');
+  var clienteId=clienteSel.value || null;
+  var clienteNombre=clienteSel.options[clienteSel.selectedIndex] ? clienteSel.options[clienteSel.selectedIndex].getAttribute('data-nombre') : '';
+  var fechaEntrega=document.getElementById('pedidoFechaEntrega').value || null;
+  var cantidad=parseFloat(document.getElementById('pedidoCantidad').value || '0');
+  if(!tipo){msg.style.color='var(--red)';msg.textContent='Selecciona tipo de pedido.';return;}
+  if(!clienteId){msg.style.color='var(--red)';msg.textContent='Selecciona un cliente.';return;}
+  var pedido={
+    folio: generarFolioPedido(tipo),
+    tipo_pedido: tipo,
+    cliente_id: clienteId,
+    cliente_nombre: clienteNombre,
+    fecha_entrega: fechaEntrega,
+    estatus: 'pendiente',
+    prioridad: 'automatica',
+    area_actual_id: document.getElementById('pedidoArea').value || null,
+    producto: document.getElementById('pedidoProducto').value.trim() || null,
+    tela: document.getElementById('pedidoTela').value.trim() || null,
+    unidad_medida: document.getElementById('pedidoUnidad').value || null,
+    cantidad_total: isNaN(cantidad)?0:cantidad,
+    lado_sublimacion: document.getElementById('pedidoLado').value.trim() || null,
+    indicaciones_generales: document.getElementById('pedidoIndicaciones').value.trim() || null,
+    requiere_hoja_viajera: true,
+    requiere_packing_list: tipo==='Sublimado' || tipo==='Venta de tela',
+    origen: 'manual',
+    activo: true
+  };
+  msg.style.color='var(--muted)'; msg.textContent='Guardando pedido...';
+  try{
+    var res=await db.from('pedidos').insert([pedido]).select();
+    if(res.error) throw res.error;
+    msg.style.color='var(--green)'; msg.textContent='Pedido guardado correctamente: '+pedido.folio;
+    limpiarPedidoForm();
+    await cargarPedidos();
+  }catch(err){console.error(err); msg.style.color='var(--red)'; msg.textContent='Error al guardar pedido: '+err.message;}
+}
+async function cargarPedidos(){
+  var tbody=document.getElementById('pedidosTbody'); if(!tbody)return;
+  tbody.innerHTML='<tr><td colspan="8">Cargando pedidos...</td></tr>';
+  try{
+    var res=await db.from('pedidos').select('id,folio,tipo_pedido,cliente_nombre,producto,tela,cantidad_total,unidad_medida,fecha_entrega,estatus,created_at').order('created_at',{ascending:false}).limit(50);
+    if(res.error) throw res.error;
+    var data=res.data||[];
+    if(data.length===0){tbody.innerHTML='<tr><td colspan="8">Todavía no hay pedidos registrados.</td></tr>';return;}
+    tbody.innerHTML=data.map(function(p){
+      return '<tr><td><b>'+safe(p.folio)+'</b></td><td>'+safe(p.tipo_pedido)+'</td><td>'+safe(p.cliente_nombre)+'</td><td>'+safe(p.producto)+'</td><td>'+safe(p.tela)+'</td><td>'+safe(p.cantidad_total)+' '+safe(p.unidad_medida)+'</td><td>'+safe(p.fecha_entrega)+'</td><td><span class="chip orange">'+safe(p.estatus)+'</span></td></tr>';
+    }).join('');
+  }catch(err){console.error(err); tbody.innerHTML='<tr><td colspan="8" style="color:var(--red);font-weight:700">Error al cargar pedidos: '+safe(err.message)+'</td></tr>';}
+}
+
+initNavigation(); probarConexion();
+</script>
+</body>
+</html>
