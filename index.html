@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V8.2 Pedidos y Muestras Unificados</title>
+<title>ERP Importaciones Juanita - V9 Marketplace y Guías</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -22,13 +22,13 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 .designCard{border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0;background:#fbfdf8}.designHeader{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.previewImg{width:74px;height:58px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}.tableWrap{overflow:auto}.pedidoDisenosRow td{background:#fbfdf8}
 .tallasGrid{display:grid;grid-template-columns:repeat(7,minmax(90px,1fr));gap:10px}.tallaItem{background:white;border:1px solid var(--line);border-radius:14px;padding:10px}.tallaItem input{text-align:center;font-weight:800}.designTotal{margin-top:10px;padding:10px;border-radius:12px;background:#fff;border:1px solid var(--line);font-weight:900;color:var(--olive)}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tabBtn{background:white;color:var(--olive);border:1px solid var(--line)}.tabBtn.active{background:var(--olive);color:white}.catPanel{display:none}.catPanel.active{display:block}.checkGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.checkItem{display:flex;gap:7px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}.checkItem input{width:auto}.imgThumb{width:46px;height:38px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}
-.historyBox{margin-top:14px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:14px}.historyBox h3{margin:0 0 10px}.statusLine{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.miniActions{display:flex;gap:6px;flex-wrap:wrap}.muestraPreview{width:64px;height:50px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}@media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.grid4,.grid3,.grid2,.formGrid,.tallasGrid,.checkGrid{grid-template-columns:1fr}}
+.historyBox{margin-top:14px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:14px}.historyBox h3{margin:0 0 10px}.statusLine{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.miniActions{display:flex;gap:6px;flex-wrap:wrap}.muestraPreview{width:64px;height:50px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}.scanHero{background:linear-gradient(135deg,#d6e5cf,#f8fbf4);border:1px solid var(--line);border-radius:18px;padding:16px}.itemDraft{display:flex;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;margin:6px 0}.guideResult{margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px}@media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.grid4,.grid3,.grid2,.formGrid,.tallasGrid,.checkGrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V8.2 Unificado</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V9 Marketplace</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -50,14 +50,14 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V8.2 PEDIDOS Y MUESTRAS UNIFICADOS</span>
+<span class="version">VERSIÓN ACTUAL: V9 MARKETPLACE Y GUÍAS</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V8.2 Pedidos y muestras unificados</td></tr><tr><th>Pedidos</th><td>Pedidos y muestras en un solo flujo</td></tr><tr><th>Configuración</th><td>Catálogos + aprobación + muestras unificadas</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V9 Marketplace y guías</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Catálogos + pedidos + marketplace</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -128,7 +128,53 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 </div>
 </section>
 
-<section id="marketplace" class="section"><div class="card"><h3>Marketplace</h3><p>Módulo pendiente.</p></div></section>
+<section id="marketplace" class="section">
+<div class="moduleHeader"><div><h3>Marketplace / Guías</h3><p>Registro de guías, productos por etiqueta, surtido y entregas.</p></div><button onclick="cargarGuiasMarketplace()">Actualizar</button></div>
+
+<div class="grid2">
+  <div class="card">
+    <h3>Nueva guía marketplace</h3>
+    <div class="formGrid">
+      <div><label>Marketplace</label><select id="mkMarketplace"><option>Shein</option><option>Mercado Libre</option><option>Amazon</option><option>Shopify</option><option>Otro</option></select></div>
+      <div><label>Número de guía</label><input id="mkGuia" placeholder="Escanea o escribe la guía"></div>
+      <div><label>Número de pedido</label><input id="mkPedido" placeholder="Pedido marketplace"></div>
+      <div><label>Fecha de venta</label><input id="mkFechaVenta" type="date"></div>
+      <div><label>Fecha límite entrega</label><input id="mkFechaLimite" type="date"></div>
+      <div><label>Cliente / referencia</label><input id="mkCliente" placeholder="Opcional"></div>
+    </div><br>
+    <label>Notas</label><textarea id="mkNotas" placeholder="Indicaciones del pedido"></textarea>
+    <div class="subCard">
+      <h3>Producto dentro de la guía</h3>
+      <div class="formGrid">
+        <div><label>SKU</label><input id="mkItemSku" placeholder="SKU vendido"></div>
+        <div><label>Descripción</label><input id="mkItemDesc" placeholder="Descripción producto"></div>
+        <div><label>Talla</label><input id="mkItemTalla" placeholder="Talla"></div>
+        <div><label>Cantidad</label><input id="mkItemCantidad" type="number" min="1" step="1" value="1"></div>
+        <div><label>Imagen URL</label><input id="mkItemImagen" placeholder="https://..."></div>
+      </div>
+      <div class="actions"><button type="button" onclick="agregarItemMarketplace()">+ Agregar producto</button><button type="button" class="secondary" onclick="limpiarItemsMarketplace()">Limpiar productos</button></div>
+      <div id="mkItemsDraft"></div>
+    </div>
+    <div class="actions"><button onclick="guardarGuiaMarketplace()">Guardar guía</button><button class="secondary" onclick="limpiarGuiaMarketplace()">Limpiar todo</button></div>
+    <p id="mkMsg" style="font-weight:700;color:var(--muted)"></p>
+  </div>
+
+  <div class="card">
+    <h3>Pantalla guía / surtido</h3>
+    <div class="scanHero">
+      <label>Escanear guía</label>
+      <input id="mkBuscarGuia" placeholder="Escanea o escribe la guía">
+      <div class="actions"><button onclick="buscarGuiaMarketplace()">Buscar guía</button><button class="secondary" onclick="marcarGuiaBuscadaEntregada()">Marcar entregada</button></div>
+      <div id="mkResultadoGuia" class="guideResult hidden"></div>
+    </div>
+  </div>
+</div><br>
+
+<div class="card">
+  <h3>Guías registradas</h3>
+  <div class="tableWrap"><table><thead><tr><th>Guía</th><th>Marketplace</th><th>Pedido</th><th>Fecha venta</th><th>Fecha límite</th><th>Estatus</th><th>Entrega</th><th>Productos</th><th>Acciones</th></tr></thead><tbody id="mkGuiasTbody"><tr><td colspan="9">Cargando guías...</td></tr></tbody></table></div>
+</div>
+</section>
 <section id="produccion" class="section"><div class="card"><h3>Producción</h3><p>Módulo pendiente.</p></div></section>
 <section id="almacen" class="section"><div class="card"><h3>Almacén</h3><p>Módulo pendiente.</p></div></section>
 <section id="inventarios" class="section"><div class="card"><h3>Inventarios</h3><p>Módulo pendiente.</p></div></section>
@@ -143,7 +189,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 const SUPABASE_URL="https://sqlkkdxdpnjcuxkfouhc.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxbGtrZHhkcG5qY3V4a2ZvdWhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTAxNjUsImV4cCI6MjA5NjAyNjE2NX0.sfrMQgfWFJNgY89jFqLJa9mww_pL8x59ziaZ2n96ALo";
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Ventas, guías y faltantes."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Catálogos + aprobación + muestras unificadas de pedido."]};
+var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Catálogos + pedidos + marketplace de pedido."]};
 var catalogoProductos=[],areasPedido=[],disenosClienteActual=[],catalogoTelas=[],catalogoTecnicas=[],catalogoTallas=[],tiposPedido=[];
 var tallasBase=['2-3','4-5','6-7','8-9','10-11','12-14','XXS','XS','S','M','L','XL','XXL'];
 var tecnicasPromocionales=['Bordado','DTF UV 3D','Tampografía','Sublimado full','Sublimado en plancha','Otro'];
@@ -155,7 +201,7 @@ var unidadesPorTipo={'Sublimado':['rollos','metros','repeticiones'],'Solo impres
 var tiposConDisenos={'Sublimado':true,'Ropa personalizada':true,'Promocionales':true,'Solo impresión':true,'Muestra':true};
 
 function safe(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function showView(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');var nav=document.querySelector('.navItem[data-view="'+id+'"]');if(nav)nav.classList.add('active');pageTitle.textContent=titles[id][0];pageSubtitle.textContent=titles[id][1];if(id==='clientes')cargarClientes();if(id==='pedidos')iniciarModuloPedidos();if(id==='muestras')iniciarModuloMuestras();if(id==='config')cargarTodosCatalogos()}
+function showView(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');var nav=document.querySelector('.navItem[data-view="'+id+'"]');if(nav)nav.classList.add('active');pageTitle.textContent=titles[id][0];pageSubtitle.textContent=titles[id][1];if(id==='clientes')cargarClientes();if(id==='pedidos')iniciarModuloPedidos();if(id==='muestras')iniciarModuloMuestras();if(id==='config')cargarTodosCatalogos();if(id==='marketplace')iniciarModuloMarketplace()}
 function initNavigation(){document.querySelectorAll('.navItem').forEach(n=>n.addEventListener('click',function(){showView(this.getAttribute('data-view'))}))}
 function setDbStatus(ok,msg){dbStatus.textContent=ok?'OK':'ERROR';dbStatus.style.color=ok?'var(--green)':'var(--red)';dbNote.textContent=msg||''}
 async function probarConexion(){try{var c=await db.from('clientes').select('id',{count:'exact',head:true});if(c.error)throw c.error;setDbStatus(true,'Supabase conectado');clientesCount.textContent=c.count||0;var p=await db.from('catalogo_productos').select('id',{count:'exact',head:true});productosCount.textContent=p.count||0;var t=await db.from('catalogo_tecnicas').select('id',{count:'exact',head:true});tecnicasCount.textContent=t.count||0}catch(e){console.error(e);setDbStatus(false,e.message)}}
@@ -289,6 +335,91 @@ async function cargarMuestras(){
   var data=r.data||[];
   muestrasTbody.innerHTML=data.length?data.map(p=>{var area=areasPedido.find(a=>String(a.id)===String(p.area_actual_id));var chip=String(p.estatus)==='aprobado'?'green':(String(p.estatus).includes('cambio')?'red':'orange');var acciones='<button class="secondary smallBtn" onclick="verHistorialPedido(\''+safe(p.id)+'\')">Historial</button>';return '<tr><td><b>'+safe(p.folio)+'</b></td><td>'+safe(p.tipo_pedido)+'</td><td>'+safe(p.cliente_nombre)+'</td><td>'+safe(p.producto)+'</td><td>'+safe(p.tela)+'</td><td>'+safe(p.cantidad_total)+' '+safe(p.unidad_medida)+'</td><td>'+safe(p.fecha_entrega)+'</td><td>'+safe(area?area.nombre:'Sin asignar')+'</td><td><span class="chip '+chip+'">'+safe(p.estatus)+'</span></td><td>'+acciones+'</td></tr>'}).join(''):'<tr><td colspan="10">Todavía no hay muestras. Créala desde Pedidos seleccionando tipo de registro Muestra.</td></tr>';
 }
+
+
+var mkItems=[];
+function renderItemsMarketplace(){
+  var box=document.getElementById('mkItemsDraft');
+  if(!box)return;
+  box.innerHTML=mkItems.length?mkItems.map((it,i)=>'<div class="itemDraft"><div><b>'+safe(it.sku)+'</b> — '+safe(it.descripcion)+' | Talla: '+safe(it.talla)+' | Cant: '+safe(it.cantidad)+'</div><button class="danger smallBtn" onclick="quitarItemMarketplace('+i+')">Quitar</button></div>').join(''):'<div class="hint">Todavía no hay productos agregados a esta guía.</div>';
+}
+function agregarItemMarketplace(){
+  var sku=mkItemSku.value.trim(), desc=mkItemDesc.value.trim(), talla=mkItemTalla.value.trim(), cant=parseInt(mkItemCantidad.value||'0',10)||0;
+  if(!sku){mkMsg.style.color='var(--red)';mkMsg.textContent='Escribe el SKU del producto.';return}
+  if(cant<=0){mkMsg.style.color='var(--red)';mkMsg.textContent='La cantidad debe ser mayor a 0.';return}
+  mkItems.push({sku:sku,descripcion:desc||sku,talla:talla||null,cantidad:cant,imagen_url:mkItemImagen.value.trim()||null});
+  ['mkItemSku','mkItemDesc','mkItemTalla','mkItemImagen'].forEach(id=>document.getElementById(id).value='');
+  mkItemCantidad.value='1';
+  mkMsg.textContent='';
+  renderItemsMarketplace();
+}
+function quitarItemMarketplace(i){mkItems.splice(i,1);renderItemsMarketplace()}
+function limpiarItemsMarketplace(){mkItems=[];renderItemsMarketplace()}
+function limpiarGuiaMarketplace(){
+  ['mkGuia','mkPedido','mkFechaVenta','mkFechaLimite','mkCliente','mkNotas','mkBuscarGuia'].forEach(id=>{var e=document.getElementById(id);if(e)e.value=''});
+  mkMarketplace.value='Shein';
+  limpiarItemsMarketplace();
+  mkMsg.textContent='';
+}
+async function iniciarModuloMarketplace(){renderItemsMarketplace();await cargarGuiasMarketplace()}
+async function guardarGuiaMarketplace(){
+  var guia=mkGuia.value.trim();
+  if(!guia){mkMsg.style.color='var(--red)';mkMsg.textContent='Escanea o escribe la guía.';return}
+  if(!mkFechaVenta.value){mkMsg.style.color='var(--red)';mkMsg.textContent='Selecciona fecha de venta.';return}
+  if(!mkFechaLimite.value){mkMsg.style.color='var(--red)';mkMsg.textContent='Selecciona fecha límite.';return}
+  if(!mkItems.length){mkMsg.style.color='var(--red)';mkMsg.textContent='Agrega al menos un producto a la guía.';return}
+  mkMsg.style.color='var(--muted)';mkMsg.textContent='Guardando guía...';
+  var guiaObj={guia:guia,marketplace:mkMarketplace.value,pedido_marketplace:mkPedido.value.trim()||null,cliente_nombre:mkCliente.value.trim()||null,fecha_venta:mkFechaVenta.value,fecha_limite:mkFechaLimite.value,estatus:'pendiente_surtido',notas:mkNotas.value.trim()||null,activo:true};
+  var gr=await db.from('marketplace_guias').insert([guiaObj]).select('id,guia').single();
+  if(gr.error){mkMsg.style.color='var(--red)';mkMsg.textContent='Error guía: '+gr.error.message;return}
+  var rows=mkItems.map(it=>({guia_id:gr.data.id,guia:guia,sku:it.sku,descripcion:it.descripcion,talla:it.talla,cantidad:it.cantidad,imagen_url:it.imagen_url,estatus:'pendiente'}));
+  var ir=await db.from('marketplace_items').insert(rows);
+  if(ir.error){mkMsg.style.color='var(--red)';mkMsg.textContent='Guía creada, pero falló guardar productos: '+ir.error.message;return}
+  mkMsg.style.color='var(--green)';mkMsg.textContent='Guía guardada: '+guia;
+  limpiarGuiaMarketplace();
+  await cargarGuiasMarketplace();
+}
+async function cargarGuiasMarketplace(){
+  if(!document.getElementById('mkGuiasTbody'))return;
+  mkGuiasTbody.innerHTML='<tr><td colspan="9">Cargando guías...</td></tr>';
+  var r=await db.from('marketplace_guias').select('*').order('created_at',{ascending:false}).limit(80);
+  if(r.error){mkGuiasTbody.innerHTML='<tr><td colspan="9" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
+  var data=r.data||[];
+  mkGuiasTbody.innerHTML=data.length?data.map(g=>{var chip=g.estatus==='entregado'?'green':(g.estatus==='atrasado'?'red':'orange');return '<tr><td><b>'+safe(g.guia)+'</b></td><td>'+safe(g.marketplace)+'</td><td>'+safe(g.pedido_marketplace)+'</td><td>'+safe(g.fecha_venta)+'</td><td>'+safe(g.fecha_limite)+'</td><td><span class="chip '+chip+'">'+safe(g.estatus)+'</span></td><td>'+safe(g.fecha_entrega||'')+'</td><td><button class="secondary smallBtn" onclick="verProductosGuia(\\''+safe(g.guia)+'\\')">Ver productos</button></td><td><button class="smallBtn" onclick="marcarGuiaEntregada(\\''+safe(g.guia)+'\\')">Entregada</button></td></tr><tr id="mk-items-'+safe(g.guia).replace(/[^a-zA-Z0-9_-]/g,'')+'" class="pedidoDisenosRow hidden"><td colspan="9"></td></tr>'}).join(''):'<tr><td colspan="9">Todavía no hay guías registradas.</td></tr>';
+}
+async function verProductosGuia(guia){
+  var row=document.getElementById('mk-items-'+safe(guia).replace(/[^a-zA-Z0-9_-]/g,''));
+  if(!row){mkBuscarGuia.value=guia;buscarGuiaMarketplace();return}
+  if(!row.classList.contains('hidden')){row.classList.add('hidden');return}
+  row.classList.remove('hidden');
+  var cell=row.querySelector('td');cell.innerHTML='Cargando productos...';
+  var r=await db.from('marketplace_items').select('*').eq('guia',guia).order('created_at',{ascending:true});
+  if(r.error){cell.innerHTML='<span style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</span>';return}
+  cell.innerHTML=tablaItemsMarketplace(r.data||[]);
+}
+function tablaItemsMarketplace(items){
+  return items.length?'<table><thead><tr><th>Imagen</th><th>SKU</th><th>Descripción</th><th>Talla</th><th>Cantidad</th><th>Estatus</th></tr></thead><tbody>'+items.map(it=>'<tr><td>'+(it.imagen_url?'<img class="previewImg" src="'+safe(it.imagen_url)+'">':'-')+'</td><td><b>'+safe(it.sku)+'</b></td><td>'+safe(it.descripcion)+'</td><td>'+safe(it.talla)+'</td><td>'+safe(it.cantidad)+'</td><td>'+safe(it.estatus||'pendiente')+'</td></tr>').join('')+'</tbody></table>':'Sin productos.';
+}
+async function buscarGuiaMarketplace(){
+  var guia=mkBuscarGuia.value.trim();
+  if(!guia){mkResultadoGuia.classList.remove('hidden');mkResultadoGuia.innerHTML='<b>Escanea o escribe una guía.</b>';return}
+  mkResultadoGuia.classList.remove('hidden');mkResultadoGuia.innerHTML='Buscando guía...';
+  var gr=await db.from('marketplace_guias').select('*').eq('guia',guia).maybeSingle();
+  if(gr.error){mkResultadoGuia.innerHTML='<b style="color:var(--red)">Error: '+safe(gr.error.message)+'</b>';return}
+  if(!gr.data){mkResultadoGuia.innerHTML='<b style="color:var(--red)">No encontré esa guía.</b>';return}
+  var ir=await db.from('marketplace_items').select('*').eq('guia',guia).order('created_at',{ascending:true});
+  var g=gr.data;
+  mkResultadoGuia.innerHTML='<h3>Guía '+safe(g.guia)+'</h3><div class="statusLine"><span class="chip orange">'+safe(g.estatus)+'</span><b>'+safe(g.marketplace)+'</b><span>Pedido: '+safe(g.pedido_marketplace)+'</span><span>Límite: '+safe(g.fecha_limite)+'</span></div><br>'+tablaItemsMarketplace(ir.data||[]);
+}
+async function marcarGuiaEntregada(guia){
+  if(!confirm('¿Marcar guía '+guia+' como entregada?'))return;
+  var r=await db.from('marketplace_guias').update({estatus:'entregado',fecha_entrega:new Date().toISOString(),fecha_ultimo_movimiento:new Date().toISOString()}).eq('guia',guia);
+  if(r.error){alert('Error: '+r.error.message);return}
+  await db.from('marketplace_items').update({estatus:'entregado'}).eq('guia',guia);
+  await cargarGuiasMarketplace();
+  if(mkBuscarGuia.value.trim()===guia)buscarGuiaMarketplace();
+}
+async function marcarGuiaBuscadaEntregada(){var guia=mkBuscarGuia.value.trim();if(!guia){alert('Escanea o escribe guía.');return}await marcarGuiaEntregada(guia)}
 
 initNavigation();probarConexion();aplicarTipoPedido();
 </script></body></html>
