@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V9 Marketplace y Guías</title>
+<title>ERP Importaciones Juanita - V9.1 Marketplace y Guías</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -28,7 +28,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <body>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V9 Marketplace</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V9.1 Marketplace</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -50,14 +50,14 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V9 MARKETPLACE Y GUÍAS</span>
+<span class="version">VERSIÓN ACTUAL: V9.1 MARKETPLACE Y GUÍAS CORREGIDO</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V9 Marketplace y guías</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Catálogos + pedidos + marketplace</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V9.1 Marketplace y guías</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Catálogos + pedidos + marketplace</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -385,8 +385,15 @@ async function cargarGuiasMarketplace(){
   var r=await db.from('marketplace_guias').select('*').order('created_at',{ascending:false}).limit(80);
   if(r.error){mkGuiasTbody.innerHTML='<tr><td colspan="9" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
   var data=r.data||[];
-  mkGuiasTbody.innerHTML=data.length?data.map(g=>{var chip=g.estatus==='entregado'?'green':(g.estatus==='atrasado'?'red':'orange');return '<tr><td><b>'+safe(g.guia)+'</b></td><td>'+safe(g.marketplace)+'</td><td>'+safe(g.pedido_marketplace)+'</td><td>'+safe(g.fecha_venta)+'</td><td>'+safe(g.fecha_limite)+'</td><td><span class="chip '+chip+'">'+safe(g.estatus)+'</span></td><td>'+safe(g.fecha_entrega||'')+'</td><td><button class="secondary smallBtn" onclick="verProductosGuia(\\''+safe(g.guia)+'\\')">Ver productos</button></td><td><button class="smallBtn" onclick="marcarGuiaEntregada(\\''+safe(g.guia)+'\\')">Entregada</button></td></tr><tr id="mk-items-'+safe(g.guia).replace(/[^a-zA-Z0-9_-]/g,'')+'" class="pedidoDisenosRow hidden"><td colspan="9"></td></tr>'}).join(''):'<tr><td colspan="9">Todavía no hay guías registradas.</td></tr>';
+  if(!data.length){mkGuiasTbody.innerHTML='<tr><td colspan="9">Todavía no hay guías registradas.</td></tr>';return}
+  mkGuiasTbody.innerHTML=data.map(g=>{
+    var chip=g.estatus==='entregado'?'green':(g.estatus==='atrasado'?'red':'orange');
+    var guia=safe(g.guia);
+    var rowId='mk-items-'+guia.replace(/[^a-zA-Z0-9_-]/g,'');
+    return '<tr><td><b>'+guia+'</b></td><td>'+safe(g.marketplace)+'</td><td>'+safe(g.pedido_marketplace)+'</td><td>'+safe(g.fecha_venta)+'</td><td>'+safe(g.fecha_limite)+'</td><td><span class="chip '+chip+'">'+safe(g.estatus)+'</span></td><td>'+safe(g.fecha_entrega||'')+'</td><td><button class="secondary smallBtn" data-guia="'+guia+'" onclick="verProductosGuia(this.dataset.guia)">Ver productos</button></td><td><button class="smallBtn" data-guia="'+guia+'" onclick="marcarGuiaEntregada(this.dataset.guia)">Entregada</button></td></tr><tr id="'+rowId+'" class="pedidoDisenosRow hidden"><td colspan="9"></td></tr>';
+  }).join('');
 }
+
 async function verProductosGuia(guia){
   var row=document.getElementById('mk-items-'+safe(guia).replace(/[^a-zA-Z0-9_-]/g,''));
   if(!row){mkBuscarGuia.value=guia;buscarGuiaMarketplace();return}
