@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V8.1 Pedidos y Muestras Unificados</title>
+<title>ERP Importaciones Juanita - V8.2 Pedidos y Muestras Unificados</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -28,11 +28,10 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <body>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V8.1 Unificado</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V8.2 Unificado</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
-<div class="navItem" data-view="muestras"><div class="navIcon">🧪</div>Muestras</div>
 <div class="navItem" data-view="marketplace"><div class="navIcon">🏷️</div>Marketplace</div>
 <div class="navItem" data-view="produccion"><div class="navIcon">🏭</div>Producción</div>
 <div class="navGroup">Operación</div>
@@ -51,14 +50,14 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V8.1 PEDIDOS Y MUESTRAS UNIFICADOS</span>
+<span class="version">VERSIÓN ACTUAL: V8.2 PEDIDOS Y MUESTRAS UNIFICADOS</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V8.1 Pedidos y muestras unificados</td></tr><tr><th>Pedidos</th><td>Pedidos y muestras en un solo flujo</td></tr><tr><th>Configuración</th><td>Catálogos + aprobación + muestras unificadas</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V8.2 Pedidos y muestras unificados</td></tr><tr><th>Pedidos</th><td>Pedidos y muestras en un solo flujo</td></tr><tr><th>Configuración</th><td>Catálogos + aprobación + muestras unificadas</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -281,43 +280,6 @@ async function verHistorialPedido(id){
 function cerrarHistorialPedido(){var panel=document.getElementById('historialPedidoPanel');if(panel)panel.classList.add('hidden')}
 async function verDisenosPedido(id){var row=document.getElementById('disenos-'+id);if(!row)return;var cell=row.querySelector('td');if(!row.classList.contains('hidden')){row.classList.add('hidden');return}row.classList.remove('hidden');cell.innerHTML='Cargando diseños...';try{var r=await db.from('pedido_disenos').select('id,numero_diseno,nombre_diseno,orientacion,cantidad,unidad_medida,indicaciones,imagen_url').eq('pedido_id',id).order('orden',{ascending:true});if(r.error)throw r.error;var data=r.data||[];cell.innerHTML=data.length?'<table><thead><tr><th>Imagen</th><th>Diseño</th><th>Orientación</th><th>Cantidad</th><th>Unidad</th><th>Indicaciones</th></tr></thead><tbody>'+data.map(d=>'<tr><td>'+(d.imagen_url?'<img class="previewImg" src="'+safe(d.imagen_url)+'">':'Sin imagen')+'</td><td>'+safe(d.nombre_diseno||d.numero_diseno)+'</td><td>'+safe(d.orientacion)+'</td><td>'+safe(d.cantidad)+'</td><td>'+safe(d.unidad_medida)+'</td><td>'+safe(d.indicaciones)+'</td></tr>').join('')+'</tbody></table>':'Este pedido no tiene diseños.'}catch(e){cell.innerHTML='<span style="color:var(--red);font-weight:700">Error: '+safe(e.message)+'</span>'}}
 
-function generarFolioMuestra(){var d=new Date();return 'MUE-'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0')+String(d.getSeconds()).padStart(2,'0')}
-async function iniciarModuloMuestras(){await Promise.all([cargarClientesParaMuestra(),cargarProductosParaMuestra(),cargarTecnicasParaMuestra(),cargarAreasCatalogo()]);cargarMuestras()}
-async function cargarClientesParaMuestra(){var sel=document.getElementById('muestraCliente');if(!sel)return;var r=await db.from('clientes').select('id,nombre,razon_social').eq('activo',true).order('nombre',{ascending:true});if(r.error){sel.innerHTML='<option value="">Error cargando clientes</option>';return}sel.innerHTML='<option value="">Selecciona cliente</option>'+((r.data||[]).map(c=>'<option value="'+safe(c.id)+'" data-nombre="'+safe(c.nombre)+'">'+safe(c.nombre)+(c.razon_social?' - '+safe(c.razon_social):'')+'</option>').join(''))}
-async function cargarProductosParaMuestra(){var sel=document.getElementById('muestraProducto');if(!sel)return;if(!catalogoProductos.length)await cargarProductosCatalogo();sel.innerHTML='<option value="">Selecciona producto</option>'+catalogoProductos.filter(p=>p.activo!==false).map(p=>{var txt=(p.sku?p.sku+' - ':'')+(p.nombre||p.descripcion||'Producto');return '<option value="'+safe(p.id)+'" data-producto="'+safe(txt)+'">'+safe(txt)+'</option>'}).join('')}
-async function cargarTecnicasParaMuestra(){var sel=document.getElementById('muestraTecnica');if(!sel)return;if(!catalogoTecnicas.length)await cargarTecnicasCatalogo();sel.innerHTML='<option value="">Selecciona técnica</option>'+catalogoTecnicas.filter(t=>t.activo!==false).map(t=>'<option>'+safe(t.nombre)+'</option>').join('')}
-function limpiarMuestraForm(){['muestraFechaEntrega','muestraImagenUrl','muestraObjetivo','muestraIndicaciones'].forEach(id=>{var e=document.getElementById(id);if(e)e.value=''});['muestraCliente','muestraProducto','muestraTecnica'].forEach(id=>{var e=document.getElementById(id);if(e)e.value=''});muestraTipo.value='Ropa personalizada';muestraPrioridad.value='normal';muestraMsg.textContent=''}
-async function guardarMuestra(){
-  var clienteOpt=muestraCliente.options[muestraCliente.selectedIndex],productoOpt=muestraProducto.options[muestraProducto.selectedIndex];
-  if(!muestraCliente.value){muestraMsg.style.color='var(--red)';muestraMsg.textContent='Selecciona cliente.';return}
-  if(!muestraProducto.value){muestraMsg.style.color='var(--red)';muestraMsg.textContent='Selecciona producto.';return}
-  if(!muestraFechaEntrega.value){muestraMsg.style.color='var(--red)';muestraMsg.textContent='Selecciona fecha requerida.';return}
-  var area=buscarAreaPorNombre('Diseño');
-  var obj={folio:generarFolioMuestra(),cliente_id:muestraCliente.value,cliente_nombre:clienteOpt?clienteOpt.getAttribute('data-nombre'):null,tipo_muestra:muestraTipo.value,producto_id:muestraProducto.value,producto:productoOpt?(productoOpt.getAttribute('data-producto')||productoOpt.textContent):null,tecnica:muestraTecnica.value||null,fecha_requerida:muestraFechaEntrega.value,prioridad:muestraPrioridad.value,imagen_url:muestraImagenUrl.value.trim()||null,objetivo:muestraObjetivo.value.trim()||null,indicaciones:muestraIndicaciones.value.trim()||null,estatus:'pendiente_diseno',area_actual_id:area?area.id:null,area_actual_nombre:'Diseño',activo:true};
-  muestraMsg.style.color='var(--muted)';muestraMsg.textContent='Guardando muestra...';
-  var r=await db.from('muestras').insert([obj]).select('id,folio').single();
-  if(r.error){muestraMsg.style.color='var(--red)';muestraMsg.textContent='Error: '+r.error.message;return}
-  muestraMsg.style.color='var(--green)';muestraMsg.textContent='Muestra guardada: '+obj.folio;
-  limpiarMuestraForm();await cargarMuestras();
-}
-async function cargarMuestras(){
-  if(!document.getElementById('muestrasTbody'))return;
-  muestrasTbody.innerHTML='<tr><td colspan="10">Cargando muestras...</td></tr>';
-  var r=await db.from('muestras').select('*').order('created_at',{ascending:false}).limit(50);
-  if(r.error){muestrasTbody.innerHTML='<tr><td colspan="10" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
-  var data=r.data||[];
-  muestrasTbody.innerHTML=data.length?data.map(m=>{var img=m.imagen_url?'<img class="muestraPreview" src="'+safe(m.imagen_url)+'">':'-';var acciones='<button class="smallBtn" onclick="actualizarEstatusMuestra(\''+safe(m.id)+'\',\'aprobada\')">Aprobar</button> <button class="secondary smallBtn" onclick="actualizarEstatusMuestra(\''+safe(m.id)+'\',\'cambios_solicitados\')">Cambios</button>';return '<tr><td><b>'+safe(m.folio)+'</b></td><td>'+safe(m.cliente_nombre)+'</td><td>'+safe(m.tipo_muestra)+'</td><td>'+safe(m.producto)+'</td><td>'+safe(m.tecnica)+'</td><td>'+safe(m.fecha_requerida)+'</td><td>'+safe(m.area_actual_nombre||'Diseño')+'</td><td><span class="chip orange">'+safe(m.estatus)+'</span></td><td>'+img+'</td><td>'+acciones+'</td></tr>'}).join(''):'<tr><td colspan="10">Todavía no hay muestras.</td></tr>';
-}
-async function actualizarEstatusMuestra(id,estatus){
-  var comentario=prompt('Comentario (opcional):')||'';
-  var obj={estatus:estatus,comentario_resultado:comentario||null,fecha_ultimo_movimiento:new Date().toISOString()};
-  if(estatus==='aprobada')obj.fecha_aprobacion=new Date().toISOString();
-  var r=await db.from('muestras').update(obj).eq('id',id);
-  if(r.error){alert('Error: '+r.error.message);return}
-  await cargarMuestras();
-}
-
-
 async function iniciarModuloMuestras(){await Promise.all([cargarAreasCatalogo()]);cargarMuestras()}
 async function cargarMuestras(){
   if(!document.getElementById('muestrasTbody'))return;
@@ -325,7 +287,7 @@ async function cargarMuestras(){
   var r=await db.from('pedidos').select('id,folio,tipo_registro,tipo_pedido,cliente_nombre,producto,tela,cantidad_total,unidad_medida,fecha_entrega,estatus,area_actual_id,area_despues_aprobacion,created_at').eq('tipo_registro','muestra').order('created_at',{ascending:false}).limit(50);
   if(r.error){muestrasTbody.innerHTML='<tr><td colspan="10" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
   var data=r.data||[];
-  muestrasTbody.innerHTML=data.length?data.map(p=>{var area=areasPedido.find(a=>String(a.id)===String(p.area_actual_id));var chip=String(p.estatus)==='aprobado'?'green':(String(p.estatus).includes('cambio')?'red':'orange');var acciones='<button class="secondary smallBtn" onclick="verHistorialPedido(\\''+safe(p.id)+'\\')">Historial</button>';return '<tr><td><b>'+safe(p.folio)+'</b></td><td>'+safe(p.tipo_pedido)+'</td><td>'+safe(p.cliente_nombre)+'</td><td>'+safe(p.producto)+'</td><td>'+safe(p.tela)+'</td><td>'+safe(p.cantidad_total)+' '+safe(p.unidad_medida)+'</td><td>'+safe(p.fecha_entrega)+'</td><td>'+safe(area?area.nombre:'Sin asignar')+'</td><td><span class="chip '+chip+'">'+safe(p.estatus)+'</span></td><td>'+acciones+'</td></tr>'}).join(''):'<tr><td colspan="10">Todavía no hay muestras. Créala desde Pedidos seleccionando tipo de registro Muestra.</td></tr>';
+  muestrasTbody.innerHTML=data.length?data.map(p=>{var area=areasPedido.find(a=>String(a.id)===String(p.area_actual_id));var chip=String(p.estatus)==='aprobado'?'green':(String(p.estatus).includes('cambio')?'red':'orange');var acciones='<button class="secondary smallBtn" onclick="verHistorialPedido(\''+safe(p.id)+'\')">Historial</button>';return '<tr><td><b>'+safe(p.folio)+'</b></td><td>'+safe(p.tipo_pedido)+'</td><td>'+safe(p.cliente_nombre)+'</td><td>'+safe(p.producto)+'</td><td>'+safe(p.tela)+'</td><td>'+safe(p.cantidad_total)+' '+safe(p.unidad_medida)+'</td><td>'+safe(p.fecha_entrega)+'</td><td>'+safe(area?area.nombre:'Sin asignar')+'</td><td><span class="chip '+chip+'">'+safe(p.estatus)+'</span></td><td>'+acciones+'</td></tr>'}).join(''):'<tr><td colspan="10">Todavía no hay muestras. Créala desde Pedidos seleccionando tipo de registro Muestra.</td></tr>';
 }
 
 initNavigation();probarConexion();aplicarTipoPedido();
