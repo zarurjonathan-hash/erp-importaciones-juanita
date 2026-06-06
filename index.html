@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V6 Catálogos</title>
+<title>ERP Importaciones Juanita - V6.1 Catálogos</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -28,7 +28,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <body>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V6 Catálogos</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V6.1 Catálogos</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -51,14 +51,14 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V6 CATÁLOGOS REALES</span>
+<span class="version">VERSIÓN ACTUAL: V6.1 CATÁLOGOS CORREGIDOS</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V6 Catálogos reales</td></tr><tr><th>Pedidos</th><td>V5.5 conservado con tallas por diseño</td></tr><tr><th>Configuración</th><td>Productos, telas, técnicas, tallas, áreas y tipos</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V6.1 Catálogos corregidos</td></tr><tr><th>Pedidos</th><td>V5.5 conservado con tallas por diseño</td></tr><tr><th>Configuración</th><td>Productos, telas, técnicas, tallas, áreas y tipos</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -197,7 +197,7 @@ function agregarTallaCampoADiseno(wrap,talla){wrap.insertAdjacentHTML('beforeend
 function agregarTallaExtraADiseno(btn){var talla=prompt('Escribe la talla nueva');if(!talla)return;agregarTallaCampoADiseno(btn.closest('.designCard').querySelector('.disenoTallas'),talla.trim());actualizarCantidadDisenos()}
 function datosTallasDiseno(card){var filas=[];card.querySelectorAll('.tallaCantidad').forEach(i=>{var q=parseFloat(i.value||'0')||0;if(q>0)filas.push({talla:i.getAttribute('data-talla'),cantidad:q})});return filas}
 function totalTallasDiseno(card){return datosTallasDiseno(card).reduce((t,x)=>t+x.cantidad,0)}
-function actualizarModoNuevoDiseno(sel){var card=sel.closest('.designCard'),box=card.querySelector('.nuevoDisenoBox'),img=card.querySelector('.disenoPreview'),opt=sel.options[sel.selectedIndex];box.classList.toggle('hidden',sel.value!=='__nuevo__');if(img&&sel.value!=='__nuevo__){var ex=opt?opt.getAttribute('data-img'):'';if(ex){img.src=ex;img.setAttribute('data-img',ex)}else{img.removeAttribute('src');img.removeAttribute('data-img')}}}
+function actualizarModoNuevoDiseno(sel){var card=sel.closest('.designCard'),box=card.querySelector('.nuevoDisenoBox'),img=card.querySelector('.disenoPreview'),opt=sel.options[sel.selectedIndex];box.classList.toggle('hidden',sel.value!=='__nuevo__');if(img&&sel.value!=='__nuevo__'){var ex=opt?opt.getAttribute('data-img'):'';if(ex){img.src=ex;img.setAttribute('data-img',ex)}else{img.removeAttribute('src');img.removeAttribute('data-img')}}}
 function quitarDisenoPedido(btn){btn.closest('.designCard').remove();actualizarCantidadDisenos()}
 function previewDisenoImagen(input){var img=input.closest('.designCard').querySelector('.disenoPreview');if(!input.files||!input.files[0])return;var r=new FileReader();r.onload=e=>{img.src=e.target.result;img.setAttribute('data-img',e.target.result)};r.readAsDataURL(input.files[0])}
 function girarImagenDiseno(btn){var card=btn.closest('.designCard'),img=card.querySelector('.disenoPreview'),rot=(parseInt(card.getAttribute('data-rotacion')||'0',10)+90)%360;card.setAttribute('data-rotacion',rot);img.style.transform='rotate('+rot+'deg)'}
