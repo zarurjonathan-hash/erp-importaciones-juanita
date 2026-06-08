@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V10.2 Scanner Cámara Real</title>
+<title>ERP Importaciones Juanita - V11 Producción y Menú Móvil</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -22,13 +22,45 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 .designCard{border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0;background:#fbfdf8}.designHeader{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.previewImg{width:74px;height:58px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}.tableWrap{overflow:auto}.pedidoDisenosRow td{background:#fbfdf8}
 .tallasGrid{display:grid;grid-template-columns:repeat(7,minmax(90px,1fr));gap:10px}.tallaItem{background:white;border:1px solid var(--line);border-radius:14px;padding:10px}.tallaItem input{text-align:center;font-weight:800}.designTotal{margin-top:10px;padding:10px;border-radius:12px;background:#fff;border:1px solid var(--line);font-weight:900;color:var(--olive)}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tabBtn{background:white;color:var(--olive);border:1px solid var(--line)}.tabBtn.active{background:var(--olive);color:white}.catPanel{display:none}.catPanel.active{display:block}.checkGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.checkItem{display:flex;gap:7px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}.checkItem input{width:auto}.imgThumb{width:46px;height:38px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}
-.historyBox{margin-top:14px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:14px}.historyBox h3{margin:0 0 10px}.statusLine{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.miniActions{display:flex;gap:6px;flex-wrap:wrap}.muestraPreview{width:64px;height:50px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}.scanHero{background:linear-gradient(135deg,#d6e5cf,#f8fbf4);border:1px solid var(--line);border-radius:18px;padding:16px}.itemDraft{display:flex;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;margin:6px 0}.guideResult{margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px}.stockBox{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.stockStat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.stockStat b{font-size:22px;color:var(--olive)}.warnRow td{background:#fff7ed}.okRow td{background:#f0fbf4}.neg{color:var(--red);font-weight:900}.pos{color:var(--green);font-weight:900}.cameraBox{border:1px solid var(--line);border-radius:16px;background:#0b0f0d;padding:10px;margin-top:10px}.cameraBox video{width:100%;max-height:260px;border-radius:12px;background:#000}.scanModeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.scanModeCard{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px}.scanModeCard h4{margin:0 0 6px}.scanModeCard p{margin:0;color:var(--muted);font-size:12px}.cameraBox #mkHtml5QrReader{background:#000;border-radius:12px;overflow:hidden}.cameraBox #mkHtml5QrReader video{width:100%!important;border-radius:12px}.cameraBox #mkHtml5QrReader__scan_region{background:#000}.cameraBox #mkHtml5QrReader__dashboard{color:#fff}.cameraBox #mkHtml5QrReader__dashboard button{margin:6px}@media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.grid4,.grid3,.grid2,.formGrid,.tallasGrid,.checkGrid{grid-template-columns:1fr}}
+.historyBox{margin-top:14px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:14px}.historyBox h3{margin:0 0 10px}.statusLine{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.miniActions{display:flex;gap:6px;flex-wrap:wrap}.muestraPreview{width:64px;height:50px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}.scanHero{background:linear-gradient(135deg,#d6e5cf,#f8fbf4);border:1px solid var(--line);border-radius:18px;padding:16px}.itemDraft{display:flex;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;margin:6px 0}.guideResult{margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px}.stockBox{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.stockStat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.stockStat b{font-size:22px;color:var(--olive)}.warnRow td{background:#fff7ed}.okRow td{background:#f0fbf4}.neg{color:var(--red);font-weight:900}.pos{color:var(--green);font-weight:900}.cameraBox{border:1px solid var(--line);border-radius:16px;background:#0b0f0d;padding:10px;margin-top:10px}.cameraBox video{width:100%;max-height:260px;border-radius:12px;background:#000}.scanModeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.scanModeCard{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px}.scanModeCard h4{margin:0 0 6px}.scanModeCard p{margin:0;color:var(--muted);font-size:12px}.cameraBox #mkHtml5QrReader{background:#000;border-radius:12px;overflow:hidden}.cameraBox #mkHtml5QrReader video{width:100%!important;border-radius:12px}.cameraBox #mkHtml5QrReader__scan_region{background:#000}.cameraBox #mkHtml5QrReader__dashboard{color:#fff}.cameraBox #mkHtml5QrReader__dashboard button{margin:6px}
+
+.mobileTopbar{display:none;position:sticky;top:0;z-index:80;background:rgba(243,246,239,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:10px 14px;align-items:center;gap:12px}
+.hamburgerBtn{width:46px;height:42px;border-radius:14px;background:var(--olive);display:flex;flex-direction:column;gap:5px;align-items:center;justify-content:center;padding:0}
+.hamburgerBtn span{width:22px;height:3px;background:white;border-radius:999px;display:block}
+.mobileMenuOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:90}
+body.menuOpen .mobileMenuOverlay{display:block}
+body.menuOpen{overflow:hidden}
+.prodFlow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}.prodStep{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px}.prodStep b{color:var(--olive)}
+@media(max-width:1000px){
+  .mobileTopbar{display:flex}
+  .app{display:block;min-height:calc(100vh - 63px)}
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:82%;max-width:330px;z-index:100;transform:translateX(-105%);transition:transform .22s ease;box-shadow:0 20px 60px rgba(0,0,0,.28);overflow:auto}
+  body.menuOpen .sidebar{transform:translateX(0)}
+  .main{padding:16px}
+  .topbar{align-items:flex-start}
+  .topbar .title h2{font-size:24px}
+  .userBox{display:none}
+  .grid4,.grid3,.grid2,.formGrid,.tallasGrid,.checkGrid,.stockBox,.scanModeGrid,.prodFlow{grid-template-columns:1fr!important}
+  table{min-width:720px}
+  .tableWrap{overflow:auto}
+}
+
 </style>
 </head>
 <body>
+<div class="mobileTopbar">
+  <button class="hamburgerBtn" onclick="toggleMobileMenu()" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+  <div>
+    <b>Importaciones Juanita</b><br>
+    <small>ERP V11</small>
+  </div>
+</div>
+<div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V10.2 Scanner</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V11 Producción</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -50,14 +82,14 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V10.2 SCANNER CÁMARA REAL</span>
+<span class="version">VERSIÓN ACTUAL: V11 PRODUCCIÓN Y MENÚ MÓVIL</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V10.2 Scanner cámara real</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Catálogos + pedidos + marketplace + inventario</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V11 Producción y menú móvil</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace + inventario + producción</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -188,7 +220,31 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 </div>
 </section>
 
-<section id="produccion" class="section"><div class="card"><h3>Producción</h3><p>Módulo pendiente.</p></div></section>
+<section id="produccion" class="section">
+<div class="moduleHeader"><div><h3>Producción / Faltantes a fabricar</h3><p>Convierte faltantes de marketplace en órdenes de producción para corte, costura, POD o almacén.</p></div><button onclick="iniciarModuloProduccion()">Actualizar</button></div>
+
+<div class="card">
+  <h3>Flujo de producción marketplace</h3>
+  <div class="prodFlow">
+    <div class="prodStep"><b>1. Marketplace</b><br><span class="hint">Importa ventas CSV.</span></div>
+    <div class="prodStep"><b>2. Inventario</b><br><span class="hint">Descuenta stock y detecta faltantes.</span></div>
+    <div class="prodStep"><b>3. Producción</b><br><span class="hint">Genera órdenes de fabricación.</span></div>
+    <div class="prodStep"><b>4. Entrada</b><br><span class="hint">Escanea producto terminado y suma stock.</span></div>
+  </div>
+  <div class="actions"><button onclick="generarOrdenesTodosFaltantes()">Generar órdenes de todos los faltantes</button><button class="secondary" onclick="cargarFaltantesProduccion()">Actualizar faltantes</button></div>
+  <p id="prodMsg" style="font-weight:700;color:var(--muted)"></p>
+</div><br>
+
+<div class="card">
+  <h3>Faltantes detectados</h3>
+  <div class="tableWrap"><table><thead><tr><th>Imagen</th><th>SKU</th><th>Descripción</th><th>Talla</th><th>Stock actual</th><th>Fabricar</th><th>Acción</th></tr></thead><tbody id="prodFaltantesTbody"><tr><td colspan="7">Cargando faltantes...</td></tr></tbody></table></div>
+</div><br>
+
+<div class="card">
+  <h3>Órdenes de producción marketplace</h3>
+  <div class="tableWrap"><table><thead><tr><th>Folio</th><th>SKU</th><th>Descripción</th><th>Talla</th><th>Cantidad</th><th>Área</th><th>Estatus</th><th>Fecha</th><th>Acciones</th></tr></thead><tbody id="ordenesProdTbody"><tr><td colspan="9">Cargando órdenes...</td></tr></tbody></table></div>
+</div>
+</section>
 <section id="almacen" class="section"><div class="card"><h3>Almacén</h3><p>Módulo pendiente.</p></div></section>
 <section id="inventarios" class="section">
 <div class="moduleHeader"><div><h3>Inventario Marketplace</h3><p>Inventario separado por SKU marketplace. Recibe producto con código de barras y descuenta automáticamente al importar ventas.</p></div><button onclick="iniciarModuloInventarioMarketplace()">Actualizar</button></div>
@@ -271,7 +327,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 const SUPABASE_URL="https://sqlkkdxdpnjcuxkfouhc.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxbGtrZHhkcG5qY3V4a2ZvdWhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTAxNjUsImV4cCI6MjA5NjAyNjE2NX0.sfrMQgfWFJNgY89jFqLJa9mww_pL8x59ziaZ2n96ALo";
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Catálogos + pedidos + marketplace + inventario de pedido."]};
+var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Marketplace + inventario + producción de pedido."]};
 var catalogoProductos=[],areasPedido=[],disenosClienteActual=[],catalogoTelas=[],catalogoTecnicas=[],catalogoTallas=[],tiposPedido=[];
 var tallasBase=['2-3','4-5','6-7','8-9','10-11','12-14','XXS','XS','S','M','L','XL','XXL'];
 var tecnicasPromocionales=['Bordado','DTF UV 3D','Tampografía','Sublimado full','Sublimado en plancha','Otro'];
@@ -283,7 +339,7 @@ var unidadesPorTipo={'Sublimado':['rollos','metros','repeticiones'],'Solo impres
 var tiposConDisenos={'Sublimado':true,'Ropa personalizada':true,'Promocionales':true,'Solo impresión':true,'Muestra':true};
 
 function safe(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function showView(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');var nav=document.querySelector('.navItem[data-view="'+id+'"]');if(nav)nav.classList.add('active');pageTitle.textContent=titles[id][0];pageSubtitle.textContent=titles[id][1];if(id==='clientes')cargarClientes();if(id==='pedidos')iniciarModuloPedidos();if(id==='muestras')iniciarModuloMuestras();if(id==='config')cargarTodosCatalogos();if(id==='marketplace')iniciarModuloMarketplace();if(id==='inventarios')iniciarModuloInventarioMarketplace()}
+function showView(id){if(typeof closeMobileMenu==='function')closeMobileMenu();document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');var nav=document.querySelector('.navItem[data-view="'+id+'"]');if(nav)nav.classList.add('active');pageTitle.textContent=titles[id][0];pageSubtitle.textContent=titles[id][1];if(id==='clientes')cargarClientes();if(id==='pedidos')iniciarModuloPedidos();if(id==='muestras')iniciarModuloMuestras();if(id==='config')cargarTodosCatalogos();if(id==='marketplace')iniciarModuloMarketplace();if(id==='inventarios')iniciarModuloInventarioMarketplace();if(id==='produccion')iniciarModuloProduccion()}
 function initNavigation(){document.querySelectorAll('.navItem').forEach(n=>n.addEventListener('click',function(){showView(this.getAttribute('data-view'))}))}
 function setDbStatus(ok,msg){dbStatus.textContent=ok?'OK':'ERROR';dbStatus.style.color=ok?'var(--green)':'var(--red)';dbNote.textContent=msg||''}
 async function probarConexion(){try{var c=await db.from('clientes').select('id',{count:'exact',head:true});if(c.error)throw c.error;setDbStatus(true,'Supabase conectado');clientesCount.textContent=c.count||0;var p=await db.from('catalogo_productos').select('id',{count:'exact',head:true});productosCount.textContent=p.count||0;var t=await db.from('catalogo_tecnicas').select('id',{count:'exact',head:true});tecnicasCount.textContent=t.count||0}catch(e){console.error(e);setDbStatus(false,e.message)}}
@@ -844,5 +900,86 @@ function detenerCamaraGuia(){
   if(document.getElementById('mkHtml5QrReader'))mkHtml5QrReader.innerHTML='';
 }
 
+
+function openMobileMenu(){document.body.classList.add('menuOpen')}
+function closeMobileMenu(){document.body.classList.remove('menuOpen')}
+function toggleMobileMenu(){document.body.classList.toggle('menuOpen')}
+
+async function iniciarModuloProduccion(){
+  await Promise.all([cargarFaltantesProduccion(),cargarOrdenesProduccion()]);
+}
+async function cargarFaltantesProduccion(){
+  if(!document.getElementById('prodFaltantesTbody'))return;
+  prodFaltantesTbody.innerHTML='<tr><td colspan="7">Cargando faltantes...</td></tr>';
+  var r=await db.from('productos_marketplace').select('*').lt('stock_actual',0).order('sku',{ascending:true});
+  if(r.error){prodFaltantesTbody.innerHTML='<tr><td colspan="7" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
+  var data=r.data||[];
+  prodFaltantesTbody.innerHTML=data.length?data.map(p=>{
+    var fabricar=Math.abs(Number(p.stock_actual)||0);
+    return '<tr class="warnRow"><td>'+imgThumbHtml(p.imagen_url)+'</td><td><b>'+safe(p.sku)+'</b></td><td>'+safe(p.descripcion)+'</td><td>'+safe(p.talla)+'</td><td class="neg">'+safe(p.stock_actual)+'</td><td class="neg">'+fabricar+'</td><td><button class="smallBtn" data-sku="'+safe(p.sku)+'" onclick="generarOrdenProduccionSku(this.dataset.sku)">Generar orden</button></td></tr>';
+  }).join(''):'<tr><td colspan="7">No hay faltantes por fabricar.</td></tr>';
+}
+function folioOrdenProduccion(){var d=new Date();return 'OPM-'+String(d.getFullYear()).slice(2)+String(d.getMonth()+1).padStart(2,'0')+String(d.getDate()).padStart(2,'0')+'-'+String(d.getHours()).padStart(2,'0')+String(d.getMinutes()).padStart(2,'0')+String(d.getSeconds()).padStart(2,'0')+'-'+Math.floor(Math.random()*900+100)}
+async function ordenActivaParaSku(sku){
+  var r=await db.from('ordenes_produccion_marketplace').select('id,folio,estatus').eq('sku',sku).in('estatus',['pendiente','en_proceso']).limit(1).maybeSingle();
+  if(r.error)throw r.error;
+  return r.data;
+}
+async function generarOrdenProduccionSku(sku){
+  prodMsg.style.color='var(--muted)';prodMsg.textContent='Generando orden para '+sku+'...';
+  var pr=await db.from('productos_marketplace').select('*').eq('sku',sku).maybeSingle();
+  if(pr.error||!pr.data){prodMsg.style.color='var(--red)';prodMsg.textContent='No encontré el SKU '+sku;return}
+  var p=pr.data, cantidad=Math.abs(Number(p.stock_actual)||0);
+  if(cantidad<=0){prodMsg.style.color='var(--red)';prodMsg.textContent='Ese SKU no tiene faltante.';return}
+  var existe=await ordenActivaParaSku(sku);
+  if(existe){prodMsg.style.color='var(--orange)';prodMsg.textContent='Ya existe una orden activa para '+sku+': '+existe.folio;return}
+  var area=(String(p.descripcion||'').toLowerCase().includes('tela')?'Almacén':'POD');
+  var obj={folio:folioOrdenProduccion(),sku:sku,descripcion:p.descripcion||sku,talla:p.talla||null,imagen_url:p.imagen_url||null,cantidad:cantidad,area_actual_nombre:area,estatus:'pendiente',origen:'faltante_marketplace',stock_al_generar:Number(p.stock_actual)||0,activo:true};
+  var r=await db.from('ordenes_produccion_marketplace').insert([obj]);
+  if(r.error){prodMsg.style.color='var(--red)';prodMsg.textContent='Error: '+r.error.message;return}
+  prodMsg.style.color='var(--green)';prodMsg.textContent='Orden generada para '+sku+' por '+cantidad+' piezas.';
+  await iniciarModuloProduccion();
+}
+async function generarOrdenesTodosFaltantes(){
+  var r=await db.from('productos_marketplace').select('sku').lt('stock_actual',0);
+  if(r.error){prodMsg.style.color='var(--red)';prodMsg.textContent='Error: '+r.error.message;return}
+  var skus=(r.data||[]).map(x=>x.sku);
+  if(!skus.length){prodMsg.style.color='var(--muted)';prodMsg.textContent='No hay faltantes.';return}
+  var ok=0,omitidas=0;
+  for(const sku of skus){
+    try{
+      var existe=await ordenActivaParaSku(sku);
+      if(existe){omitidas++;continue}
+      var pr=await db.from('productos_marketplace').select('*').eq('sku',sku).maybeSingle();
+      if(!pr.data)continue;
+      var p=pr.data,cantidad=Math.abs(Number(p.stock_actual)||0);
+      if(cantidad<=0)continue;
+      var area=(String(p.descripcion||'').toLowerCase().includes('tela')?'Almacén':'POD');
+      var obj={folio:folioOrdenProduccion(),sku:sku,descripcion:p.descripcion||sku,talla:p.talla||null,imagen_url:p.imagen_url||null,cantidad:cantidad,area_actual_nombre:area,estatus:'pendiente',origen:'faltante_marketplace',stock_al_generar:Number(p.stock_actual)||0,activo:true};
+      var ins=await db.from('ordenes_produccion_marketplace').insert([obj]);
+      if(!ins.error)ok++;
+    }catch(e){console.warn(e)}
+  }
+  prodMsg.style.color='var(--green)';prodMsg.textContent='Órdenes generadas: '+ok+'. Omitidas por orden activa: '+omitidas+'.';
+  await iniciarModuloProduccion();
+}
+async function cargarOrdenesProduccion(){
+  if(!document.getElementById('ordenesProdTbody'))return;
+  ordenesProdTbody.innerHTML='<tr><td colspan="9">Cargando órdenes...</td></tr>';
+  var r=await db.from('ordenes_produccion_marketplace').select('*').order('created_at',{ascending:false}).limit(100);
+  if(r.error){ordenesProdTbody.innerHTML='<tr><td colspan="9" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
+  var data=r.data||[];
+  ordenesProdTbody.innerHTML=data.length?data.map(o=>{
+    var chip=o.estatus==='terminada'?'green':(o.estatus==='cancelada'?'red':'orange');
+    var acciones=o.estatus==='pendiente'?'<button class="smallBtn" data-id="'+safe(o.id)+'" onclick="cambiarEstatusOrdenProduccion(this.dataset.id,\\'en_proceso\\')">Iniciar</button> ':''; 
+    acciones+=o.estatus!=='terminada'?'<button class="secondary smallBtn" data-id="'+safe(o.id)+'" onclick="cambiarEstatusOrdenProduccion(this.dataset.id,\\'terminada\\')">Terminar</button>':'';
+    return '<tr><td><b>'+safe(o.folio)+'</b></td><td>'+safe(o.sku)+'</td><td>'+safe(o.descripcion)+'</td><td>'+safe(o.talla)+'</td><td>'+safe(o.cantidad)+'</td><td>'+safe(o.area_actual_nombre)+'</td><td><span class="chip '+chip+'">'+safe(o.estatus)+'</span></td><td>'+safe(o.created_at?new Date(o.created_at).toLocaleDateString():'')+'</td><td>'+acciones+'</td></tr>';
+  }).join(''):'<tr><td colspan="9">Todavía no hay órdenes.</td></tr>';
+}
+async function cambiarEstatusOrdenProduccion(id,estatus){
+  var r=await db.from('ordenes_produccion_marketplace').update({estatus:estatus,fecha_ultimo_movimiento:new Date().toISOString()}).eq('id',id);
+  if(r.error){alert('Error: '+r.error.message);return}
+  await cargarOrdenesProduccion();
+}
 initNavigation();probarConexion();aplicarTipoPedido();
 </script></body></html>
