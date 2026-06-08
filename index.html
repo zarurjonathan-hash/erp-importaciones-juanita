@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V11.1 Producción y Menú Móvil</title>
+<title>ERP Importaciones Juanita - V12 POD y Surtido</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -45,6 +45,10 @@ body.menuOpen{overflow:hidden}
   .tableWrap{overflow:auto}
 }
 
+
+.podStatusGrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.podStatusCard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.podStatusCard b{font-size:22px;color:var(--olive)}.podGuideHeader{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}.podItemRow{display:grid;grid-template-columns:72px 1fr 92px 160px;gap:10px;align-items:center;border:1px solid var(--line);background:#fff;border-radius:14px;padding:10px;margin:8px 0}.podItemRow.done{background:#f0fbf4}.podItemRow img{width:60px;height:50px;object-fit:cover;border-radius:10px;border:1px solid var(--line)}.podScanBox{background:linear-gradient(135deg,#eef7e8,#fff);border:1px solid var(--line);border-radius:18px;padding:16px}
+@media(max-width:1000px){.podStatusGrid,.podItemRow{grid-template-columns:1fr!important}.podItemRow img{width:80px;height:66px}}
+
 </style>
 </head>
 <body>
@@ -54,20 +58,20 @@ body.menuOpen{overflow:hidden}
   </button>
   <div>
     <b>Importaciones Juanita</b><br>
-    <small>ERP V11.1</small>
+    <small>ERP V12</small>
   </div>
 </div>
 <div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V11.1 Producción</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V12 POD</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
 <div class="navItem" data-view="marketplace"><div class="navIcon">🏷️</div>Marketplace</div>
 <div class="navItem" data-view="produccion"><div class="navIcon">🏭</div>Producción</div>
 <div class="navGroup">Operación</div>
-<div class="navItem" data-view="almacen"><div class="navIcon">📦</div>Almacén</div>
+<div class="navItem" data-view="almacen"><div class="navIcon">📦</div>POD / Surtido</div>
 <div class="navItem" data-view="inventarios"><div class="navIcon">🧾</div>Inventarios</div>
 <div class="navItem" data-view="documentos"><div class="navIcon">🖨️</div>Documentos</div>
 <div class="navItem" data-view="archivos"><div class="navIcon">📁</div>Archivos</div>
@@ -82,14 +86,14 @@ body.menuOpen{overflow:hidden}
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V11.1 PRODUCCIÓN Y MENÚ MÓVIL CORREGIDO</span>
+<span class="version">VERSIÓN ACTUAL: V12 POD Y SURTIDO OPERATIVO</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V11.1 Producción y menú móvil corregido</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace + inventario + producción</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V12 POD y surtido operativo</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace + inventario + producción + POD</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -245,7 +249,68 @@ body.menuOpen{overflow:hidden}
   <div class="tableWrap"><table><thead><tr><th>Folio</th><th>SKU</th><th>Descripción</th><th>Talla</th><th>Cantidad</th><th>Área</th><th>Estatus</th><th>Fecha</th><th>Acciones</th></tr></thead><tbody id="ordenesProdTbody"><tr><td colspan="9">Cargando órdenes...</td></tr></tbody></table></div>
 </div>
 </section>
-<section id="almacen" class="section"><div class="card"><h3>Almacén</h3><p>Módulo pendiente.</p></div></section>
+<section id="almacen" class="section">
+<div class="moduleHeader"><div><h3>POD / Surtido</h3><p>Escanea guías, surte productos, empaca y marca entregas.</p></div><button onclick="iniciarModuloPOD()">Actualizar</button></div>
+
+<div class="podStatusGrid">
+  <div class="podStatusCard"><span class="hint">Pendientes</span><br><b id="podPendientesCount">0</b></div>
+  <div class="podStatusCard"><span class="hint">En surtido</span><br><b id="podEnSurtidoCount">0</b></div>
+  <div class="podStatusCard"><span class="hint">Surtidas</span><br><b id="podSurtidasCount">0</b></div>
+  <div class="podStatusCard"><span class="hint">Empacadas</span><br><b id="podEmpacadasCount">0</b></div>
+  <div class="podStatusCard"><span class="hint">Atrasadas</span><br><b id="podAtrasadasCount">0</b></div>
+</div><br>
+
+<div class="grid2">
+  <div class="card">
+    <h3>Scanner de guía para surtido</h3>
+    <div class="podScanBox">
+      <label>Guía</label>
+      <input id="podBuscarGuia" placeholder="Escanea o escribe la guía" onkeydown="if(event.key==='Enter'){buscarGuiaPOD()}">
+      <div class="actions">
+        <button onclick="buscarGuiaPOD()">Buscar guía</button>
+        <button class="secondary" onclick="usarCamaraPOD()">Usar cámara</button>
+        <button class="secondary" onclick="detenerCamaraGuia()">Detener cámara</button>
+      </div>
+      <div class="hint">También funciona con scanner USB/Bluetooth colocando el cursor en el campo.</div>
+    </div>
+  </div>
+  <div class="card">
+    <h3>Flujo POD</h3>
+    <table><tbody>
+      <tr><th>1</th><td>Pendiente surtido</td></tr>
+      <tr><th>2</th><td>En surtido</td></tr>
+      <tr><th>3</th><td>Surtido</td></tr>
+      <tr><th>4</th><td>Empacado</td></tr>
+      <tr><th>5</th><td>Entregado</td></tr>
+    </tbody></table>
+  </div>
+</div><br>
+
+<div id="podGuiaPanel" class="card hidden">
+  <div class="moduleHeader"><div><h3 id="podGuiaTitulo">Guía</h3><p id="podGuiaSubtitulo">Productos por surtir</p></div><button class="secondary" onclick="cerrarGuiaPOD()">Cerrar</button></div>
+  <div id="podGuiaInfo" class="podGuideHeader"></div>
+  <div class="actions">
+    <button onclick="cambiarEstatusGuiaPOD('en_surtido')">Iniciar surtido</button>
+    <button onclick="marcarTodosItemsPOD()">Marcar todos surtidos</button>
+    <button class="secondary" onclick="cambiarEstatusGuiaPOD('surtido')">Marcar guía surtida</button>
+    <button class="secondary" onclick="cambiarEstatusGuiaPOD('empacado')">Marcar empacada</button>
+    <button class="secondary" onclick="cambiarEstatusGuiaPOD('entregado')">Marcar entregada</button>
+  </div>
+  <div id="podItemsBox"></div>
+</div><br>
+
+<div class="card">
+  <h3>Guías pendientes / en proceso</h3>
+  <div class="tabs">
+    <button class="tabBtn active" onclick="cargarGuiasPOD('pendiente_surtido',this)">Pendientes</button>
+    <button class="tabBtn" onclick="cargarGuiasPOD('en_surtido',this)">En surtido</button>
+    <button class="tabBtn" onclick="cargarGuiasPOD('surtido',this)">Surtidas</button>
+    <button class="tabBtn" onclick="cargarGuiasPOD('empacado',this)">Empacadas</button>
+    <button class="tabBtn" onclick="cargarGuiasPOD('atrasadas',this)">Atrasadas</button>
+  </div>
+  <div class="tableWrap"><table><thead><tr><th>Guía</th><th>Marketplace</th><th>Pedido</th><th>Fecha límite</th><th>Estatus</th><th>Productos</th><th>Acción</th></tr></thead><tbody id="podGuiasTbody"><tr><td colspan="7">Cargando guías...</td></tr></tbody></table></div>
+</div>
+</section>
 <section id="inventarios" class="section">
 <div class="moduleHeader"><div><h3>Inventario Marketplace</h3><p>Inventario separado por SKU marketplace. Recibe producto con código de barras y descuenta automáticamente al importar ventas.</p></div><button onclick="iniciarModuloInventarioMarketplace()">Actualizar</button></div>
 
@@ -327,7 +392,7 @@ body.menuOpen{overflow:hidden}
 const SUPABASE_URL="https://sqlkkdxdpnjcuxkfouhc.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxbGtrZHhkcG5qY3V4a2ZvdWhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTAxNjUsImV4cCI6MjA5NjAyNjE2NX0.sfrMQgfWFJNgY89jFqLJa9mww_pL8x59ziaZ2n96ALo";
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Marketplace + inventario + producción de pedido."]};
+var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Marketplace + inventario + producción + POD de pedido."]};
 var catalogoProductos=[],areasPedido=[],disenosClienteActual=[],catalogoTelas=[],catalogoTecnicas=[],catalogoTallas=[],tiposPedido=[];
 var tallasBase=['2-3','4-5','6-7','8-9','10-11','12-14','XXS','XS','S','M','L','XL','XXL'];
 var tecnicasPromocionales=['Bordado','DTF UV 3D','Tampografía','Sublimado full','Sublimado en plancha','Otro'];
@@ -339,7 +404,7 @@ var unidadesPorTipo={'Sublimado':['rollos','metros','repeticiones'],'Solo impres
 var tiposConDisenos={'Sublimado':true,'Ropa personalizada':true,'Promocionales':true,'Solo impresión':true,'Muestra':true};
 
 function safe(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function showView(id){if(typeof closeMobileMenu==='function')closeMobileMenu();document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');var nav=document.querySelector('.navItem[data-view="'+id+'"]');if(nav)nav.classList.add('active');pageTitle.textContent=titles[id][0];pageSubtitle.textContent=titles[id][1];if(id==='clientes')cargarClientes();if(id==='pedidos')iniciarModuloPedidos();if(id==='muestras')iniciarModuloMuestras();if(id==='config')cargarTodosCatalogos();if(id==='marketplace')iniciarModuloMarketplace();if(id==='inventarios')iniciarModuloInventarioMarketplace();if(id==='produccion')iniciarModuloProduccion()}
+function showView(id){if(typeof closeMobileMenu==='function')closeMobileMenu();document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');var nav=document.querySelector('.navItem[data-view="'+id+'"]');if(nav)nav.classList.add('active');pageTitle.textContent=titles[id][0];pageSubtitle.textContent=titles[id][1];if(id==='clientes')cargarClientes();if(id==='pedidos')iniciarModuloPedidos();if(id==='muestras')iniciarModuloMuestras();if(id==='config')cargarTodosCatalogos();if(id==='marketplace')iniciarModuloMarketplace();if(id==='inventarios')iniciarModuloInventarioMarketplace();if(id==='produccion')iniciarModuloProduccion();if(id==='almacen')iniciarModuloPOD()}
 function initNavigation(){document.querySelectorAll('.navItem').forEach(n=>n.addEventListener('click',function(){showView(this.getAttribute('data-view'))}))}
 function setDbStatus(ok,msg){dbStatus.textContent=ok?'OK':'ERROR';dbStatus.style.color=ok?'var(--green)':'var(--red)';dbNote.textContent=msg||''}
 async function probarConexion(){try{var c=await db.from('clientes').select('id',{count:'exact',head:true});if(c.error)throw c.error;setDbStatus(true,'Supabase conectado');clientesCount.textContent=c.count||0;var p=await db.from('catalogo_productos').select('id',{count:'exact',head:true});productosCount.textContent=p.count||0;var t=await db.from('catalogo_tecnicas').select('id',{count:'exact',head:true});tecnicasCount.textContent=t.count||0}catch(e){console.error(e);setDbStatus(false,e.message)}}
@@ -987,5 +1052,124 @@ async function cambiarEstatusOrdenProduccion(id,estatus){
   if(r.error){alert('Error: '+r.error.message);return}
   await cargarOrdenesProduccion();
 }
+
+var podGuiaActual=null;
+var podItemsActuales=[];
+async function iniciarModuloPOD(){
+  await Promise.all([cargarResumenPOD(),cargarGuiasPOD('pendiente_surtido')]);
+}
+function usarCamaraPOD(){
+  var v=(document.getElementById('podBuscarGuia')||{}).value||'';
+  if(document.getElementById('mkBuscarGuia'))mkBuscarGuia.value=v;
+  iniciarCamaraGuia();
+  var old=window.guiaDetectadaPorCamara;
+  window.guiaDetectadaPorCamara=function(val){
+    if(!val)return;
+    if(document.getElementById('podBuscarGuia'))podBuscarGuia.value=val;
+    if(document.getElementById('mkBuscarGuia'))mkBuscarGuia.value=val;
+    detenerCamaraGuia();
+    buscarGuiaPOD();
+    window.guiaDetectadaPorCamara=old;
+  };
+}
+async function cargarResumenPOD(){
+  var hoy=new Date().toISOString().slice(0,10);
+  async function countBy(q){
+    var r=await q;
+    return r.error?0:(r.count||0);
+  }
+  var pend=await countBy(db.from('marketplace_guias').select('id',{count:'exact',head:true}).eq('estatus','pendiente_surtido'));
+  var ens=await countBy(db.from('marketplace_guias').select('id',{count:'exact',head:true}).eq('estatus','en_surtido'));
+  var sur=await countBy(db.from('marketplace_guias').select('id',{count:'exact',head:true}).eq('estatus','surtido'));
+  var emp=await countBy(db.from('marketplace_guias').select('id',{count:'exact',head:true}).eq('estatus','empacado'));
+  var atr=await countBy(db.from('marketplace_guias').select('id',{count:'exact',head:true}).lt('fecha_limite',hoy).not('estatus','in','("entregado")'));
+  if(document.getElementById('podPendientesCount'))podPendientesCount.textContent=pend;
+  if(document.getElementById('podEnSurtidoCount'))podEnSurtidoCount.textContent=ens;
+  if(document.getElementById('podSurtidasCount'))podSurtidasCount.textContent=sur;
+  if(document.getElementById('podEmpacadasCount'))podEmpacadasCount.textContent=emp;
+  if(document.getElementById('podAtrasadasCount'))podAtrasadasCount.textContent=atr;
+}
+async function cargarGuiasPOD(filtro,btn){
+  if(btn){document.querySelectorAll('#almacen .tabBtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active')}
+  if(!document.getElementById('podGuiasTbody'))return;
+  podGuiasTbody.innerHTML='<tr><td colspan="7">Cargando guías...</td></tr>';
+  var q=db.from('marketplace_guias').select('*').order('fecha_limite',{ascending:true}).limit(100);
+  var hoy=new Date().toISOString().slice(0,10);
+  if(filtro==='atrasadas')q=q.lt('fecha_limite',hoy).not('estatus','in','("entregado")');
+  else q=q.eq('estatus',filtro||'pendiente_surtido');
+  var r=await q;
+  if(r.error){podGuiasTbody.innerHTML='<tr><td colspan="7" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
+  var data=r.data||[];
+  podGuiasTbody.innerHTML=data.length?data.map(g=>{
+    var chip=g.estatus==='entregado'?'green':(g.estatus==='empacado'||g.estatus==='surtido'?'green':(g.estatus==='en_surtido'?'orange':'gray'));
+    var guia=safe(g.guia);
+    return '<tr><td><b>'+guia+'</b></td><td>'+safe(g.marketplace)+'</td><td>'+safe(g.pedido_marketplace)+'</td><td>'+safe(g.fecha_limite)+'</td><td><span class="chip '+chip+'">'+safe(g.estatus)+'</span></td><td><button class="secondary smallBtn" data-guia="'+guia+'" onclick="abrirGuiaPOD(this.dataset.guia)">Ver/surtir</button></td><td><button class="smallBtn" data-guia="'+guia+'" onclick="abrirGuiaPOD(this.dataset.guia)">Abrir</button></td></tr>';
+  }).join(''):'<tr><td colspan="7">No hay guías en este filtro.</td></tr>';
+}
+async function buscarGuiaPOD(){
+  var guia=(document.getElementById('podBuscarGuia')?podBuscarGuia.value.trim():'');
+  if(!guia){alert('Escanea o escribe una guía.');return}
+  await abrirGuiaPOD(guia);
+}
+async function abrirGuiaPOD(guia){
+  podGuiaPanel.classList.remove('hidden');
+  podGuiaTitulo.textContent='Guía '+guia;
+  podGuiaSubtitulo.textContent='Cargando productos...';
+  podItemsBox.innerHTML='Cargando...';
+  var gr=await db.from('marketplace_guias').select('*').eq('guia',guia).maybeSingle();
+  if(gr.error||!gr.data){podItemsBox.innerHTML='<b style="color:var(--red)">No encontré esa guía.</b>';return}
+  podGuiaActual=gr.data;
+  var ir=await db.from('marketplace_items').select('*').eq('guia',guia).order('created_at',{ascending:true});
+  if(ir.error){podItemsBox.innerHTML='<b style="color:var(--red)">Error: '+safe(ir.error.message)+'</b>';return}
+  podItemsActuales=ir.data||[];
+  podGuiaSubtitulo.textContent=(podItemsActuales.length||0)+' producto(s) para surtir';
+  podGuiaInfo.innerHTML='<span class="chip orange">'+safe(podGuiaActual.estatus)+'</span><b>'+safe(podGuiaActual.marketplace)+'</b><span>Pedido: '+safe(podGuiaActual.pedido_marketplace)+'</span><span>Límite: '+safe(podGuiaActual.fecha_limite)+'</span>';
+  renderItemsPOD();
+  podGuiaPanel.scrollIntoView({behavior:'smooth',block:'start'});
+  if(podGuiaActual.estatus==='pendiente_surtido')await cambiarEstatusGuiaPOD('en_surtido',true);
+}
+function renderItemsPOD(){
+  podItemsBox.innerHTML=podItemsActuales.length?podItemsActuales.map(it=>{
+    var done=it.estatus==='surtido'||it.estatus==='entregado';
+    return '<div class="podItemRow '+(done?'done':'')+'"><div>'+(it.imagen_url?'<img src="'+safe(it.imagen_url)+'">':'<div class="imgThumb">-</div>')+'</div><div><b>'+safe(it.sku)+'</b><br>'+safe(it.descripcion)+'<br><span class="hint">Talla/variante: '+safe(it.talla||'-')+'</span></div><div><b>Cant: '+safe(it.cantidad)+'</b><br><span class="chip '+(done?'green':'gray')+'">'+safe(it.estatus||'pendiente')+'</span></div><div><button class="smallBtn" data-id="'+safe(it.id)+'" onclick="marcarItemPODSurtido(this.dataset.id)">Surtido</button></div></div>';
+  }).join(''):'Sin productos en esta guía.';
+}
+async function marcarItemPODSurtido(id){
+  var r=await db.from('marketplace_items').update({estatus:'surtido'}).eq('id',id);
+  if(r.error){alert('Error: '+r.error.message);return}
+  var item=podItemsActuales.find(x=>String(x.id)===String(id)); if(item)item.estatus='surtido';
+  renderItemsPOD();
+  await evaluarGuiaSurtidaPOD();
+}
+async function marcarTodosItemsPOD(){
+  if(!podGuiaActual){alert('Abre una guía primero.');return}
+  var r=await db.from('marketplace_items').update({estatus:'surtido'}).eq('guia',podGuiaActual.guia);
+  if(r.error){alert('Error: '+r.error.message);return}
+  podItemsActuales.forEach(x=>x.estatus='surtido');
+  renderItemsPOD();
+  await cambiarEstatusGuiaPOD('surtido');
+}
+async function evaluarGuiaSurtidaPOD(){
+  if(!podGuiaActual)return;
+  var allDone=podItemsActuales.length>0&&podItemsActuales.every(x=>x.estatus==='surtido'||x.estatus==='entregado');
+  if(allDone)await cambiarEstatusGuiaPOD('surtido',true);
+}
+async function cambiarEstatusGuiaPOD(estatus,silencioso){
+  if(!podGuiaActual){if(!silencioso)alert('Abre una guía primero.');return}
+  var obj={estatus:estatus,fecha_ultimo_movimiento:new Date().toISOString()};
+  if(estatus==='entregado')obj.fecha_entrega=new Date().toISOString();
+  var r=await db.from('marketplace_guias').update(obj).eq('guia',podGuiaActual.guia);
+  if(r.error){alert('Error: '+r.error.message);return}
+  podGuiaActual.estatus=estatus;
+  podGuiaInfo.querySelector('.chip').textContent=estatus;
+  if(estatus==='entregado'){
+    await db.from('marketplace_items').update({estatus:'entregado'}).eq('guia',podGuiaActual.guia);
+    podItemsActuales.forEach(x=>x.estatus='entregado');
+    renderItemsPOD();
+  }
+  await db.from('pod_historial').insert([{guia:podGuiaActual.guia,accion:'estatus_'+estatus,estatus_nuevo:estatus,usuario:'POD',comentario:null}]);
+  await Promise.all([cargarResumenPOD(),cargarGuiasPOD(estatus==='entregado'?'empacado':estatus)]);
+}
+function cerrarGuiaPOD(){podGuiaPanel.classList.add('hidden');podGuiaActual=null;podItemsActuales=[]}
 initNavigation();probarConexion();aplicarTipoPedido();
 </script></body></html>
