@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V13 Pantalla Guía Visual</title>
+<title>ERP Importaciones Juanita - V14 Marketplace Limpio y Catálogo Visual</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -75,6 +75,12 @@ body.menuOpen{overflow:hidden}
   .concentradoMetric{grid-template-columns:1fr}
 }
 
+
+.productGalleryCard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:12px;box-shadow:var(--shadow)}
+.productGalleryCard img{width:100%;height:130px;object-fit:contain;border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:8px}
+.productGalleryCard h4{margin:4px 0;font-size:14px}.productGalleryCard p{margin:3px 0;color:var(--muted);font-size:12px}.productGalleryStock{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+@media(max-width:1000px){#catalogoVisualMkBox{grid-template-columns:1fr!important}}
+
 </style>
 </head>
 <body>
@@ -84,13 +90,13 @@ body.menuOpen{overflow:hidden}
   </button>
   <div>
     <b>Importaciones Juanita</b><br>
-    <small>ERP V13</small>
+    <small>ERP V14</small>
   </div>
 </div>
 <div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V13 POD</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V14 Catálogo</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -98,7 +104,7 @@ body.menuOpen{overflow:hidden}
 <div class="navItem" data-view="produccion"><div class="navIcon">🏭</div>Producción</div>
 <div class="navGroup">Operación</div>
 <div class="navItem" data-view="almacen"><div class="navIcon">📦</div>POD / Surtido</div>
-<div class="navItem" data-view="inventarios"><div class="navIcon">🧾</div>Inventarios</div>
+<div class="navItem" data-view="inventarios"><div class="navIcon">🧾</div>Catálogo Marketplace</div>
 <div class="navItem" data-view="documentos"><div class="navIcon">🖨️</div>Documentos</div>
 <div class="navItem" data-view="archivos"><div class="navIcon">📁</div>Archivos</div>
 <div class="navGroup">Administración</div>
@@ -112,14 +118,14 @@ body.menuOpen{overflow:hidden}
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V13 PANTALLA GUÍA VISUAL + CONCENTRADO</span>
+<span class="version">VERSIÓN ACTUAL: V14 MARKETPLACE LIMPIO + CATÁLOGO VISUAL</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V13 Pantalla guía visual + concentrado</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace + inventario + producción + POD visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V14 Marketplace limpio + catálogo visual</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -209,33 +215,13 @@ body.menuOpen{overflow:hidden}
   </div>
 
   <div class="card">
-    <h3>Pantalla guía / surtido</h3>
+    <h3>Marketplace limpio</h3>
     <div class="scanHero">
-      <label>Escanear guía</label>
-      <div class="scanModeGrid">
-        <div class="scanModeCard">
-          <h4>Scanner USB/Bluetooth</h4>
-          <p>Conecta el scanner, coloca el cursor en el campo y escanea la guía impresa.</p>
-        </div>
-        <div class="scanModeCard">
-          <h4>Cámara del celular</h4>
-          <p>Activa la cámara y apunta al código de barras o QR de la guía.</p>
-        </div>
-      </div><br>
-      <input id="mkBuscarGuia" placeholder="Escanea, escribe o lee con cámara la guía" onkeydown="if(event.key==='Enter'){buscarGuiaMarketplace()}">
-      <div class="actions">
-        <button onclick="buscarGuiaMarketplace()">Buscar guía</button>
-        <button class="secondary" onclick="iniciarCamaraGuia()">Usar cámara</button>
-        <button class="secondary" onclick="detenerCamaraGuia()">Detener cámara</button>
-        <button class="secondary" onclick="marcarGuiaBuscadaEntregada()">Marcar entregada</button>
-      </div>
-      <div id="mkCameraBox" class="cameraBox hidden">
-        <video id="mkCameraVideo" autoplay muted playsinline></video>
-        <div id="mkHtml5QrReader" class="hidden"></div>
-        <div class="hint" style="color:#d8ead3">Apunta al código de barras o QR de la guía. Funciona mejor con buena luz y acercando la etiqueta.</div>
-      </div>
-      <div id="mkResultadoGuia" class="guideResult hidden"></div>
+      <b>Este módulo queda solo para importar ventas.</b>
+      <p class="hint">El escaneo de guías y la cámara se movieron a <b>POD / Surtido</b>, que es donde se preparan físicamente los pedidos.</p>
+      <div class="actions"><button onclick="showView('almacen')">Ir a POD / Surtido</button><button class="secondary" onclick="showView('inventarios')">Ir a Catálogo Marketplace</button></div>
     </div>
+  </div>
   </div>
 </div><br>
 
@@ -298,6 +284,11 @@ body.menuOpen{overflow:hidden}
         <button class="secondary" onclick="detenerCamaraGuia()">Detener cámara</button>
       </div>
       <div class="hint">También funciona con scanner USB/Bluetooth colocando el cursor en el campo.</div>
+      <div id="mkCameraBox" class="cameraBox hidden">
+        <video id="mkCameraVideo" autoplay muted playsinline></video>
+        <div id="mkHtml5QrReader" class="hidden"></div>
+        <div class="hint" style="color:#d8ead3">Apunta al código de barras o QR de la guía. Funciona mejor con buena luz.</div>
+      </div>
     </div>
   </div>
   <div class="card">
@@ -419,6 +410,15 @@ body.menuOpen{overflow:hidden}
   <h3>Historial de inventario</h3>
   <div class="tableWrap"><table><thead><tr><th>Fecha</th><th>SKU</th><th>Tipo</th><th>Cantidad</th><th>Antes</th><th>Después</th><th>Referencia</th><th>Motivo</th></tr></thead><tbody id="movMkTbody"><tr><td colspan="8">Cargando...</td></tr></tbody></table></div>
 </div>
+
+<br>
+<div class="card">
+  <div class="moduleHeader">
+    <div><h3>Galería visual de productos</h3><p>Vista rápida de productos marketplace con imagen, stock y faltantes.</p></div>
+    <button onclick="cargarCatalogoVisualMarketplace()">Actualizar galería</button>
+  </div>
+  <div id="catalogoVisualMkBox" class="grid4"><div class="card">Cargando productos...</div></div>
+</div>
 </section>
 <section id="documentos" class="section"><div class="card"><h3>Documentos</h3><p>Módulo pendiente.</p></div></section>
 <section id="archivos" class="section"><div class="card"><h3>Archivos</h3><p>Módulo pendiente.</p></div></section>
@@ -431,7 +431,7 @@ body.menuOpen{overflow:hidden}
 const SUPABASE_URL="https://sqlkkdxdpnjcuxkfouhc.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxbGtrZHhkcG5qY3V4a2ZvdWhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTAxNjUsImV4cCI6MjA5NjAyNjE2NX0.sfrMQgfWFJNgY89jFqLJa9mww_pL8x59ziaZ2n96ALo";
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Marketplace + inventario + producción + POD visual de pedido."]};
+var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Marketplace limpio + POD + catálogo visual de pedido."]};
 var catalogoProductos=[],areasPedido=[],disenosClienteActual=[],catalogoTelas=[],catalogoTecnicas=[],catalogoTallas=[],tiposPedido=[];
 var tallasBase=['2-3','4-5','6-7','8-9','10-11','12-14','XXS','XS','S','M','L','XL','XXL'];
 var tecnicasPromocionales=['Bordado','DTF UV 3D','Tampografía','Sublimado full','Sublimado en plancha','Otro'];
@@ -774,7 +774,7 @@ async function marcarGuiaBuscadaEntregada(){var guia=mkBuscarGuia.value.trim();i
 
 
 async function iniciarModuloInventarioMarketplace(){
-  await Promise.all([cargarProductosMarketplace(),cargarSetsMarketplace(),cargarMovimientosMarketplace()]);
+  await Promise.all([cargarProductosMarketplace(),cargarSetsMarketplace(),cargarMovimientosMarketplace(),cargarCatalogoVisualMarketplace()]);
 }
 function imgThumbHtml(url){return url?'<img class="imgThumb" src="'+safe(url)+'">':'-'}
 async function cargarProductosMarketplace(){
@@ -1279,6 +1279,26 @@ async function cargarConcentradoMarketplace(){
   concentradoMkTbody.innerHTML=rows.length?rows.map(x=>{
     return '<tr class="'+(x.fabricar>0?'warnRow':'')+'"><td>'+imgThumbHtml(x.imagen_url)+'</td><td><b>'+safe(x.sku)+'</b></td><td>'+safe(x.descripcion)+'</td><td>'+safe(x.talla||'-')+'</td><td><b>'+safe(x.cantidad)+'</b></td><td class="'+(x.stock_actual<0?'neg':'pos')+'">'+safe(x.stock_actual)+'</td><td class="'+(x.fabricar>0?'neg':'pos')+'">'+safe(x.fabricar)+'</td></tr>';
   }).join(''):'<tr><td colspan="7">No hay productos importados.</td></tr>';
+}
+
+async function cargarCatalogoVisualMarketplace(){
+  if(!document.getElementById('catalogoVisualMkBox'))return;
+  catalogoVisualMkBox.innerHTML='<div class="card">Cargando productos...</div>';
+  var r=await db.from('productos_marketplace').select('*').order('sku',{ascending:true}).limit(80);
+  if(r.error){catalogoVisualMkBox.innerHTML='<div class="card" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</div>';return}
+  var data=r.data||[];
+  catalogoVisualMkBox.innerHTML=data.length?data.map(p=>{
+    var stock=Number(p.stock_actual||0);
+    var chip=stock<0?'red':(stock===0?'orange':'green');
+    return '<div class="productGalleryCard">'+
+      (p.imagen_url?'<img src="'+safe(p.imagen_url)+'">':'<div style="height:130px;border:1px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--muted);margin-bottom:8px">Sin imagen</div>')+
+      '<h4>'+safe(p.sku)+'</h4>'+
+      '<p>'+safe(p.descripcion||'')+'</p>'+
+      '<p><b>Talla:</b> '+safe(p.talla||'-')+'</p>'+
+      '<p><b>Código:</b> '+safe(p.codigo_barras||'-')+'</p>'+
+      '<div class="productGalleryStock"><span class="chip '+chip+'">Stock: '+safe(stock)+'</span>'+(stock<0?'<span class="chip red">Fabricar: '+Math.abs(stock)+'</span>':'')+'</div>'+
+    '</div>';
+  }).join(''):'<div class="card">No hay productos marketplace.</div>';
 }
 initNavigation();probarConexion();aplicarTipoPedido();
 </script></body></html>
