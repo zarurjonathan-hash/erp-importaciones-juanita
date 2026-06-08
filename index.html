@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V14.1 Rediseño Profesional</title>
+<title>ERP Importaciones Juanita - V14.2 Estructura Corregida</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -156,6 +156,11 @@ td{background:#fff}
   .title h2{font-size:26px}
 }
 
+
+/* V14.2 SEGURIDAD DE VISTAS */
+section.section{display:none!important}
+section.section.active{display:block!important}
+
 </style>
 </head>
 <body>
@@ -165,13 +170,13 @@ td{background:#fff}
   </button>
   <div>
     <b>Importaciones Juanita</b><br>
-    <small>ERP V14.1</small>
+    <small>ERP V14.2</small>
   </div>
 </div>
 <div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V14.1 Pro</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V14.2 Pro</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -193,14 +198,14 @@ td{background:#fff}
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Resumen general de operación, pedidos, marketplace e inventario.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V14.1 REDISEÑO PROFESIONAL + ESTRUCTURA CORREGIDA</span>
+<span class="version">VERSIÓN ACTUAL: V14.2 ESTRUCTURA CORREGIDA</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V14.1 Rediseño profesional + estructura corregida</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V14.2 Estructura corregida</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -296,7 +301,6 @@ td{background:#fff}
       <p class="hint">El escaneo de guías y la cámara se movieron a <b>POD / Surtido</b>, que es donde se preparan físicamente los pedidos.</p>
       <div class="actions"><button onclick="showView('almacen')">Ir a POD / Surtido</button><button class="secondary" onclick="showView('inventarios')">Ir a Catálogo Marketplace</button></div>
     </div>
-  </div>
   </div>
 </div><br>
 
@@ -537,7 +541,7 @@ function showView(id){
   if(typeof closeMobileMenu==='function')closeMobileMenu();
   var target=document.getElementById(id);
   if(!target){console.warn('Vista no encontrada:',id);return}
-  document.querySelectorAll('main.main > section.section').forEach(s=>{
+  document.querySelectorAll('section.section').forEach(s=>{
     s.classList.remove('active');
     s.style.display='none';
   });
@@ -1417,5 +1421,5 @@ async function cargarCatalogoVisualMarketplace(){
     '</div>';
   }).join(''):'<div class="card">No hay productos marketplace.</div>';
 }
-initNavigation();document.querySelectorAll('main.main > section.section').forEach(s=>{if(!s.classList.contains('active'))s.style.display='none'});probarConexion();aplicarTipoPedido();
+initNavigation();document.querySelectorAll('section.section').forEach(s=>{if(!s.classList.contains('active'))s.style.display='none'});probarConexion();aplicarTipoPedido();
 </script></body></html>
