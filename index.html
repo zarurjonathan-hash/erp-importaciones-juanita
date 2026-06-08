@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V11 Producción y Menú Móvil</title>
+<title>ERP Importaciones Juanita - V11.1 Producción y Menú Móvil</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -54,13 +54,13 @@ body.menuOpen{overflow:hidden}
   </button>
   <div>
     <b>Importaciones Juanita</b><br>
-    <small>ERP V11</small>
+    <small>ERP V11.1</small>
   </div>
 </div>
 <div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V11 Producción</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V11.1 Producción</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -82,14 +82,14 @@ body.menuOpen{overflow:hidden}
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V11 PRODUCCIÓN Y MENÚ MÓVIL</span>
+<span class="version">VERSIÓN ACTUAL: V11.1 PRODUCCIÓN Y MENÚ MÓVIL CORREGIDO</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V11 Producción y menú móvil</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace + inventario + producción</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V11.1 Producción y menú móvil corregido</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace + inventario + producción</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -971,11 +971,17 @@ async function cargarOrdenesProduccion(){
   var data=r.data||[];
   ordenesProdTbody.innerHTML=data.length?data.map(o=>{
     var chip=o.estatus==='terminada'?'green':(o.estatus==='cancelada'?'red':'orange');
-    var acciones=o.estatus==='pendiente'?'<button class="smallBtn" data-id="'+safe(o.id)+'" onclick="cambiarEstatusOrdenProduccion(this.dataset.id,\\'en_proceso\\')">Iniciar</button> ':''; 
-    acciones+=o.estatus!=='terminada'?'<button class="secondary smallBtn" data-id="'+safe(o.id)+'" onclick="cambiarEstatusOrdenProduccion(this.dataset.id,\\'terminada\\')">Terminar</button>':'';
+    var acciones='';
+    if(o.estatus==='pendiente'){
+      acciones+='<button class="smallBtn" data-id="'+safe(o.id)+'" data-estatus="en_proceso" onclick="cambiarEstatusOrdenProduccion(this.dataset.id,this.dataset.estatus)">Iniciar</button> ';
+    }
+    if(o.estatus!=='terminada'){
+      acciones+='<button class="secondary smallBtn" data-id="'+safe(o.id)+'" data-estatus="terminada" onclick="cambiarEstatusOrdenProduccion(this.dataset.id,this.dataset.estatus)">Terminar</button>';
+    }
     return '<tr><td><b>'+safe(o.folio)+'</b></td><td>'+safe(o.sku)+'</td><td>'+safe(o.descripcion)+'</td><td>'+safe(o.talla)+'</td><td>'+safe(o.cantidad)+'</td><td>'+safe(o.area_actual_nombre)+'</td><td><span class="chip '+chip+'">'+safe(o.estatus)+'</span></td><td>'+safe(o.created_at?new Date(o.created_at).toLocaleDateString():'')+'</td><td>'+acciones+'</td></tr>';
   }).join(''):'<tr><td colspan="9">Todavía no hay órdenes.</td></tr>';
 }
+
 async function cambiarEstatusOrdenProduccion(id,estatus){
   var r=await db.from('ordenes_produccion_marketplace').update({estatus:estatus,fecha_ultimo_movimiento:new Date().toISOString()}).eq('id',id);
   if(r.error){alert('Error: '+r.error.message);return}
