@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V9.1 Marketplace y Guías</title>
+<title>ERP Importaciones Juanita - V9.2 Importación Marketplace CSV</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -28,7 +28,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <body>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V9.1 Marketplace</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V9.2 Marketplace</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -50,14 +50,14 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V9.1 MARKETPLACE Y GUÍAS CORREGIDO</span>
+<span class="version">VERSIÓN ACTUAL: V9.2 IMPORTACIÓN MASIVA MARKETPLACE CSV</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V9.1 Marketplace y guías</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Catálogos + pedidos + marketplace</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V9.2 Importación masiva marketplace</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Catálogos + pedidos + marketplace</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -129,33 +129,20 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 </section>
 
 <section id="marketplace" class="section">
-<div class="moduleHeader"><div><h3>Marketplace / Guías</h3><p>Registro de guías, productos por etiqueta, surtido y entregas.</p></div><button onclick="cargarGuiasMarketplace()">Actualizar</button></div>
+<div class="moduleHeader"><div><h3>Marketplace / Importación masiva</h3><p>Sube CSV descargado de Shein, Mercado Libre, Coppel o Temu. El sistema agrupa automáticamente por guía.</p></div><button onclick="cargarGuiasMarketplace()">Actualizar guías</button></div>
 
 <div class="grid2">
   <div class="card">
-    <h3>Nueva guía marketplace</h3>
+    <h3>Importar archivo CSV</h3>
     <div class="formGrid">
-      <div><label>Marketplace</label><select id="mkMarketplace"><option>Shein</option><option>Mercado Libre</option><option>Amazon</option><option>Shopify</option><option>Otro</option></select></div>
-      <div><label>Número de guía</label><input id="mkGuia" placeholder="Escanea o escribe la guía"></div>
-      <div><label>Número de pedido</label><input id="mkPedido" placeholder="Pedido marketplace"></div>
-      <div><label>Fecha de venta</label><input id="mkFechaVenta" type="date"></div>
-      <div><label>Fecha límite entrega</label><input id="mkFechaLimite" type="date"></div>
-      <div><label>Cliente / referencia</label><input id="mkCliente" placeholder="Opcional"></div>
-    </div><br>
-    <label>Notas</label><textarea id="mkNotas" placeholder="Indicaciones del pedido"></textarea>
-    <div class="subCard">
-      <h3>Producto dentro de la guía</h3>
-      <div class="formGrid">
-        <div><label>SKU</label><input id="mkItemSku" placeholder="SKU vendido"></div>
-        <div><label>Descripción</label><input id="mkItemDesc" placeholder="Descripción producto"></div>
-        <div><label>Talla</label><input id="mkItemTalla" placeholder="Talla"></div>
-        <div><label>Cantidad</label><input id="mkItemCantidad" type="number" min="1" step="1" value="1"></div>
-        <div><label>Imagen URL</label><input id="mkItemImagen" placeholder="https://..."></div>
-      </div>
-      <div class="actions"><button type="button" onclick="agregarItemMarketplace()">+ Agregar producto</button><button type="button" class="secondary" onclick="limpiarItemsMarketplace()">Limpiar productos</button></div>
-      <div id="mkItemsDraft"></div>
+      <div><label>Marketplace</label><select id="mkImportMarketplace" onchange="resetImportMarketplace()"><option>Shein</option><option>Mercado Libre</option><option>Coppel</option><option>Temu</option><option>Otro</option></select></div>
+      <div><label>Archivo CSV</label><input id="mkCsvFile" type="file" accept=".csv,text/csv" onchange="leerCsvMarketplace(this)"></div>
+      <div><label>Modo</label><select id="mkImportModo"><option value="reemplazar">Reemplazar guías importadas</option><option value="agregar">Agregar sin borrar productos previos</option></select></div>
     </div>
-    <div class="actions"><button onclick="guardarGuiaMarketplace()">Guardar guía</button><button class="secondary" onclick="limpiarGuiaMarketplace()">Limpiar todo</button></div>
+    <div class="hint">Exporta/descarga el archivo del marketplace como CSV. No captures guías manualmente.</div>
+    <div id="mkImportStatus" class="guideResult hidden"></div>
+    <div id="mkMappingBox" class="subCard hidden"></div>
+    <div class="actions"><button onclick="importarCsvMarketplace()">Importar CSV</button><button class="secondary" onclick="resetImportMarketplace()">Limpiar importación</button></div>
     <p id="mkMsg" style="font-weight:700;color:var(--muted)"></p>
   </div>
 
@@ -171,10 +158,16 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 </div><br>
 
 <div class="card">
+  <h3>Vista previa de importación</h3>
+  <div class="tableWrap"><table><thead><tr><th>Guía</th><th>Pedido</th><th>SKU</th><th>Producto</th><th>Talla/Variante</th><th>Cantidad</th><th>Fecha venta</th><th>Fecha límite</th></tr></thead><tbody id="mkPreviewTbody"><tr><td colspan="8">Sube un CSV para ver la vista previa.</td></tr></tbody></table></div>
+</div><br>
+
+<div class="card">
   <h3>Guías registradas</h3>
   <div class="tableWrap"><table><thead><tr><th>Guía</th><th>Marketplace</th><th>Pedido</th><th>Fecha venta</th><th>Fecha límite</th><th>Estatus</th><th>Entrega</th><th>Productos</th><th>Acciones</th></tr></thead><tbody id="mkGuiasTbody"><tr><td colspan="9">Cargando guías...</td></tr></tbody></table></div>
 </div>
 </section>
+
 <section id="produccion" class="section"><div class="card"><h3>Producción</h3><p>Módulo pendiente.</p></div></section>
 <section id="almacen" class="section"><div class="card"><h3>Almacén</h3><p>Módulo pendiente.</p></div></section>
 <section id="inventarios" class="section"><div class="card"><h3>Inventarios</h3><p>Módulo pendiente.</p></div></section>
@@ -337,48 +330,150 @@ async function cargarMuestras(){
 }
 
 
-var mkItems=[];
-function renderItemsMarketplace(){
-  var box=document.getElementById('mkItemsDraft');
-  if(!box)return;
-  box.innerHTML=mkItems.length?mkItems.map((it,i)=>'<div class="itemDraft"><div><b>'+safe(it.sku)+'</b> — '+safe(it.descripcion)+' | Talla: '+safe(it.talla)+' | Cant: '+safe(it.cantidad)+'</div><button class="danger smallBtn" onclick="quitarItemMarketplace('+i+')">Quitar</button></div>').join(''):'<div class="hint">Todavía no hay productos agregados a esta guía.</div>';
+
+var mkImportRows=[];
+var mkImportMap=null;
+var mkImportHeaders=[];
+function normalizarHeader(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[#º°]/g,'').replace(/\s+/g,' ').trim()}
+var mkAliases={
+  guia:['numero de guia','número de guía','guia','guía','numero de seguimiento','número de seguimiento','tracking no','tracking number','no guia'],
+  pedido:['numero de pedido','número de pedido','pedido','id del pedido','de venta','venta','numero de venta','número de venta','order no','order number'],
+  sku:['sku del vendedor','seller sku','sku de tienda','sku de la oferta','sku oferta','sku de contribucion','sku de contribución','sku'],
+  producto:['nombre del producto','titulo de la publicacion','título de la publicación','detalles','producto','descripcion','descripción'],
+  talla:['especificacion','especificación','variante','variacion','variación','talla'],
+  cantidad:['cantidad de envio de actividad','cantidad de envío de actividad','unidades','cantidad comprada','cantidad a enviar','cantidad de envío','cantidad de envio','cantidad'],
+  fecha_venta:['fecha y hora de creacion de pedido','fecha y hora de creación de pedido','fecha de venta','fecha de creacion','fecha de creación','fecha de compra','paid time'],
+  fecha_limite:['fecha y hora requeridas de recoleccion','fecha y hora requeridas de recolección','fecha limite de envio','fecha límite de envío','fecha limite envio','hora de envio mas reciente','hora de envío más reciente','fecha limite','fecha límite','ship by date'],
+  precio:['precio','importe','total','monto','precio unitario']
+};
+function parseCsvMarketplace(text){
+  text=String(text||'').replace(/^\uFEFF/,'').replace(/\r\n/g,'\n').replace(/\r/g,'\n');
+  var firstLines=text.split('\n').slice(0,10).join('\n');
+  var delimiters=[',',';','\t'];
+  var best=',',bestScore=-1;
+  delimiters.forEach(d=>{
+    var score=firstLines.split('\n').reduce((a,l)=>a+(l.split(d).length-1),0);
+    if(score>bestScore){best=d;bestScore=score}
+  });
+  var rows=[],row=[],cell='',q=false;
+  for(var i=0;i<text.length;i++){
+    var ch=text[i],next=text[i+1];
+    if(ch==='"'&&q&&next==='"'){cell+='"';i++;continue}
+    if(ch==='"'){q=!q;continue}
+    if(ch===best&&!q){row.push(cell);cell='';continue}
+    if(ch==='\n'&&!q){row.push(cell);if(row.some(x=>String(x).trim()!==''))rows.push(row);row=[];cell='';continue}
+    cell+=ch;
+  }
+  if(cell!==''||row.length){row.push(cell);if(row.some(x=>String(x).trim()!==''))rows.push(row)}
+  return rows.map(r=>r.map(c=>String(c||'').trim()));
 }
-function agregarItemMarketplace(){
-  var sku=mkItemSku.value.trim(), desc=mkItemDesc.value.trim(), talla=mkItemTalla.value.trim(), cant=parseInt(mkItemCantidad.value||'0',10)||0;
-  if(!sku){mkMsg.style.color='var(--red)';mkMsg.textContent='Escribe el SKU del producto.';return}
-  if(cant<=0){mkMsg.style.color='var(--red)';mkMsg.textContent='La cantidad debe ser mayor a 0.';return}
-  mkItems.push({sku:sku,descripcion:desc||sku,talla:talla||null,cantidad:cant,imagen_url:mkItemImagen.value.trim()||null});
-  ['mkItemSku','mkItemDesc','mkItemTalla','mkItemImagen'].forEach(id=>document.getElementById(id).value='');
-  mkItemCantidad.value='1';
-  mkMsg.textContent='';
-  renderItemsMarketplace();
+function detectarMapaMarketplace(rows){
+  var best={idx:0,score:-1,map:{},headers:[]};
+  rows.slice(0,30).forEach((r,idx)=>{
+    var headers=r.map(normalizarHeader),map={},score=0;
+    Object.keys(mkAliases).forEach(k=>{
+      var found=-1;
+      headers.forEach((h,i)=>{
+        if(found>=0)return;
+        if(mkAliases[k].some(a=>h===normalizarHeader(a)||h.includes(normalizarHeader(a))||normalizarHeader(a).includes(h)&&h.length>3)){found=i}
+      });
+      if(found>=0){map[k]=found;score++}
+    });
+    if(score>best.score){best={idx:idx,score:score,map:map,headers:r}}
+  });
+  return best;
 }
-function quitarItemMarketplace(i){mkItems.splice(i,1);renderItemsMarketplace()}
-function limpiarItemsMarketplace(){mkItems=[];renderItemsMarketplace()}
-function limpiarGuiaMarketplace(){
-  ['mkGuia','mkPedido','mkFechaVenta','mkFechaLimite','mkCliente','mkNotas','mkBuscarGuia'].forEach(id=>{var e=document.getElementById(id);if(e)e.value=''});
-  mkMarketplace.value='Shein';
-  limpiarItemsMarketplace();
-  mkMsg.textContent='';
+function valor(row,i){return i===undefined||i===null?'':String(row[i]||'').trim()}
+function parseCantidad(v){var n=String(v||'').replace(/,/g,'.').match(/-?\d+(\.\d+)?/);return n?Math.max(1,Math.round(parseFloat(n[0]))):1}
+function fechaCsv(v){
+  var s=String(v||'').trim();
+  if(!s)return null;
+  var m=s.match(/(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/);
+  if(m)return m[1]+'-'+String(m[2]).padStart(2,'0')+'-'+String(m[3]).padStart(2,'0');
+  m=s.match(/(\d{1,2})[-\/](\d{1,2})[-\/](\d{2,4})/);
+  if(m){var y=m[3].length===2?'20'+m[3]:m[3];return y+'-'+String(m[2]).padStart(2,'0')+'-'+String(m[1]).padStart(2,'0')}
+  var d=new Date(s);
+  if(!isNaN(d.getTime()))return d.toISOString().slice(0,10);
+  return null;
 }
-async function iniciarModuloMarketplace(){renderItemsMarketplace();await cargarGuiasMarketplace()}
-async function guardarGuiaMarketplace(){
-  var guia=mkGuia.value.trim();
-  if(!guia){mkMsg.style.color='var(--red)';mkMsg.textContent='Escanea o escribe la guía.';return}
-  if(!mkFechaVenta.value){mkMsg.style.color='var(--red)';mkMsg.textContent='Selecciona fecha de venta.';return}
-  if(!mkFechaLimite.value){mkMsg.style.color='var(--red)';mkMsg.textContent='Selecciona fecha límite.';return}
-  if(!mkItems.length){mkMsg.style.color='var(--red)';mkMsg.textContent='Agrega al menos un producto a la guía.';return}
-  mkMsg.style.color='var(--muted)';mkMsg.textContent='Guardando guía...';
-  var guiaObj={guia:guia,marketplace:mkMarketplace.value,pedido_marketplace:mkPedido.value.trim()||null,cliente_nombre:mkCliente.value.trim()||null,fecha_venta:mkFechaVenta.value,fecha_limite:mkFechaLimite.value,estatus:'pendiente_surtido',notas:mkNotas.value.trim()||null,activo:true};
-  var gr=await db.from('marketplace_guias').insert([guiaObj]).select('id,guia').single();
-  if(gr.error){mkMsg.style.color='var(--red)';mkMsg.textContent='Error guía: '+gr.error.message;return}
-  var rows=mkItems.map(it=>({guia_id:gr.data.id,guia:guia,sku:it.sku,descripcion:it.descripcion,talla:it.talla,cantidad:it.cantidad,imagen_url:it.imagen_url,estatus:'pendiente'}));
-  var ir=await db.from('marketplace_items').insert(rows);
-  if(ir.error){mkMsg.style.color='var(--red)';mkMsg.textContent='Guía creada, pero falló guardar productos: '+ir.error.message;return}
-  mkMsg.style.color='var(--green)';mkMsg.textContent='Guía guardada: '+guia;
-  limpiarGuiaMarketplace();
+function resetImportMarketplace(){
+  mkImportRows=[];mkImportMap=null;mkImportHeaders=[];
+  if(document.getElementById('mkCsvFile'))mkCsvFile.value='';
+  if(document.getElementById('mkPreviewTbody'))mkPreviewTbody.innerHTML='<tr><td colspan="8">Sube un CSV para ver la vista previa.</td></tr>';
+  if(document.getElementById('mkImportStatus')){mkImportStatus.classList.add('hidden');mkImportStatus.innerHTML=''}
+  if(document.getElementById('mkMappingBox')){mkMappingBox.classList.add('hidden');mkMappingBox.innerHTML=''}
+  if(document.getElementById('mkMsg'))mkMsg.textContent='';
+}
+function leerCsvMarketplace(input){
+  var f=input.files&&input.files[0];
+  if(!f)return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      var rows=parseCsvMarketplace(e.target.result);
+      var detected=detectarMapaMarketplace(rows);
+      mkImportMap=detected.map;mkImportHeaders=detected.headers||[];
+      var data=rows.slice(detected.idx+1).filter(r=>r.some(c=>String(c).trim()!==''));
+      mkImportRows=data.map(r=>({
+        guia:valor(r,mkImportMap.guia),
+        pedido:valor(r,mkImportMap.pedido),
+        sku:valor(r,mkImportMap.sku),
+        producto:valor(r,mkImportMap.producto),
+        talla:valor(r,mkImportMap.talla),
+        cantidad:parseCantidad(valor(r,mkImportMap.cantidad)),
+        fecha_venta:fechaCsv(valor(r,mkImportMap.fecha_venta)),
+        fecha_limite:fechaCsv(valor(r,mkImportMap.fecha_limite)),
+        precio:valor(r,mkImportMap.precio)
+      })).filter(x=>x.guia&&x.sku);
+      renderPreviewMarketplace(detected);
+    }catch(err){
+      mkMsg.style.color='var(--red)';mkMsg.textContent='Error leyendo CSV: '+err.message;
+    }
+  };
+  reader.readAsText(f,'UTF-8');
+}
+function renderPreviewMarketplace(detected){
+  mkImportStatus.classList.remove('hidden');
+  mkImportStatus.innerHTML='<b>Archivo detectado.</b><br>Fila de encabezados detectada: '+(detected.idx+1)+'<br>Filas válidas detectadas: '+mkImportRows.length;
+  var campos=['guia','pedido','sku','producto','talla','cantidad','fecha_venta','fecha_limite'];
+  mkMappingBox.classList.remove('hidden');
+  mkMappingBox.innerHTML='<h3>Columnas detectadas</h3><table><tbody>'+campos.map(c=>'<tr><th>'+c+'</th><td>'+safe(mkImportHeaders[mkImportMap[c]]||'No detectado')+'</td></tr>').join('')+'</tbody></table>';
+  mkPreviewTbody.innerHTML=mkImportRows.slice(0,20).map(r=>'<tr><td>'+safe(r.guia)+'</td><td>'+safe(r.pedido)+'</td><td><b>'+safe(r.sku)+'</b></td><td>'+safe(r.producto)+'</td><td>'+safe(r.talla)+'</td><td>'+safe(r.cantidad)+'</td><td>'+safe(r.fecha_venta)+'</td><td>'+safe(r.fecha_limite)+'</td></tr>').join('')||'<tr><td colspan="8">No se detectaron filas válidas. Revisa que el CSV tenga guía y SKU.</td></tr>';
+}
+function chunks(arr,size){var out=[];for(var i=0;i<arr.length;i+=size)out.push(arr.slice(i,i+size));return out}
+async function importarCsvMarketplace(){
+  if(!mkImportRows.length){mkMsg.style.color='var(--red)';mkMsg.textContent='Primero sube un CSV válido.';return}
+  var market=mkImportMarketplace.value;
+  mkMsg.style.color='var(--muted)';mkMsg.textContent='Importando '+mkImportRows.length+' productos...';
+  var guiasMap={};
+  mkImportRows.forEach(r=>{
+    if(!guiasMap[r.guia])guiasMap[r.guia]={guia:r.guia,marketplace:market,pedido_marketplace:r.pedido||null,fecha_venta:r.fecha_venta,fecha_limite:r.fecha_limite,estatus:'pendiente_surtido',activo:true,fecha_ultimo_movimiento:new Date().toISOString()};
+  });
+  var guias=Object.values(guiasMap);
+  var batch={marketplace:market,nombre_archivo:(mkCsvFile.files&&mkCsvFile.files[0]?mkCsvFile.files[0].name:null),total_filas:mkImportRows.length,total_guias:guias.length,estatus:'procesado'};
+  var br=await db.from('marketplace_importaciones').insert([batch]).select('id').single();
+  var importId=br.error?null:br.data.id;
+  if(importId){guias.forEach(g=>g.importacion_id=importId)}
+  for(const part of chunks(guias,500)){
+    var gr=await db.from('marketplace_guias').upsert(part,{onConflict:'guia'});
+    if(gr.error){mkMsg.style.color='var(--red)';mkMsg.textContent='Error importando guías: '+gr.error.message;return}
+  }
+  var guiaKeys=guias.map(g=>g.guia);
+  if(mkImportModo.value==='reemplazar'){
+    for(const part of chunks(guiaKeys,200)){
+      var del=await db.from('marketplace_items').delete().in('guia',part);
+      if(del.error){mkMsg.style.color='var(--red)';mkMsg.textContent='Error limpiando productos anteriores: '+del.error.message;return}
+    }
+  }
+  var items=mkImportRows.map(r=>({guia:r.guia,sku:r.sku,descripcion:r.producto||r.sku,talla:r.talla||null,cantidad:r.cantidad||1,imagen_url:null,tipo_item:'individual',estatus:'pendiente',importacion_id:importId}));
+  for(const part of chunks(items,500)){
+    var ir=await db.from('marketplace_items').insert(part);
+    if(ir.error){mkMsg.style.color='var(--red)';mkMsg.textContent='Error importando productos: '+ir.error.message;return}
+  }
+  mkMsg.style.color='var(--green)';mkMsg.textContent='Importación completa: '+guias.length+' guías y '+items.length+' productos.';
   await cargarGuiasMarketplace();
 }
+async function iniciarModuloMarketplace(){await cargarGuiasMarketplace()}
 async function cargarGuiasMarketplace(){
   if(!document.getElementById('mkGuiasTbody'))return;
   mkGuiasTbody.innerHTML='<tr><td colspan="9">Cargando guías...</td></tr>';
@@ -393,7 +488,6 @@ async function cargarGuiasMarketplace(){
     return '<tr><td><b>'+guia+'</b></td><td>'+safe(g.marketplace)+'</td><td>'+safe(g.pedido_marketplace)+'</td><td>'+safe(g.fecha_venta)+'</td><td>'+safe(g.fecha_limite)+'</td><td><span class="chip '+chip+'">'+safe(g.estatus)+'</span></td><td>'+safe(g.fecha_entrega||'')+'</td><td><button class="secondary smallBtn" data-guia="'+guia+'" onclick="verProductosGuia(this.dataset.guia)">Ver productos</button></td><td><button class="smallBtn" data-guia="'+guia+'" onclick="marcarGuiaEntregada(this.dataset.guia)">Entregada</button></td></tr><tr id="'+rowId+'" class="pedidoDisenosRow hidden"><td colspan="9"></td></tr>';
   }).join('');
 }
-
 async function verProductosGuia(guia){
   var row=document.getElementById('mk-items-'+safe(guia).replace(/[^a-zA-Z0-9_-]/g,''));
   if(!row){mkBuscarGuia.value=guia;buscarGuiaMarketplace();return}
