@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V9.2 Importación Marketplace CSV</title>
+<title>ERP Importaciones Juanita - V10.1 Inventario y Scanner</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -22,13 +22,13 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 .designCard{border:1px solid var(--line);border-radius:16px;padding:14px;margin:12px 0;background:#fbfdf8}.designHeader{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}.previewImg{width:74px;height:58px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}.tableWrap{overflow:auto}.pedidoDisenosRow td{background:#fbfdf8}
 .tallasGrid{display:grid;grid-template-columns:repeat(7,minmax(90px,1fr));gap:10px}.tallaItem{background:white;border:1px solid var(--line);border-radius:14px;padding:10px}.tallaItem input{text-align:center;font-weight:800}.designTotal{margin-top:10px;padding:10px;border-radius:12px;background:#fff;border:1px solid var(--line);font-weight:900;color:var(--olive)}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.tabBtn{background:white;color:var(--olive);border:1px solid var(--line)}.tabBtn.active{background:var(--olive);color:white}.catPanel{display:none}.catPanel.active{display:block}.checkGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.checkItem{display:flex;gap:7px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:8px}.checkItem input{width:auto}.imgThumb{width:46px;height:38px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}
-.historyBox{margin-top:14px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:14px}.historyBox h3{margin:0 0 10px}.statusLine{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.miniActions{display:flex;gap:6px;flex-wrap:wrap}.muestraPreview{width:64px;height:50px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}.scanHero{background:linear-gradient(135deg,#d6e5cf,#f8fbf4);border:1px solid var(--line);border-radius:18px;padding:16px}.itemDraft{display:flex;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;margin:6px 0}.guideResult{margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px}@media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.grid4,.grid3,.grid2,.formGrid,.tallasGrid,.checkGrid{grid-template-columns:1fr}}
+.historyBox{margin-top:14px;border:1px solid var(--line);border-radius:16px;background:#fff;padding:14px}.historyBox h3{margin:0 0 10px}.statusLine{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.miniActions{display:flex;gap:6px;flex-wrap:wrap}.muestraPreview{width:64px;height:50px;border-radius:10px;object-fit:cover;border:1px solid var(--line);background:var(--soft)}.scanHero{background:linear-gradient(135deg,#d6e5cf,#f8fbf4);border:1px solid var(--line);border-radius:18px;padding:16px}.itemDraft{display:flex;gap:8px;align-items:center;justify-content:space-between;border:1px solid var(--line);background:#fff;border-radius:12px;padding:8px;margin:6px 0}.guideResult{margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:16px;padding:14px}.stockBox{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.stockStat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.stockStat b{font-size:22px;color:var(--olive)}.warnRow td{background:#fff7ed}.okRow td{background:#f0fbf4}.neg{color:var(--red);font-weight:900}.pos{color:var(--green);font-weight:900}.cameraBox{border:1px solid var(--line);border-radius:16px;background:#0b0f0d;padding:10px;margin-top:10px}.cameraBox video{width:100%;max-height:260px;border-radius:12px;background:#000}.scanModeGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.scanModeCard{border:1px solid var(--line);border-radius:14px;background:#fff;padding:12px}.scanModeCard h4{margin:0 0 6px}.scanModeCard p{margin:0;color:var(--muted);font-size:12px}@media(max-width:1000px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.grid4,.grid3,.grid2,.formGrid,.tallasGrid,.checkGrid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V9.2 Marketplace</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V10.1 Scanner</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -50,14 +50,14 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V9.2 IMPORTACIÓN MASIVA MARKETPLACE CSV</span>
+<span class="version">VERSIÓN ACTUAL: V10.1 INVENTARIO MARKETPLACE + SCANNER</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V9.2 Importación masiva marketplace</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Catálogos + pedidos + marketplace</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V10.1 Inventario marketplace + scanner</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Catálogos + pedidos + marketplace + inventario</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -150,8 +150,27 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
     <h3>Pantalla guía / surtido</h3>
     <div class="scanHero">
       <label>Escanear guía</label>
-      <input id="mkBuscarGuia" placeholder="Escanea o escribe la guía">
-      <div class="actions"><button onclick="buscarGuiaMarketplace()">Buscar guía</button><button class="secondary" onclick="marcarGuiaBuscadaEntregada()">Marcar entregada</button></div>
+      <div class="scanModeGrid">
+        <div class="scanModeCard">
+          <h4>Scanner USB/Bluetooth</h4>
+          <p>Conecta el scanner, coloca el cursor en el campo y escanea la guía impresa.</p>
+        </div>
+        <div class="scanModeCard">
+          <h4>Cámara del celular</h4>
+          <p>Activa la cámara y apunta al código de barras o QR de la guía.</p>
+        </div>
+      </div><br>
+      <input id="mkBuscarGuia" placeholder="Escanea, escribe o lee con cámara la guía" onkeydown="if(event.key==='Enter'){buscarGuiaMarketplace()}">
+      <div class="actions">
+        <button onclick="buscarGuiaMarketplace()">Buscar guía</button>
+        <button class="secondary" onclick="iniciarCamaraGuia()">Usar cámara</button>
+        <button class="secondary" onclick="detenerCamaraGuia()">Detener cámara</button>
+        <button class="secondary" onclick="marcarGuiaBuscadaEntregada()">Marcar entregada</button>
+      </div>
+      <div id="mkCameraBox" class="cameraBox hidden">
+        <video id="mkCameraVideo" autoplay muted playsinline></video>
+        <div class="hint" style="color:#d8ead3">Si el navegador no soporta lectura automática, usa el scanner USB/Bluetooth o escribe la guía.</div>
+      </div>
       <div id="mkResultadoGuia" class="guideResult hidden"></div>
     </div>
   </div>
@@ -170,7 +189,76 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 
 <section id="produccion" class="section"><div class="card"><h3>Producción</h3><p>Módulo pendiente.</p></div></section>
 <section id="almacen" class="section"><div class="card"><h3>Almacén</h3><p>Módulo pendiente.</p></div></section>
-<section id="inventarios" class="section"><div class="card"><h3>Inventarios</h3><p>Módulo pendiente.</p></div></section>
+<section id="inventarios" class="section">
+<div class="moduleHeader"><div><h3>Inventario Marketplace</h3><p>Inventario separado por SKU marketplace. Recibe producto con código de barras y descuenta automáticamente al importar ventas.</p></div><button onclick="iniciarModuloInventarioMarketplace()">Actualizar</button></div>
+
+<div class="grid2">
+  <div class="card">
+    <h3>Entrada rápida por código de barras</h3>
+    <div class="formGrid">
+      <div><label>Código de barras / SKU</label><input id="invScanCodigo" placeholder="Escanea código o SKU"></div>
+      <div><label>Cantidad recibida</label><input id="invScanCantidad" type="number" min="1" step="1" value="1"></div>
+      <div><label>Nota</label><input id="invScanNota" placeholder="Ej. producción, ajuste, devolución"></div>
+    </div>
+    <div class="actions"><button onclick="registrarEntradaInventario()">Registrar entrada</button><button class="secondary" onclick="limpiarEntradaInventario()">Limpiar</button></div>
+    <p id="invMsg" style="font-weight:700;color:var(--muted)"></p>
+  </div>
+
+  <div class="card">
+    <h3>Alta / edición rápida de SKU</h3>
+    <div class="formGrid">
+      <div><label>SKU marketplace</label><input id="prodMkSku"></div>
+      <div><label>Código de barras</label><input id="prodMkBarcode"></div>
+      <div><label>Talla</label><input id="prodMkTalla"></div>
+      <div><label>Descripción</label><input id="prodMkDesc"></div>
+      <div><label>Imagen URL</label><input id="prodMkImagen"></div>
+      <div><label>Stock inicial</label><input id="prodMkStock" type="number" step="1" value="0"></div>
+    </div>
+    <div class="actions"><button onclick="guardarProductoMarketplace()">Guardar SKU</button></div>
+    <p id="prodMkMsg" style="font-weight:700;color:var(--muted)"></p>
+  </div>
+</div><br>
+
+<div class="grid2">
+  <div class="card">
+    <h3>Sets Marketplace</h3>
+    <p class="hint">Cuando el CSV trae un SKU set, se descuentan sus componentes reales.</p>
+    <div class="formGrid">
+      <div><label>SKU del set</label><input id="setMkSku" placeholder="SKU vendido como set"></div>
+      <div><label>SKU componente</label><input id="setMkComp" placeholder="SKU real a descontar"></div>
+      <div><label>Cantidad componente</label><input id="setMkCant" type="number" min="1" step="1" value="1"></div>
+    </div>
+    <div class="actions"><button onclick="guardarSetMarketplace()">Agregar componente</button></div>
+    <p id="setMkMsg" style="font-weight:700;color:var(--muted)"></p>
+    <div class="tableWrap"><table><thead><tr><th>Set</th><th>Componente</th><th>Cantidad</th></tr></thead><tbody id="setsMkTbody"><tr><td colspan="3">Cargando...</td></tr></tbody></table></div>
+  </div>
+
+  <div class="card">
+    <h3>Resumen inventario</h3>
+    <div class="stockBox">
+      <div class="stockStat"><span class="hint">SKUs</span><br><b id="invTotalSkus">0</b></div>
+      <div class="stockStat"><span class="hint">Con stock</span><br><b id="invConStock">0</b></div>
+      <div class="stockStat"><span class="hint">Faltantes</span><br><b id="invFaltantes">0</b></div>
+      <div class="stockStat"><span class="hint">Sets</span><br><b id="invTotalSets">0</b></div>
+    </div>
+  </div>
+</div><br>
+
+<div class="card">
+  <h3>Faltantes por producto</h3>
+  <div class="tableWrap"><table><thead><tr><th>Imagen</th><th>SKU</th><th>Descripción</th><th>Talla</th><th>Stock actual</th><th>Fabricar</th></tr></thead><tbody id="faltantesMkTbody"><tr><td colspan="6">Cargando...</td></tr></tbody></table></div>
+</div><br>
+
+<div class="card">
+  <h3>Productos marketplace</h3>
+  <div class="tableWrap"><table><thead><tr><th>Imagen</th><th>SKU</th><th>Código barras</th><th>Descripción</th><th>Talla</th><th>Stock actual</th><th>Activo</th></tr></thead><tbody id="productosMkTbody"><tr><td colspan="7">Cargando...</td></tr></tbody></table></div>
+</div><br>
+
+<div class="card">
+  <h3>Historial de inventario</h3>
+  <div class="tableWrap"><table><thead><tr><th>Fecha</th><th>SKU</th><th>Tipo</th><th>Cantidad</th><th>Antes</th><th>Después</th><th>Referencia</th><th>Motivo</th></tr></thead><tbody id="movMkTbody"><tr><td colspan="8">Cargando...</td></tr></tbody></table></div>
+</div>
+</section>
 <section id="documentos" class="section"><div class="card"><h3>Documentos</h3><p>Módulo pendiente.</p></div></section>
 <section id="archivos" class="section"><div class="card"><h3>Archivos</h3><p>Módulo pendiente.</p></div></section>
 <section id="compras" class="section"><div class="card"><h3>Compras</h3><p>Módulo pendiente.</p></div></section>
@@ -182,7 +270,7 @@ table{width:100%;border-collapse:separate;border-spacing:0;overflow:hidden;borde
 const SUPABASE_URL="https://sqlkkdxdpnjcuxkfouhc.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxbGtrZHhkcG5qY3V4a2ZvdWhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTAxNjUsImV4cCI6MjA5NjAyNjE2NX0.sfrMQgfWFJNgY89jFqLJa9mww_pL8x59ziaZ2n96ALo";
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Catálogos + pedidos + marketplace de pedido."]};
+var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Catálogos + pedidos + marketplace + inventario de pedido."]};
 var catalogoProductos=[],areasPedido=[],disenosClienteActual=[],catalogoTelas=[],catalogoTecnicas=[],catalogoTallas=[],tiposPedido=[];
 var tallasBase=['2-3','4-5','6-7','8-9','10-11','12-14','XXS','XS','S','M','L','XL','XXL'];
 var tecnicasPromocionales=['Bordado','DTF UV 3D','Tampografía','Sublimado full','Sublimado en plancha','Otro'];
@@ -194,7 +282,7 @@ var unidadesPorTipo={'Sublimado':['rollos','metros','repeticiones'],'Solo impres
 var tiposConDisenos={'Sublimado':true,'Ropa personalizada':true,'Promocionales':true,'Solo impresión':true,'Muestra':true};
 
 function safe(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function showView(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');var nav=document.querySelector('.navItem[data-view="'+id+'"]');if(nav)nav.classList.add('active');pageTitle.textContent=titles[id][0];pageSubtitle.textContent=titles[id][1];if(id==='clientes')cargarClientes();if(id==='pedidos')iniciarModuloPedidos();if(id==='muestras')iniciarModuloMuestras();if(id==='config')cargarTodosCatalogos();if(id==='marketplace')iniciarModuloMarketplace()}
+function showView(id){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');var nav=document.querySelector('.navItem[data-view="'+id+'"]');if(nav)nav.classList.add('active');pageTitle.textContent=titles[id][0];pageSubtitle.textContent=titles[id][1];if(id==='clientes')cargarClientes();if(id==='pedidos')iniciarModuloPedidos();if(id==='muestras')iniciarModuloMuestras();if(id==='config')cargarTodosCatalogos();if(id==='marketplace')iniciarModuloMarketplace();if(id==='inventarios')iniciarModuloInventarioMarketplace()}
 function initNavigation(){document.querySelectorAll('.navItem').forEach(n=>n.addEventListener('click',function(){showView(this.getAttribute('data-view'))}))}
 function setDbStatus(ok,msg){dbStatus.textContent=ok?'OK':'ERROR';dbStatus.style.color=ok?'var(--green)':'var(--red)';dbNote.textContent=msg||''}
 async function probarConexion(){try{var c=await db.from('clientes').select('id',{count:'exact',head:true});if(c.error)throw c.error;setDbStatus(true,'Supabase conectado');clientesCount.textContent=c.count||0;var p=await db.from('catalogo_productos').select('id',{count:'exact',head:true});productosCount.textContent=p.count||0;var t=await db.from('catalogo_tecnicas').select('id',{count:'exact',head:true});tecnicasCount.textContent=t.count||0}catch(e){console.error(e);setDbStatus(false,e.message)}}
@@ -470,7 +558,8 @@ async function importarCsvMarketplace(){
     var ir=await db.from('marketplace_items').insert(part);
     if(ir.error){mkMsg.style.color='var(--red)';mkMsg.textContent='Error importando productos: '+ir.error.message;return}
   }
-  mkMsg.style.color='var(--green)';mkMsg.textContent='Importación completa: '+guias.length+' guías y '+items.length+' productos.';
+  var invRes=await procesarInventarioImportacionMarketplace(items,importId);
+  mkMsg.style.color='var(--green)';mkMsg.textContent='Importación completa: '+guias.length+' guías y '+items.length+' productos. Inventario: '+invRes.movimientos+' movimientos, '+invRes.faltantes+' faltantes.';
   await cargarGuiasMarketplace();
 }
 async function iniciarModuloMarketplace(){await cargarGuiasMarketplace()}
@@ -522,5 +611,171 @@ async function marcarGuiaEntregada(guia){
 }
 async function marcarGuiaBuscadaEntregada(){var guia=mkBuscarGuia.value.trim();if(!guia){alert('Escanea o escribe guía.');return}await marcarGuiaEntregada(guia)}
 
+
+async function iniciarModuloInventarioMarketplace(){
+  await Promise.all([cargarProductosMarketplace(),cargarSetsMarketplace(),cargarMovimientosMarketplace()]);
+}
+function imgThumbHtml(url){return url?'<img class="imgThumb" src="'+safe(url)+'">':'-'}
+async function cargarProductosMarketplace(){
+  if(!document.getElementById('productosMkTbody'))return;
+  var r=await db.from('productos_marketplace').select('*').order('sku',{ascending:true}).limit(500);
+  if(r.error){productosMkTbody.innerHTML='<tr><td colspan="7" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
+  var data=r.data||[];
+  productosMkTbody.innerHTML=data.length?data.map(p=>'<tr class="'+((Number(p.stock_actual)||0)<0?'warnRow':'')+'"><td>'+imgThumbHtml(p.imagen_url)+'</td><td><b>'+safe(p.sku)+'</b></td><td>'+safe(p.codigo_barras)+'</td><td>'+safe(p.descripcion)+'</td><td>'+safe(p.talla)+'</td><td class="'+((Number(p.stock_actual)||0)<0?'neg':'pos')+'">'+safe(p.stock_actual||0)+'</td><td>'+(p.activo?'Sí':'No')+'</td></tr>').join(''):'<tr><td colspan="7">Sin productos marketplace.</td></tr>';
+  var falt=data.filter(p=>(Number(p.stock_actual)||0)<0);
+  if(document.getElementById('faltantesMkTbody')){
+    faltantesMkTbody.innerHTML=falt.length?falt.map(p=>'<tr class="warnRow"><td>'+imgThumbHtml(p.imagen_url)+'</td><td><b>'+safe(p.sku)+'</b></td><td>'+safe(p.descripcion)+'</td><td>'+safe(p.talla)+'</td><td class="neg">'+safe(p.stock_actual||0)+'</td><td class="neg">'+Math.abs(Number(p.stock_actual)||0)+'</td></tr>').join(''):'<tr><td colspan="6">No hay faltantes por ahora.</td></tr>';
+  }
+  if(document.getElementById('invTotalSkus')){
+    invTotalSkus.textContent=data.length;
+    invConStock.textContent=data.filter(p=>(Number(p.stock_actual)||0)>0).length;
+    invFaltantes.textContent=falt.length;
+  }
+}
+async function cargarSetsMarketplace(){
+  if(!document.getElementById('setsMkTbody'))return;
+  var r=await db.from('marketplace_sets').select('*').order('set_sku',{ascending:true}).limit(500);
+  if(r.error){setsMkTbody.innerHTML='<tr><td colspan="3" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
+  var data=r.data||[];
+  setsMkTbody.innerHTML=data.length?data.map(s=>'<tr><td><b>'+safe(s.set_sku)+'</b></td><td>'+safe(s.componente_sku)+'</td><td>'+safe(s.cantidad_componente)+'</td></tr>').join(''):'<tr><td colspan="3">Sin sets configurados.</td></tr>';
+  if(document.getElementById('invTotalSets'))invTotalSets.textContent=[...new Set(data.map(s=>s.set_sku))].length;
+}
+async function cargarMovimientosMarketplace(){
+  if(!document.getElementById('movMkTbody'))return;
+  var r=await db.from('inventario_movimientos_marketplace').select('*').order('created_at',{ascending:false}).limit(100);
+  if(r.error){movMkTbody.innerHTML='<tr><td colspan="8" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
+  var data=r.data||[];
+  movMkTbody.innerHTML=data.length?data.map(m=>'<tr><td>'+safe(new Date(m.created_at).toLocaleString())+'</td><td><b>'+safe(m.sku)+'</b></td><td>'+safe(m.tipo)+'</td><td>'+safe(m.cantidad)+'</td><td>'+safe(m.stock_antes)+'</td><td>'+safe(m.stock_despues)+'</td><td>'+safe(m.referencia)+'</td><td>'+safe(m.motivo)+'</td></tr>').join(''):'<tr><td colspan="8">Sin movimientos.</td></tr>';
+}
+function limpiarEntradaInventario(){['invScanCodigo','invScanNota'].forEach(id=>{var e=document.getElementById(id);if(e)e.value=''});if(document.getElementById('invScanCantidad'))invScanCantidad.value='1';if(document.getElementById('invMsg'))invMsg.textContent=''}
+async function guardarProductoMarketplace(){
+  var sku=prodMkSku.value.trim();
+  if(!sku){prodMkMsg.style.color='var(--red)';prodMkMsg.textContent='Escribe SKU.';return}
+  var obj={sku:sku,codigo_barras:prodMkBarcode.value.trim()||sku,descripcion:prodMkDesc.value.trim()||sku,talla:prodMkTalla.value.trim()||null,imagen_url:prodMkImagen.value.trim()||null,stock_actual:Number(prodMkStock.value||0)||0,activo:true};
+  var r=await db.from('productos_marketplace').upsert([obj],{onConflict:'sku'});
+  if(r.error){prodMkMsg.style.color='var(--red)';prodMkMsg.textContent='Error: '+r.error.message;return}
+  prodMkMsg.style.color='var(--green)';prodMkMsg.textContent='SKU guardado.';
+  ['prodMkSku','prodMkBarcode','prodMkDesc','prodMkTalla','prodMkImagen'].forEach(id=>document.getElementById(id).value='');prodMkStock.value='0';
+  await cargarProductosMarketplace();
+}
+async function guardarSetMarketplace(){
+  var setSku=setMkSku.value.trim(), comp=setMkComp.value.trim(), cant=Number(setMkCant.value||1)||1;
+  if(!setSku||!comp){setMkMsg.style.color='var(--red)';setMkMsg.textContent='Escribe SKU del set y componente.';return}
+  var r=await db.from('marketplace_sets').upsert([{set_sku:setSku,componente_sku:comp,cantidad_componente:cant,activo:true}],{onConflict:'set_sku,componente_sku'});
+  if(r.error){setMkMsg.style.color='var(--red)';setMkMsg.textContent='Error: '+r.error.message;return}
+  setMkMsg.style.color='var(--green)';setMkMsg.textContent='Componente agregado.';
+  setMkComp.value='';setMkCant.value='1';
+  await cargarSetsMarketplace();
+}
+async function registrarEntradaInventario(){
+  var codigo=invScanCodigo.value.trim(), cantidad=Number(invScanCantidad.value||0)||0;
+  if(!codigo){invMsg.style.color='var(--red)';invMsg.textContent='Escanea código o SKU.';return}
+  if(cantidad<=0){invMsg.style.color='var(--red)';invMsg.textContent='Cantidad debe ser mayor a 0.';return}
+  var pr=await db.from('productos_marketplace').select('*').or('sku.eq.'+codigo+',codigo_barras.eq.'+codigo).limit(1).maybeSingle();
+  if(pr.error){invMsg.style.color='var(--red)';invMsg.textContent='Error buscando SKU: '+pr.error.message;return}
+  var producto=pr.data;
+  if(!producto){
+    var cr=await db.from('productos_marketplace').insert([{sku:codigo,codigo_barras:codigo,descripcion:codigo,stock_actual:0,activo:true}]).select('*').single();
+    if(cr.error){invMsg.style.color='var(--red)';invMsg.textContent='No pude crear SKU: '+cr.error.message;return}
+    producto=cr.data;
+  }
+  var antes=Number(producto.stock_actual)||0, despues=antes+cantidad;
+  var ur=await db.from('productos_marketplace').update({stock_actual:despues,updated_at:new Date().toISOString()}).eq('sku',producto.sku);
+  if(ur.error){invMsg.style.color='var(--red)';invMsg.textContent='Error actualizando stock: '+ur.error.message;return}
+  await db.from('inventario_movimientos_marketplace').insert([{sku:producto.sku,tipo:'entrada',cantidad:cantidad,stock_antes:antes,stock_despues:despues,referencia:'entrada_manual',motivo:invScanNota.value.trim()||'Entrada por escaneo'}]);
+  invMsg.style.color='var(--green)';invMsg.textContent='Entrada registrada. '+producto.sku+' stock: '+despues;
+  limpiarEntradaInventario();
+  await iniciarModuloInventarioMarketplace();
+}
+async function asegurarProductoMarketplace(sku,desc,talla){
+  var pr=await db.from('productos_marketplace').select('*').eq('sku',sku).maybeSingle();
+  if(pr.error)throw pr.error;
+  if(pr.data)return pr.data;
+  var cr=await db.from('productos_marketplace').insert([{sku:sku,codigo_barras:sku,descripcion:desc||sku,talla:talla||null,stock_actual:0,activo:true}]).select('*').single();
+  if(cr.error)throw cr.error;
+  return cr.data;
+}
+async function moverStockMarketplace(sku,cantidad,tipo,referencia,motivo,desc,talla){
+  var p=await asegurarProductoMarketplace(sku,desc,talla);
+  var antes=Number(p.stock_actual)||0;
+  var delta=tipo==='salida'?-Math.abs(Number(cantidad)||0):Math.abs(Number(cantidad)||0);
+  var despues=antes+delta;
+  var ur=await db.from('productos_marketplace').update({stock_actual:despues,updated_at:new Date().toISOString()}).eq('sku',sku);
+  if(ur.error)throw ur.error;
+  var mr=await db.from('inventario_movimientos_marketplace').insert([{sku:sku,tipo:tipo,cantidad:Math.abs(Number(cantidad)||0),stock_antes:antes,stock_despues:despues,referencia:referencia||null,motivo:motivo||null}]);
+  if(mr.error)throw mr.error;
+  return despues;
+}
+async function procesarInventarioImportacionMarketplace(items,importId){
+  var movimientos=0,faltantes=0;
+  var skus=[...new Set(items.map(i=>i.sku).filter(Boolean))];
+  var setsData=[];
+  for(const part of chunks(skus,200)){
+    var sr=await db.from('marketplace_sets').select('*').in('set_sku',part).eq('activo',true);
+    if(sr.error)throw sr.error;
+    setsData=setsData.concat(sr.data||[]);
+  }
+  var setsMap={};
+  setsData.forEach(s=>{if(!setsMap[s.set_sku])setsMap[s.set_sku]=[];setsMap[s.set_sku].push(s)});
+  for(const item of items){
+    var comps=setsMap[item.sku];
+    if(comps&&comps.length){
+      for(const c of comps){
+        var qty=(Number(item.cantidad)||1)*(Number(c.cantidad_componente)||1);
+        var despues=await moverStockMarketplace(c.componente_sku,qty,'salida',item.guia,'Venta marketplace set '+item.sku,item.descripcion,item.talla);
+        movimientos++; if(despues<0)faltantes++;
+      }
+      await db.from('marketplace_items').update({es_set:true,procesado_inventario:true}).eq('guia',item.guia).eq('sku',item.sku);
+    }else{
+      var despues=await moverStockMarketplace(item.sku,item.cantidad||1,'salida',item.guia,'Venta marketplace',item.descripcion,item.talla);
+      movimientos++; if(despues<0)faltantes++;
+      await db.from('marketplace_items').update({es_set:false,procesado_inventario:true}).eq('guia',item.guia).eq('sku',item.sku);
+    }
+  }
+  return {movimientos:movimientos,faltantes:faltantes};
+}
+
+var mkCameraStream=null;
+var mkCameraTimer=null;
+var mkBarcodeDetector=null;
+async function iniciarCamaraGuia(){
+  try{
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
+      alert('Este navegador no permite usar cámara aquí. Usa scanner USB/Bluetooth o escribe la guía.');
+      return;
+    }
+    mkCameraBox.classList.remove('hidden');
+    mkCameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}});
+    mkCameraVideo.srcObject=mkCameraStream;
+    if('BarcodeDetector' in window){
+      mkBarcodeDetector=new BarcodeDetector({formats:['code_128','code_39','ean_13','ean_8','qr_code','data_matrix','pdf417','itf','upc_a','upc_e']});
+      if(mkCameraTimer)clearInterval(mkCameraTimer);
+      mkCameraTimer=setInterval(async function(){
+        try{
+          if(!mkCameraVideo||mkCameraVideo.readyState<2||!mkBarcodeDetector)return;
+          var codes=await mkBarcodeDetector.detect(mkCameraVideo);
+          if(codes&&codes.length){
+            var val=(codes[0].rawValue||'').trim();
+            if(val){
+              mkBuscarGuia.value=val;
+              detenerCamaraGuia();
+              buscarGuiaMarketplace();
+            }
+          }
+        }catch(e){console.warn('Scanner cámara:',e)}
+      },650);
+    }else{
+      alert('Tu navegador abrió la cámara, pero no soporta lectura automática de códigos. En ese caso usa scanner USB/Bluetooth o escribe la guía.');
+    }
+  }catch(e){
+    alert('No pude abrir la cámara: '+e.message);
+  }
+}
+function detenerCamaraGuia(){
+  if(mkCameraTimer){clearInterval(mkCameraTimer);mkCameraTimer=null}
+  if(mkCameraStream){mkCameraStream.getTracks().forEach(t=>t.stop());mkCameraStream=null}
+  if(document.getElementById('mkCameraVideo'))mkCameraVideo.srcObject=null;
+  if(document.getElementById('mkCameraBox'))mkCameraBox.classList.add('hidden');
+}
 initNavigation();probarConexion();aplicarTipoPedido();
 </script></body></html>
