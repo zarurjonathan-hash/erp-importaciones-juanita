@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V14 Marketplace Limpio y Catálogo Visual</title>
+<title>ERP Importaciones Juanita - V14.1 Rediseño Profesional</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -81,6 +81,81 @@ body.menuOpen{overflow:hidden}
 .productGalleryCard h4{margin:4px 0;font-size:14px}.productGalleryCard p{margin:3px 0;color:var(--muted);font-size:12px}.productGalleryStock{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
 @media(max-width:1000px){#catalogoVisualMkBox{grid-template-columns:1fr!important}}
 
+
+/* V14.1 REDISEÑO PROFESIONAL */
+:root{
+  --bg:#f6f8fb;
+  --card:#ffffff;
+  --ink:#162033;
+  --muted:#657084;
+  --line:#e5eaf1;
+  --soft:#f2f6fb;
+  --sage:#ffffff;
+  --olive:#2563eb;
+  --green:#14a46c;
+  --red:#d64d4d;
+  --orange:#f59e0b;
+  --blue:#2563eb;
+  --shadow:0 18px 45px rgba(17,24,39,.08);
+  --radius:20px;
+}
+body{background:linear-gradient(180deg,#f7faff 0%,#f3f6fb 100%);color:var(--ink)}
+.app{grid-template-columns:248px 1fr;gap:0;background:transparent}
+.sidebar{
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(14px);
+  border-right:1px solid var(--line);
+  box-shadow:8px 0 30px rgba(17,24,39,.04);
+  padding:20px 14px;
+}
+.logo{background:#edf4ff;color:var(--olive);box-shadow:inset 0 0 0 1px #d9e7ff}
+.brand{padding:4px 4px 16px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.brand h1{font-size:15px;color:#172033}.brand p{color:var(--muted)}
+.navGroup{color:#98a2b3;font-weight:900;margin-top:18px}
+.navItem{border-radius:14px;color:#263244;transition:.18s ease;padding:10px 12px}
+.navIcon{background:#f2f6fb}
+.navItem:hover{background:#f3f7ff}
+.navItem.active{background:#eaf2ff;color:#174ea6;font-weight:900;box-shadow:inset 3px 0 0 var(--olive)}
+.main{padding:28px;max-width:1440px;width:100%;margin:0 auto}
+.topbar{margin-bottom:22px}
+.title h2{font-size:30px;letter-spacing:-.6px;color:#111827}
+.title p{font-size:15px;color:var(--muted)}
+.userBox{border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);background:rgba(255,255,255,.9)}
+.avatar{background:linear-gradient(135deg,#2563eb,#16a34a)}
+.card,.userBox{box-shadow:var(--shadow)}
+.card{border-radius:22px;border:1px solid var(--line);background:rgba(255,255,255,.96)}
+.metric{min-height:116px;background:linear-gradient(135deg,#fff,#f7faff)}
+.metric .value{font-size:32px;color:#111827}
+.moduleHeader{background:transparent;padding:0;margin-bottom:16px}
+.moduleHeader h3{font-size:24px;letter-spacing:-.3px;color:#111827}
+button{background:var(--olive);box-shadow:0 8px 18px rgba(37,99,235,.18);border-radius:13px}
+button:hover{filter:brightness(.98);transform:translateY(-1px)}
+button.secondary{background:#fff;color:#2563eb;border:1px solid #d8e6ff;box-shadow:none}
+button.danger{background:#dc2626}
+input,select,textarea{border-color:#dbe3ee;background:#fff;border-radius:14px}
+table{border:1px solid var(--line);border-radius:18px;box-shadow:none}
+th{background:#f5f8fc;color:#667085}
+td{background:#fff}
+.section{display:none!important}
+.section.active{display:block!important}
+#dashboard.active,#marketplace.active,#almacen.active,#inventarios.active,#produccion.active,#pedidos.active,#clientes.active,#config.active,#muestras.active,#documentos.active,#archivos.active,#compras.active,#finanzas.active,#reportes.active{display:block!important}
+.podStatusCard,.stockStat,.productGalleryCard{box-shadow:0 12px 28px rgba(17,24,39,.06);border-color:var(--line)}
+.guiaVisual{border:1px solid #d7dde7;border-radius:18px;overflow:hidden}
+.guiaVisualTitle{background:#f2f6fb;border-bottom:1px solid #d7dde7;color:#111827}
+.guiaInfoGrid{border-bottom:1px solid #d7dde7}
+.guiaInfoLabel{border-color:#d7dde7;background:#f8fafc;color:#4b5563}
+.guiaInfoValue{border-color:#d7dde7}
+.guiaProductosTable th,.guiaProductosTable td{border-color:#d7dde7}
+.guiaProductosTable th{background:#f8fafc}
+.bigActionBar{box-shadow:0 12px 34px rgba(17,24,39,.08)}
+.mobileTopbar{background:rgba(255,255,255,.94);box-shadow:0 12px 32px rgba(17,24,39,.08)}
+.hamburgerBtn{background:var(--olive)}
+@media(max-width:1000px){
+  .main{padding:18px;max-width:none}
+  .sidebar{width:84%;max-width:310px;background:#fff}
+  .title h2{font-size:26px}
+}
+
 </style>
 </head>
 <body>
@@ -90,13 +165,13 @@ body.menuOpen{overflow:hidden}
   </button>
   <div>
     <b>Importaciones Juanita</b><br>
-    <small>ERP V14</small>
+    <small>ERP V14.1</small>
   </div>
 </div>
 <div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V14 Catálogo</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V14.1 Pro</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -115,17 +190,17 @@ body.menuOpen{overflow:hidden}
 <div class="navItem" data-view="config"><div class="navIcon">⚙️</div>Configuración</div>
 </aside>
 <main class="main">
-<div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Vista general de producción, pedidos, inventario y administración.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
+<div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Resumen general de operación, pedidos, marketplace e inventario.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V14 MARKETPLACE LIMPIO + CATÁLOGO VISUAL</span>
+<span class="version">VERSIÓN ACTUAL: V14.1 REDISEÑO PROFESIONAL + ESTRUCTURA CORREGIDA</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V14 Marketplace limpio + catálogo visual</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V14.1 Rediseño profesional + estructura corregida</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -431,19 +506,61 @@ body.menuOpen{overflow:hidden}
 const SUPABASE_URL="https://sqlkkdxdpnjcuxkfouhc.supabase.co";
 const SUPABASE_ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNxbGtrZHhkcG5qY3V4a2ZvdWhjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0NTAxNjUsImV4cCI6MjA5NjAyNjE2NX0.sfrMQgfWFJNgY89jFqLJa9mww_pL8x59ziaZ2n96ALo";
 const db=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-var titles={dashboard:["Dashboard","Vista general de producción, pedidos, inventario y administración."],pedidos:["Pedidos","V8.1 con producción/muestra desde el mismo formulario."],muestras:["Muestras","Control independiente."],marketplace:["Marketplace","Guías, surtido, entregas y productos por etiqueta."],produccion:["Producción","Seguimiento por áreas."],almacen:["Almacén","Entradas y packing list."],inventarios:["Inventarios","Stock."],documentos:["Documentos","PDFs."],archivos:["Archivos","Diseños."],clientes:["Clientes","Base de clientes."],compras:["Compras","Proveedores."],finanzas:["Finanzas","Cobranza y pagos."],reportes:["Reportes","Indicadores."],config:["Configuración / Catálogos","Marketplace limpio + POD + catálogo visual de pedido."]};
+var titles={
+dashboard:["Dashboard","Resumen general de operación, pedidos, marketplace e inventario."],
+pedidos:["Pedidos","Pedidos, muestras y producción personalizada."],
+muestras:["Muestras","Control de muestras desde pedidos."],
+marketplace:["Marketplace","Importación de archivos de ventas. Sin escaneo de guías."],
+produccion:["Producción","Faltantes y órdenes de producción marketplace."],
+almacen:["POD / Surtido","Escaneo de guías, surtido, empacado y entrega."],
+inventarios:["Catálogo Marketplace","Productos marketplace con imagen, código de barras, talla y stock."],
+documentos:["Documentos","PDFs, impresión y formatos."],
+archivos:["Archivos","Diseños y referencias."],
+clientes:["Clientes","Base de clientes."],
+compras:["Compras","Proveedores y compras."],
+finanzas:["Finanzas","Cobranza y pagos."],
+reportes:["Reportes","Indicadores y reportes."],
+config:["Configuración / Catálogos","Catálogos generales del ERP."]
+};
 var catalogoProductos=[],areasPedido=[],disenosClienteActual=[],catalogoTelas=[],catalogoTecnicas=[],catalogoTallas=[],tiposPedido=[];
 var tallasBase=['2-3','4-5','6-7','8-9','10-11','12-14','XXS','XS','S','M','L','XL','XXL'];
 var tecnicasPromocionales=['Bordado','DTF UV 3D','Tampografía','Sublimado full','Sublimado en plancha','Otro'];
 var tecnicasRopa=['Bordado','DTF UV 3D','Tampografía','Sublimado full','Sublimado en plancha','Otro'];
-var areaInicialPorTipo={'Sublimado':'Almacén','Ropa personalizada':'Diseño','Promocionales':'Diseño','Maquila':'Almacén','Solo impresión':'Impresión Sublimado','Venta de tela':'Almacén','Marketplace':'POD','Muestra':'Diseño'};
+var areaInicialPorTipo={'Sublimado':'POD / Surtido','Ropa personalizada':'Diseño','Promocionales':'Diseño','Maquila':'POD / Surtido','Solo impresión':'Impresión Sublimado','Venta de tela':'POD / Surtido','Marketplace':'POD','Muestra':'Diseño'};
 var productoFijoPorTipo={'Sublimado':'Tela sublimada','Venta de tela':'Tela'};
 var productoFlagPorTipo={'Ropa personalizada':'aplica_ropa_personalizada','Promocionales':'aplica_promocional','Marketplace':'aplica_marketplace','Maquila':'aplica_maquila','Solo impresión':'aplica_solo_impresion','Sublimado':'aplica_sublimado'};
 var unidadesPorTipo={'Sublimado':['rollos','metros','repeticiones'],'Solo impresión':['metros','diseños','rollos'],'Ropa personalizada':['piezas'],'Promocionales':['piezas'],'Venta de tela':['metros','rollos'],'Marketplace':['piezas','guías'],'Maquila':['piezas'],'Muestra':['piezas','metros']};
 var tiposConDisenos={'Sublimado':true,'Ropa personalizada':true,'Promocionales':true,'Solo impresión':true,'Muestra':true};
 
 function safe(v){return String(v==null?'':v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function showView(id){if(typeof closeMobileMenu==='function')closeMobileMenu();document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));document.getElementById(id).classList.add('active');var nav=document.querySelector('.navItem[data-view="'+id+'"]');if(nav)nav.classList.add('active');pageTitle.textContent=titles[id][0];pageSubtitle.textContent=titles[id][1];if(id==='clientes')cargarClientes();if(id==='pedidos')iniciarModuloPedidos();if(id==='muestras')iniciarModuloMuestras();if(id==='config')cargarTodosCatalogos();if(id==='marketplace')iniciarModuloMarketplace();if(id==='inventarios')iniciarModuloInventarioMarketplace();if(id==='produccion')iniciarModuloProduccion();if(id==='almacen')iniciarModuloPOD()}
+function showView(id){
+  if(typeof closeMobileMenu==='function')closeMobileMenu();
+  var target=document.getElementById(id);
+  if(!target){console.warn('Vista no encontrada:',id);return}
+  document.querySelectorAll('main.main > section.section').forEach(s=>{
+    s.classList.remove('active');
+    s.style.display='none';
+  });
+  document.querySelectorAll('.navItem').forEach(n=>n.classList.remove('active'));
+  target.classList.add('active');
+  target.style.display='block';
+  var nav=document.querySelector('.navItem[data-view="'+id+'"]');
+  if(nav)nav.classList.add('active');
+  var t=titles[id]||[id,''];
+  pageTitle.textContent=t[0];
+  pageSubtitle.textContent=t[1];
+  var main=document.querySelector('main.main');
+  if(main)main.scrollTo({top:0,left:0,behavior:'auto'});
+  window.scrollTo({top:0,left:0,behavior:'auto'});
+  if(id==='clientes')cargarClientes();
+  if(id==='pedidos')iniciarModuloPedidos();
+  if(id==='muestras')iniciarModuloMuestras();
+  if(id==='config')cargarTodosCatalogos();
+  if(id==='marketplace')iniciarModuloMarketplace();
+  if(id==='inventarios')iniciarModuloInventarioMarketplace();
+  if(id==='produccion')iniciarModuloProduccion();
+  if(id==='almacen')iniciarModuloPOD();
+}
 function initNavigation(){document.querySelectorAll('.navItem').forEach(n=>n.addEventListener('click',function(){showView(this.getAttribute('data-view'))}))}
 function setDbStatus(ok,msg){dbStatus.textContent=ok?'OK':'ERROR';dbStatus.style.color=ok?'var(--green)':'var(--red)';dbNote.textContent=msg||''}
 async function probarConexion(){try{var c=await db.from('clientes').select('id',{count:'exact',head:true});if(c.error)throw c.error;setDbStatus(true,'Supabase conectado');clientesCount.textContent=c.count||0;var p=await db.from('catalogo_productos').select('id',{count:'exact',head:true});productosCount.textContent=p.count||0;var t=await db.from('catalogo_tecnicas').select('id',{count:'exact',head:true});tecnicasCount.textContent=t.count||0}catch(e){console.error(e);setDbStatus(false,e.message)}}
@@ -1037,7 +1154,7 @@ async function generarOrdenProduccionSku(sku){
   if(cantidad<=0){prodMsg.style.color='var(--red)';prodMsg.textContent='Ese SKU no tiene faltante.';return}
   var existe=await ordenActivaParaSku(sku);
   if(existe){prodMsg.style.color='var(--orange)';prodMsg.textContent='Ya existe una orden activa para '+sku+': '+existe.folio;return}
-  var area=(String(p.descripcion||'').toLowerCase().includes('tela')?'Almacén':'POD');
+  var area=(String(p.descripcion||'').toLowerCase().includes('tela')?'POD / Surtido':'POD');
   var obj={folio:folioOrdenProduccion(),sku:sku,descripcion:p.descripcion||sku,talla:p.talla||null,imagen_url:p.imagen_url||null,cantidad:cantidad,area_actual_nombre:area,estatus:'pendiente',origen:'faltante_marketplace',stock_al_generar:Number(p.stock_actual)||0,activo:true};
   var r=await db.from('ordenes_produccion_marketplace').insert([obj]);
   if(r.error){prodMsg.style.color='var(--red)';prodMsg.textContent='Error: '+r.error.message;return}
@@ -1058,7 +1175,7 @@ async function generarOrdenesTodosFaltantes(){
       if(!pr.data)continue;
       var p=pr.data,cantidad=Math.abs(Number(p.stock_actual)||0);
       if(cantidad<=0)continue;
-      var area=(String(p.descripcion||'').toLowerCase().includes('tela')?'Almacén':'POD');
+      var area=(String(p.descripcion||'').toLowerCase().includes('tela')?'POD / Surtido':'POD');
       var obj={folio:folioOrdenProduccion(),sku:sku,descripcion:p.descripcion||sku,talla:p.talla||null,imagen_url:p.imagen_url||null,cantidad:cantidad,area_actual_nombre:area,estatus:'pendiente',origen:'faltante_marketplace',stock_al_generar:Number(p.stock_actual)||0,activo:true};
       var ins=await db.from('ordenes_produccion_marketplace').insert([obj]);
       if(!ins.error)ok++;
@@ -1300,5 +1417,5 @@ async function cargarCatalogoVisualMarketplace(){
     '</div>';
   }).join(''):'<div class="card">No hay productos marketplace.</div>';
 }
-initNavigation();probarConexion();aplicarTipoPedido();
+initNavigation();document.querySelectorAll('main.main > section.section').forEach(s=>{if(!s.classList.contains('active'))s.style.display='none'});probarConexion();aplicarTipoPedido();
 </script></body></html>
