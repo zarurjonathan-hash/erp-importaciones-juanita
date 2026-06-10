@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V16.1 Inventario Operativo</title>
+<title>ERP Importaciones Juanita - V17 POD Real</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -190,13 +190,13 @@ section.section.active{display:block!important}
   </button>
   <div>
     <b>Importaciones Juanita</b><br>
-    <small>ERP V16.1</small>
+    <small>ERP V17</small>
   </div>
 </div>
 <div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V16.1 Inventario</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V17 POD</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -218,14 +218,14 @@ section.section.active{display:block!important}
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Resumen general de operación, pedidos, marketplace e inventario.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V16.1 INVENTARIO OPERATIVO + HISTORIAL</span>
+<span class="version">VERSIÓN ACTUAL: V17 POD REAL + ESCANEO DE PRODUCTO</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V16.1 Inventario operativo + historial</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V17 POD real + escaneo de producto</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -404,10 +404,43 @@ section.section.active{display:block!important}
 
 <div id="podGuiaPanel" class="card hidden">
   <div class="moduleHeader"><div><h3 id="podGuiaTitulo">Pantalla guía</h3><p id="podGuiaSubtitulo">Vista visual para surtir pedido.</p></div><button class="secondary" onclick="cerrarGuiaPOD()">Cerrar</button></div>
+  <div id="podGuiaInfo" class="podGuideHeader"></div>
+
+  <div class="podWorkGrid">
+    <div class="podScanProductBox">
+      <h3>Escaneo de producto</h3>
+      <label>SKU / código de barras del producto</label>
+      <input id="podProductoScan" placeholder="Escanea la etiqueta del producto" onkeydown="if(event.key==='Enter'){procesarEscaneoProductoPOD()}">
+      <div class="actions">
+        <button onclick="procesarEscaneoProductoPOD()">Validar producto</button>
+        <button class="secondary" onclick="limpiarEscaneoProductoPOD()">Limpiar</button>
+      </div>
+      <div id="podScanAlert" class="podAlert"></div>
+      <div class="hint">Este escaneo valida que el producto físico sí pertenezca a la guía abierta.</div>
+    </div>
+
+    <div class="podProblemBox">
+      <h3>Reportar problema</h3>
+      <div class="formGrid">
+        <div><label>Motivo</label><select id="podProblemaMotivo"><option>Producto no encontrado</option><option>Stock físico no coincide</option><option>Etiqueta no escanea</option><option>Producto dañado</option><option>SKU equivocado</option><option>Guía no encontrada</option><option>Otro</option></select></div>
+        <div><label>SKU relacionado</label><input id="podProblemaSku" placeholder="Opcional"></div>
+        <div><label>Comentario</label><input id="podProblemaComentario" placeholder="Detalle del problema"></div>
+      </div>
+      <div class="actions"><button class="danger" onclick="reportarProblemaPOD()">Reportar problema</button></div>
+      <div class="hint">Si reportas problema, la guía pasa a estatus problema para revisión.</div>
+    </div>
+  </div>
+
   <div id="podItemsBox"></div>
+
+  <div class="card" style="margin-top:12px">
+    <div class="moduleHeader"><div><h3>Historial de escaneos</h3><p>Últimos movimientos de esta guía.</p></div><button class="secondary" onclick="cargarHistorialSurtidoPOD()">Actualizar historial</button></div>
+    <div class="tableWrap podMiniLog"><table><thead><tr><th>Hora</th><th>SKU</th><th>Resultado</th><th>Mensaje</th></tr></thead><tbody id="podSurtidoHistorialTbody"><tr><td colspan="4">Abre una guía para ver historial.</td></tr></tbody></table></div>
+  </div>
+
   <div class="bigActionBar">
     <button onclick="cambiarEstatusGuiaPOD('en_surtido')">Iniciar surtido</button>
-    <button onclick="marcarTodosItemsPOD()">Surtido completo</button>
+    <button onclick="marcarTodosItemsPOD()">Surtido completo manual</button>
     <button class="secondary" onclick="cambiarEstatusGuiaPOD('empacado')">Empacado</button>
     <button class="secondary" onclick="cambiarEstatusGuiaPOD('entregado')">Entregado</button>
     <button class="secondary" onclick="cerrarYSeguirEscaneandoPOD()">Cerrar y seguir escaneando</button>
@@ -421,6 +454,7 @@ section.section.active{display:block!important}
     <button class="tabBtn" onclick="cargarGuiasPOD('en_surtido',this)">En surtido</button>
     <button class="tabBtn" onclick="cargarGuiasPOD('surtido',this)">Surtidas</button>
     <button class="tabBtn" onclick="cargarGuiasPOD('empacado',this)">Empacadas</button>
+    <button class="tabBtn" onclick="cargarGuiasPOD('problema',this)">Problemas</button>
     <button class="tabBtn" onclick="cargarGuiasPOD('atrasadas',this)">Atrasadas</button>
   </div>
   <div class="tableWrap"><table><thead><tr><th>Guía</th><th>Marketplace</th><th>Pedido</th><th>Fecha límite</th><th>Estatus</th><th>Productos</th><th>Acción</th></tr></thead><tbody id="podGuiasTbody"><tr><td colspan="7">Cargando guías...</td></tr></tbody></table></div>
@@ -1429,17 +1463,37 @@ async function abrirGuiaPOD(guia){
   podGuiaTitulo.textContent='Guía '+guia;
   podGuiaSubtitulo.textContent='Cargando productos...';
   podItemsBox.innerHTML='Cargando...';
+  if(document.getElementById('podScanAlert')){podScanAlert.className='podAlert';podScanAlert.innerHTML=''}
   var gr=await db.from('marketplace_guias').select('*').eq('guia',guia).maybeSingle();
   if(gr.error||!gr.data){podItemsBox.innerHTML='<b style="color:var(--red)">No encontré esa guía.</b>';return}
   podGuiaActual=gr.data;
   var ir=await db.from('marketplace_items').select('*').eq('guia',guia).order('created_at',{ascending:true});
   if(ir.error){podItemsBox.innerHTML='<b style="color:var(--red)">Error: '+safe(ir.error.message)+'</b>';return}
   podItemsActuales=ir.data||[];
+
+  var skus=[...new Set(podItemsActuales.map(x=>x.sku).filter(Boolean))];
+  var productos=[];
+  for(const part of chunks(skus,200)){
+    var pr=await db.from('productos_marketplace').select('sku,codigo_barras,descripcion,talla,imagen_url').in('sku',part);
+    if(!pr.error)productos=productos.concat(pr.data||[]);
+  }
+  var prodMap={};productos.forEach(p=>prodMap[p.sku]=p);
+  podItemsActuales=podItemsActuales.map(it=>{
+    var p=prodMap[it.sku]||{};
+    it.descripcion=p.descripcion||it.descripcion||it.sku;
+    it.talla=it.talla||p.talla||'';
+    it.imagen_url=p.imagen_url||it.imagen_url||'';
+    it.surtido_cantidad=Number(it.surtido_cantidad||((it.estatus==='surtido'||it.estatus==='entregado')?it.cantidad:0)||0);
+    return it;
+  });
+
   podGuiaSubtitulo.textContent=(podItemsActuales.length||0)+' producto(s) para surtir';
   podGuiaInfo.innerHTML='<span class="chip orange">'+safe(podGuiaActual.estatus)+'</span><b>'+safe(podGuiaActual.marketplace)+'</b><span>Pedido: '+safe(podGuiaActual.pedido_marketplace)+'</span><span>Límite: '+safe(podGuiaActual.fecha_limite)+'</span>';
   renderItemsPOD();
+  await cargarHistorialSurtidoPOD();
   podGuiaPanel.scrollIntoView({behavior:'smooth',block:'start'});
   if(podGuiaActual.estatus==='pendiente_surtido')await cambiarEstatusGuiaPOD('en_surtido',true);
+  setTimeout(()=>{var inp=document.getElementById('podProductoScan');if(inp)inp.focus()},250);
 }
 function estatusChipPOD(estatus){
   var e=estatus||'pendiente_surtido';
@@ -1449,16 +1503,31 @@ function estatusChipPOD(estatus){
 function imagenItemPOD(it){
   return it.imagen_url?'<img class="guiaProductoImg" src="'+safe(it.imagen_url)+'">':'';
 }
+function cantidadNecesariaPOD(it){return Math.max(1,Number(it.cantidad)||1)}
+function cantidadSurtidaPOD(it){
+  var n=cantidadNecesariaPOD(it);
+  var s=Number(it.surtido_cantidad||0);
+  if(!s&&(it.estatus==='surtido'||it.estatus==='entregado'))s=n;
+  return Math.min(n,s);
+}
+function itemCompletoPOD(it){return cantidadSurtidaPOD(it)>=cantidadNecesariaPOD(it)}
+function avanceTotalPOD(){
+  var necesarias=podItemsActuales.reduce((s,it)=>s+cantidadNecesariaPOD(it),0);
+  var surtidas=podItemsActuales.reduce((s,it)=>s+cantidadSurtidaPOD(it),0);
+  return {necesarias:necesarias,surtidas:surtidas,porcentaje:necesarias?Math.round((surtidas/necesarias)*100):0};
+}
 function renderItemsPOD(){
   if(!podGuiaActual){podItemsBox.innerHTML='';return}
-  var totalPiezas=podItemsActuales.reduce((s,it)=>s+(Number(it.cantidad)||0),0);
-  var surtidos=podItemsActuales.filter(x=>x.estatus==='surtido'||x.estatus==='entregado').length;
+  var av=avanceTotalPOD();
   var surtible=podItemsActuales.length>0;
   var rows=podItemsActuales.length?podItemsActuales.map(it=>{
-    return '<tr><td><b>'+safe(it.sku)+'</b></td><td>'+safe(it.descripcion||'')+'</td><td class="tallaCell">'+safe(it.talla||'-')+'</td><td class="qtyCell">'+safe(it.cantidad||1)+'</td><td style="text-align:center">'+imagenItemPOD(it)+'</td></tr>';
-  }).join(''):'<tr><td colspan="5">Sin productos en esta guía.</td></tr>';
+    var n=cantidadNecesariaPOD(it), s=cantidadSurtidaPOD(it), pct=n?Math.round((s/n)*100):0;
+    var cls=s>=n?'doneRow':(s>0?'partialRow':'');
+    var status=s>=n?'✅ Completo':(s>0?'🟡 Parcial':'⚪ Pendiente');
+    return '<tr class="'+cls+'"><td><b>'+safe(it.sku)+'</b></td><td>'+safe(it.descripcion||'')+'</td><td class="tallaCell">'+safe(it.talla||'-')+'</td><td class="qtyCell">'+safe(n)+'</td><td class="progressCell"><div class="podProgressText">'+s+' / '+n+'</div><div class="podProgressBar"><span style="width:'+pct+'%"></span></div><div class="hint">'+status+'</div></td><td style="text-align:center">'+imagenItemPOD(it)+'</td><td class="actionCell"><button class="smallBtn" data-id="'+safe(it.id)+'" onclick="sumarItemManualPOD(this.dataset.id)">+1 surtido</button></td></tr>';
+  }).join(''):'<tr><td colspan="7">Sin productos en esta guía.</td></tr>';
   podGuiaTitulo.textContent='Guía '+safe(podGuiaActual.guia);
-  podGuiaSubtitulo.textContent=podItemsActuales.length+' producto(s), '+totalPiezas+' pieza(s). Surtidos: '+surtidos+'/'+podItemsActuales.length;
+  podGuiaSubtitulo.textContent=av.surtidas+' / '+av.necesarias+' pieza(s) surtidas. Avance '+av.porcentaje+'%.';
   podItemsBox.innerHTML=
     '<div class="guiaVisual">'+
       '<div class="guiaVisualTitle">INFORMACIÓN DEL PEDIDO</div>'+
@@ -1468,30 +1537,30 @@ function renderItemsPOD(){
         '<div class="guiaInfoLabel">Fecha límite de entrega</div><div class="guiaInfoValue">'+safe(podGuiaActual.fecha_limite||'-')+'</div>'+
         '<div class="guiaInfoLabel">Número de pedido</div><div class="guiaInfoValue">'+safe(podGuiaActual.pedido_marketplace||'-')+'</div>'+
         '<div class="guiaInfoLabel">Estatus entrega</div><div class="guiaInfoValue">'+estatusChipPOD(podGuiaActual.estatus)+'</div>'+
+        '<div class="guiaInfoLabel">Avance surtido</div><div class="guiaInfoValue"><b>'+av.surtidas+' / '+av.necesarias+' piezas</b><div class="podProgressBar" style="margin-top:6px"><span style="width:'+av.porcentaje+'%"></span></div></div>'+
         '<div class="guiaInfoLabel">Surtible</div><div class="guiaInfoValue"><span class="surtibleBadge">'+(surtible?'✅ Sí':'⚠️ Revisar')+'</span></div>'+
       '</div>'+
-      '<table class="guiaProductosTable"><thead><tr><th>SKU</th><th>DESCRIPCIÓN</th><th>TALLA</th><th>CANTIDAD</th><th>IMAGEN</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+      '<table class="guiaProductosTable"><thead><tr><th>SKU</th><th>DESCRIPCIÓN</th><th>TALLA</th><th>CANTIDAD</th><th>SURTIDO</th><th>IMAGEN</th><th>ACCIÓN</th></tr></thead><tbody>'+rows+'</tbody></table>'+
     '</div>';
 }
 
 async function marcarItemPODSurtido(id){
-  var r=await db.from('marketplace_items').update({estatus:'surtido'}).eq('id',id);
-  if(r.error){alert('Error: '+r.error.message);return}
-  var item=podItemsActuales.find(x=>String(x.id)===String(id)); if(item)item.estatus='surtido';
-  renderItemsPOD();
-  await evaluarGuiaSurtidaPOD();
+  var item=podItemsActuales.find(x=>String(x.id)===String(id));
+  if(!item)return;
+  await actualizarCantidadSurtidaItemPOD(item,cantidadNecesariaPOD(item),'manual');
 }
 async function marcarTodosItemsPOD(){
   if(!podGuiaActual){alert('Abre una guía primero.');return}
-  var r=await db.from('marketplace_items').update({estatus:'surtido'}).eq('guia',podGuiaActual.guia);
-  if(r.error){alert('Error: '+r.error.message);return}
-  podItemsActuales.forEach(x=>x.estatus='surtido');
+  for(const it of podItemsActuales){
+    await actualizarCantidadSurtidaItemPOD(it,cantidadNecesariaPOD(it),'manual_completo',true);
+  }
   renderItemsPOD();
   await cambiarEstatusGuiaPOD('surtido');
+  await cargarHistorialSurtidoPOD();
 }
 async function evaluarGuiaSurtidaPOD(){
   if(!podGuiaActual)return;
-  var allDone=podItemsActuales.length>0&&podItemsActuales.every(x=>x.estatus==='surtido'||x.estatus==='entregado');
+  var allDone=podItemsActuales.length>0&&podItemsActuales.every(itemCompletoPOD);
   if(allDone)await cambiarEstatusGuiaPOD('surtido',true);
 }
 async function cambiarEstatusGuiaPOD(estatus,silencioso){
@@ -1501,13 +1570,17 @@ async function cambiarEstatusGuiaPOD(estatus,silencioso){
   var r=await db.from('marketplace_guias').update(obj).eq('guia',podGuiaActual.guia);
   if(r.error){alert('Error: '+r.error.message);return}
   podGuiaActual.estatus=estatus;
-  podGuiaInfo.querySelector('.chip').textContent=estatus;
+  var chip=podGuiaInfo?podGuiaInfo.querySelector('.chip'):null;
+  if(chip)chip.textContent=estatus;
   if(estatus==='entregado'){
-    await db.from('marketplace_items').update({estatus:'entregado'}).eq('guia',podGuiaActual.guia);
-    podItemsActuales.forEach(x=>x.estatus='entregado');
+    for(const it of podItemsActuales){
+      var n=cantidadNecesariaPOD(it);
+      await db.from('marketplace_items').update({estatus:'entregado',surtido_cantidad:n}).eq('id',it.id);
+      it.estatus='entregado';it.surtido_cantidad=n;
+    }
     renderItemsPOD();
   }
-  await db.from('pod_historial').insert([{guia:podGuiaActual.guia,accion:'estatus_'+estatus,estatus_nuevo:estatus,usuario:'POD',comentario:null}]);
+  try{await db.from('pod_historial').insert([{guia:podGuiaActual.guia,accion:'estatus_'+estatus,estatus_nuevo:estatus,usuario:'POD',comentario:null}])}catch(e){console.warn(e)}
   await Promise.all([cargarResumenPOD(),cargarGuiasPOD(estatus==='entregado'?'empacado':estatus)]);
 }
 function cerrarGuiaPOD(){podGuiaPanel.classList.add('hidden');podGuiaActual=null;podItemsActuales=[]}
@@ -1515,6 +1588,112 @@ function cerrarGuiaPOD(){podGuiaPanel.classList.add('hidden');podGuiaActual=null
 function cerrarYSeguirEscaneandoPOD(){
   cerrarGuiaPOD();
   setTimeout(function(){usarCamaraPOD()},350);
+}
+
+function setPodScanAlert(tipo,msg){
+  var box=document.getElementById('podScanAlert');
+  if(!box)return;
+  box.className='podAlert '+(tipo||'warn');
+  box.innerHTML=msg;
+}
+function limpiarEscaneoProductoPOD(){
+  var inp=document.getElementById('podProductoScan');
+  if(inp){inp.value='';inp.focus()}
+  var box=document.getElementById('podScanAlert'); if(box){box.className='podAlert';box.innerHTML=''}
+}
+async function resolverSkuDesdeCodigoPOD(codigo){
+  var code=String(codigo||'').trim();
+  if(!code)return null;
+  if(podItemsActuales.some(x=>String(x.sku)===code))return code;
+  var pr=await db.from('productos_marketplace').select('sku,codigo_barras').eq('codigo_barras',code).limit(1).maybeSingle();
+  if(!pr.error&&pr.data&&pr.data.sku)return pr.data.sku;
+  var ps=await db.from('productos_marketplace').select('sku,codigo_barras').eq('sku',code).limit(1).maybeSingle();
+  if(!ps.error&&ps.data&&ps.data.sku)return ps.data.sku;
+  return code;
+}
+async function registrarSurtidoHistorialPOD(sku,resultado,mensaje,cantidad){
+  if(!podGuiaActual)return;
+  try{
+    await db.from('pod_surtido_historial').insert([{guia:podGuiaActual.guia,sku:sku,resultado:resultado,mensaje:mensaje,cantidad:cantidad||1,usuario:'POD'}]);
+  }catch(e){console.warn('No se pudo registrar historial surtido',e)}
+}
+async function cargarHistorialSurtidoPOD(){
+  var tbody=document.getElementById('podSurtidoHistorialTbody');
+  if(!tbody)return;
+  if(!podGuiaActual){tbody.innerHTML='<tr><td colspan="4">Abre una guía para ver historial.</td></tr>';return}
+  tbody.innerHTML='<tr><td colspan="4">Cargando historial...</td></tr>';
+  var r=await db.from('pod_surtido_historial').select('*').eq('guia',podGuiaActual.guia).order('created_at',{ascending:false}).limit(30);
+  if(r.error){tbody.innerHTML='<tr><td colspan="4" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
+  var data=r.data||[];
+  tbody.innerHTML=data.length?data.map(h=>'<tr><td>'+safe(h.created_at?new Date(h.created_at).toLocaleTimeString():'')+'</td><td><b>'+safe(h.sku||'-')+'</b></td><td>'+safe(h.resultado||'')+'</td><td>'+safe(h.mensaje||'')+'</td></tr>').join(''):'<tr><td colspan="4">Sin escaneos todavía.</td></tr>';
+}
+async function actualizarCantidadSurtidaItemPOD(item,nuevaCantidad,origen,silencioso){
+  var n=cantidadNecesariaPOD(item);
+  var nueva=Math.min(n,Math.max(0,Number(nuevaCantidad)||0));
+  var est=nueva>=n?'surtido':'en_surtido';
+  var r=await db.from('marketplace_items').update({surtido_cantidad:nueva,estatus:est}).eq('id',item.id);
+  if(r.error){if(!silencioso)alert('Error actualizando producto: '+r.error.message);return false}
+  item.surtido_cantidad=nueva;
+  item.estatus=est;
+  if(!silencioso)await registrarSurtidoHistorialPOD(item.sku,'correcto','Surtido '+nueva+' / '+n,1);
+  renderItemsPOD();
+  await evaluarGuiaSurtidaPOD();
+  return true;
+}
+async function sumarItemManualPOD(id){
+  var item=podItemsActuales.find(x=>String(x.id)===String(id));
+  if(!item)return;
+  var actual=cantidadSurtidaPOD(item);
+  var n=cantidadNecesariaPOD(item);
+  if(actual>=n){setPodScanAlert('warn','Este SKU ya está completo: '+safe(item.sku));return}
+  await actualizarCantidadSurtidaItemPOD(item,actual+1,'manual');
+  setPodScanAlert('ok','Producto marcado manualmente: '+safe(item.sku)+' ('+(actual+1)+' / '+n+')');
+}
+async function procesarEscaneoProductoPOD(){
+  if(!podGuiaActual){setPodScanAlert('bad','Primero escanea o abre una guía.');return}
+  var inp=document.getElementById('podProductoScan');
+  var codigo=inp?inp.value.trim():'';
+  if(!codigo){setPodScanAlert('warn','Escanea o escribe el SKU/código del producto.');return}
+  var sku=await resolverSkuDesdeCodigoPOD(codigo);
+  var candidatos=podItemsActuales.filter(x=>String(x.sku)===String(sku));
+  if(!candidatos.length){
+    var msg='Producto incorrecto. El código '+safe(codigo)+' no pertenece a esta guía.';
+    setPodScanAlert('bad','❌ '+msg);
+    await registrarSurtidoHistorialPOD(sku||codigo,'incorrecto',msg,0);
+    return;
+  }
+  var item=candidatos.find(x=>!itemCompletoPOD(x))||candidatos[0];
+  var actual=cantidadSurtidaPOD(item);
+  var n=cantidadNecesariaPOD(item);
+  if(actual>=n){
+    var completo='Este producto ya está completo: '+safe(item.sku)+' ('+actual+' / '+n+').';
+    setPodScanAlert('warn','⚠️ '+completo);
+    await registrarSurtidoHistorialPOD(item.sku,'duplicado',completo,0);
+    if(inp){inp.value='';inp.focus()}
+    return;
+  }
+  var nueva=actual+1;
+  var ok=await actualizarCantidadSurtidaItemPOD(item,nueva,'scan');
+  if(ok){
+    var av=avanceTotalPOD();
+    setPodScanAlert('ok','✅ Producto correcto: '+safe(item.sku)+' ('+nueva+' / '+n+'). Avance guía: '+av.surtidas+' / '+av.necesarias+'.');
+    await registrarSurtidoHistorialPOD(item.sku,'correcto','Escaneo correcto '+nueva+' / '+n,1);
+    await cargarHistorialSurtidoPOD();
+    if(inp){inp.value='';inp.focus()}
+  }
+}
+async function reportarProblemaPOD(){
+  if(!podGuiaActual){alert('Abre una guía primero.');return}
+  var motivo=(document.getElementById('podProblemaMotivo')?podProblemaMotivo.value:'Otro');
+  var sku=(document.getElementById('podProblemaSku')?podProblemaSku.value.trim():'');
+  var comentario=(document.getElementById('podProblemaComentario')?podProblemaComentario.value.trim():'');
+  var obj={guia:podGuiaActual.guia,sku:sku||null,motivo:motivo,comentario:comentario||null,usuario:'POD'};
+  var r=await db.from('pod_problemas').insert([obj]);
+  if(r.error){alert('Error reportando problema: '+r.error.message);return}
+  await cambiarEstatusGuiaPOD('problema',true);
+  setPodScanAlert('bad','⚠️ Problema reportado: '+safe(motivo)+'. La guía quedó en revisión.');
+  await registrarSurtidoHistorialPOD(sku,'problema',motivo+(comentario?': '+comentario:''),0);
+  await cargarHistorialSurtidoPOD();
 }
 async function cargarConcentradoMarketplace(){
   if(!document.getElementById('concentradoMkTbody'))return;
