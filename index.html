@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V15.1 Etiquetas Corregidas</title>
+<title>ERP Importaciones Juanita - V16 Entrada Inventario y Etiquetas</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -161,6 +161,26 @@ td{background:#fff}
 section.section{display:none!important}
 section.section.active{display:block!important}
 
+
+/* V15.2 LIMPIEZA CATÁLOGO + ETIQUETAS */
+#inventarios .grid2{align-items:stretch}
+.catalogToolCard{min-height:310px;display:flex;flex-direction:column;justify-content:space-between}
+.catalogToolHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.catalogToolHeader h3{margin:0;font-size:21px}
+.catalogToolHeader p{margin:6px 0 0;color:var(--muted);font-size:14px;line-height:1.35}
+.toolBadge{background:#eef4ff;color:#1d4ed8;border:1px solid #d9e7ff;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;white-space:nowrap}
+#inventarios .catalogFormGrid{display:grid;grid-template-columns:1fr 180px;gap:12px;align-items:end}
+#inventarios .importFormGrid{display:grid;grid-template-columns:1fr 210px;gap:12px;align-items:end}
+.cleanInputRow{margin:12px 0}
+.label2x1Mock{box-shadow:0 12px 25px rgba(17,24,39,.10);border-radius:8px}
+.labelPreviewBox{background:#f8fafc;border:1px solid #e5eaf1}
+.labelPreviewBox .hint{text-align:center}
+.catalogHelpList{display:grid;gap:7px;margin-top:12px;color:var(--muted);font-size:13px}
+.catalogHelpList span{display:flex;gap:7px;align-items:center}
+@media(max-width:1000px){
+  #inventarios .catalogFormGrid,#inventarios .importFormGrid{grid-template-columns:1fr}
+}
+
 </style>
 </head>
 <body>
@@ -170,13 +190,13 @@ section.section.active{display:block!important}
   </button>
   <div>
     <b>Importaciones Juanita</b><br>
-    <small>ERP V15.1</small>
+    <small>ERP V16</small>
   </div>
 </div>
 <div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V15.1 Etiquetas</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V16 Inventario</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -198,14 +218,14 @@ section.section.active{display:block!important}
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Resumen general de operación, pedidos, marketplace e inventario.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V15.1 ETIQUETAS CORREGIDAS</span>
+<span class="version">VERSIÓN ACTUAL: V16 ENTRADA INVENTARIO + ETIQUETAS AUTOMÁTICAS</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V15.1 Etiquetas corregidas</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V16 Entrada inventario + etiquetas automáticas</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -424,32 +444,115 @@ section.section.active{display:block!important}
 <div class="moduleHeader"><div><h3>Inventario Marketplace</h3><p>Inventario separado por SKU marketplace. Recibe producto con código de barras y descuenta automáticamente al importar ventas.</p></div><button onclick="iniciarModuloInventarioMarketplace()">Actualizar</button></div>
 
 
-<div class="grid2">
-  <div class="card">
-    <h3>Importar catálogo marketplace CSV</h3>
-    <div class="formGrid">
-      <div><label>Archivo CSV catálogo</label><input id="catCsvFile" type="file" accept=".csv,text/csv" onchange="leerCsvCatalogoMarketplace(this)"></div>
-      <div><label>Modo stock</label><select id="catStockModo"><option value="actualizar_si_viene">Actualizar stock si el CSV trae stock</option><option value="no_actualizar">No tocar stock</option></select></div>
-      <div><label>Formato esperado</label><input value="sku,codigo_barras,descripcion,talla,imagen_url,stock_inicial,categoria" readonly></div>
+
+<div class="entradaInventoryCard">
+  <div class="entradaInventoryHeader">
+    <div>
+      <h3>Entrada de inventario etiquetada</h3>
+      <p>Recibe tela o producto terminado, actualiza stock y genera etiquetas 2x1 automáticamente para pegar en el inventario físico.</p>
     </div>
-    <div class="hint">Detecta columnas similares aunque tengan otro nombre: SKU, código, descripción, talla, imagen, stock.</div>
-    <div id="catImportStatus" class="guideResult hidden"></div>
-    <div class="actions"><button onclick="importarCatalogoMarketplace()">Importar / actualizar catálogo</button><button class="secondary" onclick="resetCatalogoImport()">Limpiar</button></div>
-    <p id="catMsg" style="font-weight:700;color:var(--muted)"></p>
+    <span class="entradaBadge">Flujo operativo</span>
   </div>
-  <div class="card">
-    <h3>Generador de etiquetas 2 x 1 pulgadas</h3>
-    <div class="formGrid">
-      <div><label>SKU o código de barras</label><input id="labelSkuInput" placeholder="Escanea o escribe SKU"></div>
-      <div><label>Cantidad de etiquetas</label><input id="labelCantidadInput" type="number" min="1" value="1"></div>
-      <div><label>Tamaño</label><input value="2 x 1 pulgada" readonly></div>
+
+  <div class="entradaGrid">
+    <div>
+      <label>SKU / código de barras</label>
+      <input id="entradaSku" placeholder="Escanea o escribe SKU" onkeydown="if(event.key==='Enter'){buscarSkuEntradaInventario()}">
+      <div class="hint">Ejemplo: MKP-747545149. Si no existe, se crea en catálogo.</div>
     </div>
-    <div class="actions"><button onclick="generarEtiquetasSku()">Generar PDF / imprimir</button><button class="secondary" onclick="generarEtiquetasFaltantes()">Etiquetas de faltantes</button></div>
+    <div>
+      <label>Cantidad recibida</label>
+      <input id="entradaCantidad" type="number" min="1" value="1">
+    </div>
+    <div>
+      <label>Tipo de entrada</label>
+      <select id="entradaTipo">
+        <option value="producto_terminado">Producto terminado</option>
+        <option value="tela">Tela / rollo</option>
+        <option value="devolucion">Devolución</option>
+        <option value="ajuste">Ajuste positivo</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="entradaGridWide">
+    <div><label>Descripción</label><input id="entradaDescripcion" placeholder="Descripción del producto"></div>
+    <div><label>Talla / variante</label><input id="entradaTalla" placeholder="Talla"></div>
+    <div><label>Imagen URL</label><input id="entradaImagen" placeholder="https://..."></div>
+    <div><label>Código de barras</label><input id="entradaCodigo" placeholder="Si va vacío usa el SKU"></div>
+  </div>
+
+  <div class="entradaSwitch">
+    <input id="entradaGenerarEtiquetas" type="checkbox" checked>
+    <div><b>Generar etiquetas automáticamente al guardar</b><br><span class="hint">Genera una etiqueta 2x1 por cada pieza recibida.</span></div>
+  </div>
+
+  <div class="actions">
+    <button onclick="guardarEntradaInventarioEtiquetas()">Guardar entrada + etiquetas</button>
+    <button class="secondary" onclick="buscarSkuEntradaInventario()">Buscar SKU</button>
+    <button class="secondary" onclick="limpiarEntradaInventario()">Limpiar</button>
+  </div>
+
+  <div id="entradaMsg" class="guideResult hidden"></div>
+  <div class="entradaResult">
+    <div class="stockStat"><span class="hint">Stock anterior</span><br><b id="entradaStockAntes">-</b></div>
+    <div class="stockStat"><span class="hint">Entrada</span><br><b id="entradaStockEntrada">-</b></div>
+    <div class="stockStat"><span class="hint">Stock nuevo</span><br><b id="entradaStockNuevo">-</b></div>
+    <div class="stockStat"><span class="hint">Etiquetas</span><br><b id="entradaEtiquetasCount">-</b></div>
+  </div>
+</div><br>
+
+<div class="grid2">
+  <div class="card catalogToolCard">
+    <div>
+      <div class="catalogToolHeader">
+        <div>
+          <h3>Etiquetas 2 x 1 pulgadas</h3>
+          <p>Genera etiquetas con código de barras y SKU. Funciona aunque el SKU todavía no esté cargado en catálogo.</p>
+        </div>
+        <span class="toolBadge">PDF / imprimir</span>
+      </div>
+      <div class="catalogFormGrid">
+        <div><label>SKU o código de barras</label><input id="labelSkuInput" placeholder="Ej. MKP-747545149"></div>
+        <div><label>Cantidad</label><input id="labelCantidadInput" type="number" min="1" value="1"></div>
+      </div>
+      <div class="actions">
+        <button onclick="generarEtiquetasSku()">Generar etiqueta</button>
+        <button class="secondary" onclick="generarEtiquetasFaltantes()">Etiquetas de faltantes</button>
+      </div>
+      <p id="labelMsg" style="font-weight:700;color:var(--muted);min-height:20px"></p>
+    </div>
     <div class="labelPreviewBox">
-      <div class="label2x1Mock"><div class="bars">||||||||||||||||</div><div class="sku">SKU-DEMO</div></div>
-      <div class="hint">Se abre una ventana imprimible. En imprimir, elige tu impresora o “Guardar como PDF”.</div>
+      <div class="label2x1Mock"><div class="bars">||||||||||||||||</div><div class="sku">SKU</div></div>
+      <div class="hint">Tamaño real pensado para 2 x 1 pulgada. En imprimir elige tu impresora o Guardar como PDF.</div>
     </div>
-    <p id="labelMsg" style="font-weight:700;color:var(--muted)"></p>
+  </div>
+
+  <div class="card catalogToolCard">
+    <div>
+      <div class="catalogToolHeader">
+        <div>
+          <h3>Importar catálogo por CSV</h3>
+          <p>Actualiza productos, imágenes, códigos de barras, talla y stock desde un archivo.</p>
+        </div>
+        <span class="toolBadge">Masivo</span>
+      </div>
+      <div class="importFormGrid">
+        <div><label>Archivo CSV catálogo</label><input id="catCsvFile" type="file" accept=".csv,text/csv" onchange="leerCsvCatalogoMarketplace(this)"></div>
+        <div><label>Modo stock</label><select id="catStockModo"><option value="actualizar_si_viene">Actualizar si viene stock</option><option value="no_actualizar">No tocar stock</option></select></div>
+      </div>
+      <div class="catalogHelpList">
+        <span>✅ Columnas sugeridas: sku, codigo_barras, descripcion, talla, imagen_url, stock_inicial</span>
+        <span>✅ Si el SKU ya existe, lo actualiza.</span>
+        <span>✅ Si no existe, lo crea.</span>
+      </div>
+      <div id="catImportStatus" class="guideResult hidden"></div>
+      <div class="actions">
+        <button onclick="importarCatalogoMarketplace()">Importar / actualizar catálogo</button>
+        <button class="secondary" onclick="resetCatalogoImport()">Limpiar</button>
+      </div>
+      <p id="catMsg" style="font-weight:700;color:var(--muted);min-height:20px"></p>
+    </div>
   </div>
 </div><br>
 
@@ -1458,17 +1561,39 @@ function renderPreviewCatalogo(detected){catImportStatus.classList.remove('hidde
 async function importarCatalogoMarketplace(){if(!catRows.length){catMsg.style.color='var(--red)';catMsg.textContent='Primero sube un CSV de catálogo válido.';return}catMsg.style.color='var(--muted)';catMsg.textContent='Importando '+catRows.length+' SKUs...';var modoStock=catStockModo.value;var registros=catRows.map(r=>{var obj={sku:r.sku,codigo_barras:r.codigo_barras||r.sku,descripcion:r.descripcion||r.sku,talla:r.talla||null,imagen_url:r.imagen_url||null,activo:true};if(modoStock==='actualizar_si_viene'&&r.stock!==null)obj.stock_actual=r.stock;return obj});var ok=0;for(const part of chunks(registros,300)){var up=await db.from('productos_marketplace').upsert(part,{onConflict:'sku'});if(up.error){catMsg.style.color='var(--red)';catMsg.textContent='Error importando catálogo: '+up.error.message;return}ok+=part.length}catMsg.style.color='var(--green)';catMsg.textContent='Catálogo actualizado: '+ok+' SKUs.';await iniciarModuloInventarioMarketplace()}
 async function buscarProductoEtiqueta(sku){
   var valor=String(sku||'').trim();
+  if(!valor)return null;
   var r=await db.from('productos_marketplace').select('*').eq('sku',valor).limit(1).maybeSingle();
   if(r.error)throw r.error;
   if(r.data)return r.data;
   var b=await db.from('productos_marketplace').select('*').eq('codigo_barras',valor).limit(1).maybeSingle();
   if(b.error)throw b.error;
-  return b.data;
+  if(b.data)return b.data;
+  var it=await db.from('marketplace_items').select('sku,descripcion,talla,imagen_url').eq('sku',valor).limit(1).maybeSingle();
+  if(!it.error&&it.data)return {sku:it.data.sku||valor,codigo_barras:valor,descripcion:it.data.descripcion||valor,talla:it.data.talla||'',imagen_url:it.data.imagen_url||''};
+  return {sku:valor,codigo_barras:valor,descripcion:valor,talla:'',imagen_url:''};
 }
 
-async function generarEtiquetasSku(){var sku=labelSkuInput.value.trim();var cant=Number(labelCantidadInput.value||1)||1;if(!sku){labelMsg.style.color='var(--red)';labelMsg.textContent='Escribe o escanea un SKU.';return}var p=await buscarProductoEtiqueta(sku);if(!p){labelMsg.style.color='var(--red)';labelMsg.textContent='No encontré ese SKU/código.';return}imprimirEtiquetasProductos([{producto:p,cantidad:cant}])}
+async function generarEtiquetasSku(){
+  var input=document.getElementById('labelSkuInput');
+  var qty=document.getElementById('labelCantidadInput');
+  var msg=document.getElementById('labelMsg');
+  var sku=input?input.value.trim():'';
+  var cant=Number(qty?qty.value:1)||1;
+  if(!sku){if(msg){msg.style.color='var(--red)';msg.textContent='Escribe o escanea un SKU.'}return}
+  try{
+    var p=await buscarProductoEtiqueta(sku);
+    if(msg){msg.style.color='var(--green)';msg.textContent='Generando '+cant+' etiqueta(s) para '+(p.sku||sku)+'.'}
+    imprimirEtiquetasProductos([{producto:p,cantidad:cant}]);
+  }catch(e){
+    if(msg){msg.style.color='var(--orange)';msg.textContent='No pude buscar en catálogo, pero generaré la etiqueta con el texto capturado.'}
+    imprimirEtiquetasProductos([{producto:{sku:sku,codigo_barras:sku,descripcion:sku},cantidad:cant}]);
+  }
+}
 async function generarEtiquetasProductoPorSku(sku){var p=await buscarProductoEtiqueta(sku);if(!p){alert('No encontré SKU '+sku);return}var cant=Number(prompt('¿Cuántas etiquetas quieres imprimir?', '1')||1)||1;imprimirEtiquetasProductos([{producto:p,cantidad:cant}])}
 async function generarEtiquetasFaltantes(){var r=await db.from('productos_marketplace').select('*').lt('stock_actual',0).order('sku',{ascending:true}).limit(200);if(r.error){labelMsg.style.color='var(--red)';labelMsg.textContent='Error: '+r.error.message;return}var packs=(r.data||[]).map(p=>({producto:p,cantidad:Math.abs(Number(p.stock_actual)||1)}));if(!packs.length){labelMsg.style.color='var(--muted)';labelMsg.textContent='No hay faltantes negativos.';return}imprimirEtiquetasProductos(packs)}
+function escapeHtmlEtiqueta(v){
+  return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});
+}
 function escapeHtmlEtiqueta(v){
   return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});
 }
@@ -1496,6 +1621,5 @@ function imprimirEtiquetasProductos(packs){
   w.document.write(doc);
   w.document.close();
 }
-
 initNavigation();document.querySelectorAll('section.section').forEach(s=>{if(!s.classList.contains('active'))s.style.display='none'});probarConexion();aplicarTipoPedido();
 </script></body></html>
