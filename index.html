@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V16 Entrada Inventario y Etiquetas</title>
+<title>ERP Importaciones Juanita - V16.1 Inventario Operativo</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -190,13 +190,13 @@ section.section.active{display:block!important}
   </button>
   <div>
     <b>Importaciones Juanita</b><br>
-    <small>ERP V16</small>
+    <small>ERP V16.1</small>
   </div>
 </div>
 <div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V16 Inventario</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V16.1 Inventario</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -218,14 +218,14 @@ section.section.active{display:block!important}
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Resumen general de operación, pedidos, marketplace e inventario.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V16 ENTRADA INVENTARIO + ETIQUETAS AUTOMÁTICAS</span>
+<span class="version">VERSIÓN ACTUAL: V16.1 INVENTARIO OPERATIVO + HISTORIAL</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V16 Entrada inventario + etiquetas automáticas</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V16.1 Inventario operativo + historial</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -487,18 +487,42 @@ section.section.active{display:block!important}
     <div><b>Generar etiquetas automáticamente al guardar</b><br><span class="hint">Genera una etiqueta 2x1 por cada pieza recibida.</span></div>
   </div>
 
-  <div class="actions">
-    <button onclick="guardarEntradaInventarioEtiquetas()">Guardar entrada + etiquetas</button>
+  <div class="entryActionGrid">
+    <button onclick="guardarEntradaInventarioEtiquetas()">Guardar + generar etiquetas</button>
+    <button class="secondary" onclick="guardarEntradaInventarioSinImprimir()">Guardar sin imprimir</button>
     <button class="secondary" onclick="buscarSkuEntradaInventario()">Buscar SKU</button>
+  </div>
+  <div class="actions">
+    <button class="secondary" onclick="reimprimirUltimaEntrada()">Reimprimir última entrada</button>
+    <button class="secondary" onclick="probarEtiquetaDemo()">Probar etiqueta demo</button>
     <button class="secondary" onclick="limpiarEntradaInventario()">Limpiar</button>
   </div>
+  <div class="entryModeNote">💡 <div><b>Flujo recomendado:</b> escanea o escribe SKU → cantidad recibida → guardar. Si el SKU no existe, se crea automáticamente. Si marcas etiquetas, se genera 1 etiqueta por pieza recibida.</div></div>
 
   <div id="entradaMsg" class="guideResult hidden"></div>
+  <div id="ultimaEntradaBox" class="lastEntryBox hidden"></div>
   <div class="entradaResult">
     <div class="stockStat"><span class="hint">Stock anterior</span><br><b id="entradaStockAntes">-</b></div>
     <div class="stockStat"><span class="hint">Entrada</span><br><b id="entradaStockEntrada">-</b></div>
     <div class="stockStat"><span class="hint">Stock nuevo</span><br><b id="entradaStockNuevo">-</b></div>
     <div class="stockStat"><span class="hint">Etiquetas</span><br><b id="entradaEtiquetasCount">-</b></div>
+  </div>
+</div><br>
+
+
+<div class="card">
+  <div class="moduleHeader">
+    <div>
+      <h3>Historial de movimientos recientes</h3>
+      <p>Entradas, ajustes y movimientos de stock registrados desde inventario.</p>
+    </div>
+    <button class="secondary" onclick="cargarHistorialInventario()">Actualizar historial</button>
+  </div>
+  <div class="tableWrap">
+    <table class="movementsTable">
+      <thead><tr><th>Fecha</th><th>SKU</th><th>Tipo</th><th>Cantidad</th><th>Stock antes</th><th>Stock después</th><th>Motivo</th></tr></thead>
+      <tbody id="inventarioMovimientosTbody"><tr><td colspan="7">Cargando movimientos...</td></tr></tbody>
+    </table>
   </div>
 </div><br>
 
@@ -1032,7 +1056,7 @@ async function marcarGuiaBuscadaEntregada(){var guia=mkBuscarGuia.value.trim();i
 
 
 async function iniciarModuloInventarioMarketplace(){
-  await Promise.all([cargarProductosMarketplace(),cargarSetsMarketplace(),cargarMovimientosMarketplace(),cargarCatalogoVisualMarketplace()]);
+  await Promise.all([cargarProductosMarketplace(),cargarSetsMarketplace(),cargarMovimientosMarketplace(),cargarCatalogoVisualMarketplace(),cargarHistorialInventario()]);
 }
 function imgThumbHtml(url){return url?'<img class="imgThumb" src="'+safe(url)+'">':'-'}
 async function cargarProductosMarketplace(){
@@ -1620,6 +1644,110 @@ function imprimirEtiquetasProductos(packs){
   w.document.open();
   w.document.write(doc);
   w.document.close();
+}
+
+var ultimaEntradaInventario=null;
+function guardarEntradaInventarioSinImprimir(){
+  var cb=document.getElementById('entradaGenerarEtiquetas');
+  var old=cb?cb.checked:false;
+  if(cb)cb.checked=false;
+  guardarEntradaInventarioEtiquetas().finally(function(){if(cb)cb.checked=old});
+}
+function renderUltimaEntradaBox(){
+  var box=document.getElementById('ultimaEntradaBox');
+  if(!box||!ultimaEntradaInventario)return;
+  var e=ultimaEntradaInventario;
+  box.classList.remove('hidden');
+  box.innerHTML='<h4>Última entrada registrada</h4>'+
+    '<div class="stockBox">'+
+      '<div class="stockStat"><span class="hint">SKU</span><br><b style="font-size:16px">'+safe(e.producto.sku)+'</b></div>'+
+      '<div class="stockStat"><span class="hint">Cantidad</span><br><b>'+safe(e.cantidad)+'</b></div>'+
+      '<div class="stockStat"><span class="hint">Stock nuevo</span><br><b>'+safe(e.stockNuevo)+'</b></div>'+
+      '<div class="stockStat"><span class="hint">Etiquetas</span><br><b>'+safe(e.etiquetas)+'</b></div>'+
+    '</div>';
+}
+function reimprimirUltimaEntrada(){
+  if(!ultimaEntradaInventario){alert('Todavía no hay una última entrada para reimprimir.');return}
+  imprimirEtiquetasProductos([{producto:ultimaEntradaInventario.producto,cantidad:ultimaEntradaInventario.cantidad}]);
+}
+function probarEtiquetaDemo(){
+  imprimirEtiquetasProductos([{producto:{sku:'SKU-DEMO-001',codigo_barras:'SKU-DEMO-001',descripcion:'Etiqueta demo'},cantidad:1}]);
+}
+async function cargarHistorialInventario(){
+  var tbody=document.getElementById('inventarioMovimientosTbody');
+  if(!tbody)return;
+  tbody.innerHTML='<tr><td colspan="7">Cargando movimientos...</td></tr>';
+  var r=await db.from('inventario_movimientos_marketplace').select('*').order('created_at',{ascending:false}).limit(50);
+  if(r.error){tbody.innerHTML='<tr><td colspan="7" style="color:var(--red);font-weight:700">Error: '+safe(r.error.message)+'</td></tr>';return}
+  var data=r.data||[];
+  tbody.innerHTML=data.length?data.map(m=>'<tr><td>'+safe(m.created_at?new Date(m.created_at).toLocaleString():'')+'</td><td><b>'+safe(m.sku)+'</b></td><td>'+safe(m.tipo)+'</td><td>'+safe(m.cantidad)+'</td><td>'+safe(m.stock_antes)+'</td><td>'+safe(m.stock_despues)+'</td><td>'+safe(m.motivo||m.referencia||'')+'</td></tr>').join(''):'<tr><td colspan="7">Sin movimientos todavía.</td></tr>';
+}
+
+function setEntradaMsg(text,color){
+  var box=document.getElementById('entradaMsg');
+  if(!box)return;
+  box.classList.remove('hidden');
+  box.style.color=color||'var(--muted)';
+  box.style.fontWeight='800';
+  box.innerHTML=text;
+}
+function limpiarEntradaInventario(){
+  ['entradaSku','entradaDescripcion','entradaTalla','entradaImagen','entradaCodigo'].forEach(function(id){var el=document.getElementById(id);if(el)el.value=''});
+  if(document.getElementById('entradaCantidad'))entradaCantidad.value=1;
+  if(document.getElementById('entradaGenerarEtiquetas'))entradaGenerarEtiquetas.checked=true;
+  ['entradaStockAntes','entradaStockEntrada','entradaStockNuevo','entradaEtiquetasCount'].forEach(function(id){var el=document.getElementById(id);if(el)el.textContent='-'});
+  var box=document.getElementById('entradaMsg');if(box){box.classList.add('hidden');box.innerHTML=''}
+}
+async function buscarSkuEntradaInventario(){
+  var sku=(document.getElementById('entradaSku')?entradaSku.value.trim():'');
+  if(!sku){setEntradaMsg('Escribe o escanea un SKU primero.','var(--red)');return null}
+  var p=await buscarProductoEtiqueta(sku);
+  if(p&&p.sku){
+    entradaSku.value=p.sku||sku;
+    entradaCodigo.value=p.codigo_barras||p.sku||sku;
+    entradaDescripcion.value=p.descripcion||p.sku||sku;
+    entradaTalla.value=p.talla||'';
+    entradaImagen.value=p.imagen_url||'';
+    entradaStockAntes.textContent=Number(p.stock_actual||0);
+    if(Number(p.stock_actual||0)===0 && p.descripcion===sku){setEntradaMsg('SKU nuevo. Al guardar se creará en catálogo.','var(--orange)')}
+    else{setEntradaMsg('SKU listo. Puedes registrar la entrada.','var(--green)')}
+    return p;
+  }
+  entradaCodigo.value=sku;
+  entradaDescripcion.value=entradaDescripcion.value||sku;
+  entradaStockAntes.textContent='0';
+  setEntradaMsg('SKU nuevo. Al guardar se creará en catálogo.','var(--orange)');
+  return {sku:sku,codigo_barras:sku,descripcion:sku,stock_actual:0};
+}
+async function guardarEntradaInventarioEtiquetas(){
+  var sku=(document.getElementById('entradaSku')?entradaSku.value.trim():'');
+  var cantidad=Math.max(1,Math.round(Number((document.getElementById('entradaCantidad')||{}).value||1)));
+  if(!sku){setEntradaMsg('Escribe o escanea un SKU.','var(--red)');return}
+  setEntradaMsg('Guardando entrada de inventario...','var(--muted)');
+  var actual=await buscarProductoEtiqueta(sku);
+  var stockAntes=Number((actual&&actual.stock_actual)||0);
+  var codigo=(document.getElementById('entradaCodigo')?entradaCodigo.value.trim():'')||sku;
+  var descripcion=(document.getElementById('entradaDescripcion')?entradaDescripcion.value.trim():'')||(actual&&actual.descripcion)||sku;
+  var talla=(document.getElementById('entradaTalla')?entradaTalla.value.trim():'')||(actual&&actual.talla)||null;
+  var imagen=(document.getElementById('entradaImagen')?entradaImagen.value.trim():'')||(actual&&actual.imagen_url)||null;
+  var nuevo=stockAntes+cantidad;
+  var producto={sku:sku,codigo_barras:codigo,descripcion:descripcion,talla:talla,imagen_url:imagen,stock_actual:nuevo,activo:true};
+  var up=await db.from('productos_marketplace').upsert([producto],{onConflict:'sku'});
+  if(up.error){setEntradaMsg('Error actualizando catálogo: '+safe(up.error.message),'var(--red)');return}
+  var motivo=(document.getElementById('entradaTipo')?entradaTipo.value:'entrada');
+  try{
+    await db.from('inventario_movimientos_marketplace').insert([{sku:sku,tipo:'entrada',cantidad:cantidad,stock_antes:stockAntes,stock_despues:nuevo,referencia:'entrada_inventario_etiquetada',motivo:motivo}]);
+  }catch(e){console.warn('No se pudo registrar movimiento',e)}
+  var etiquetas=(document.getElementById('entradaGenerarEtiquetas')&&entradaGenerarEtiquetas.checked)?cantidad:0;
+  entradaStockAntes.textContent=stockAntes;
+  entradaStockEntrada.textContent=cantidad;
+  entradaStockNuevo.textContent=nuevo;
+  entradaEtiquetasCount.textContent=etiquetas;
+  ultimaEntradaInventario={producto:producto,cantidad:cantidad,stockNuevo:nuevo,etiquetas:etiquetas};
+  renderUltimaEntradaBox();
+  setEntradaMsg('Entrada guardada correctamente. Stock nuevo: '+nuevo+'.'+(etiquetas?' Generando etiquetas...':''),'var(--green)');
+  await Promise.all([cargarProductosMarketplace(),cargarCatalogoVisualMarketplace(),cargarHistorialInventario()]);
+  if(etiquetas){imprimirEtiquetasProductos([{producto:producto,cantidad:cantidad}]);}
 }
 initNavigation();document.querySelectorAll('section.section').forEach(s=>{if(!s.classList.contains('active'))s.style.display='none'});probarConexion();aplicarTipoPedido();
 </script></body></html>
