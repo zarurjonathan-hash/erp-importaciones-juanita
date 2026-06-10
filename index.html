@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>ERP Importaciones Juanita - V15 Catálogo Masivo y Etiquetas</title>
+<title>ERP Importaciones Juanita - V15.1 Etiquetas Corregidas</title>
 <style>
 :root{--bg:#f3f6ef;--card:#fff;--ink:#1f2a24;--muted:#66736a;--line:#dfe6d8;--soft:#eef3e7;--sage:#c2d8b7;--olive:#556b2f;--green:#2f7d4f;--red:#b74242;--orange:#c9822b;--blue:#4267b2;--shadow:0 18px 45px rgba(24,32,25,.10);--radius:18px}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--ink)}
@@ -170,13 +170,13 @@ section.section.active{display:block!important}
   </button>
   <div>
     <b>Importaciones Juanita</b><br>
-    <small>ERP V15</small>
+    <small>ERP V15.1</small>
   </div>
 </div>
 <div id="mobileMenuOverlay" class="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
 <div class="app">
 <aside class="sidebar">
-<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V15 Etiquetas</p></div></div>
+<div class="brand"><div class="logo">IJ</div><div><h1>Importaciones Juanita</h1><p>ERP V15.1 Etiquetas</p></div></div>
 <div class="navGroup">Principal</div>
 <div class="navItem active" data-view="dashboard"><div class="navIcon">📊</div>Dashboard</div>
 <div class="navItem" data-view="pedidos"><div class="navIcon">📄</div>Pedidos</div>
@@ -198,14 +198,14 @@ section.section.active{display:block!important}
 <div class="topbar"><div class="title"><h2 id="pageTitle">Dashboard</h2><p id="pageSubtitle">Resumen general de operación, pedidos, marketplace e inventario.</p></div><div class="userBox"><div class="avatar">J</div><div><b>Jonathan Zarur</b><br><span style="color:var(--muted);font-size:12px">Rol: Director</span></div></div></div>
 
 <section id="dashboard" class="section active">
-<span class="version">VERSIÓN ACTUAL: V15 CATÁLOGO MASIVO + ETIQUETAS 2X1</span>
+<span class="version">VERSIÓN ACTUAL: V15.1 ETIQUETAS CORREGIDAS</span>
 <div class="grid4">
 <div class="card metric"><div class="label">Conexión Supabase</div><div class="value" id="dbStatus">...</div><div class="note" id="dbNote">Probando conexión</div></div>
 <div class="card metric"><div class="label">Clientes en BD</div><div class="value" id="clientesCount">...</div><div class="note">Tabla clientes</div></div>
 <div class="card metric"><div class="label">Productos catálogo</div><div class="value" id="productosCount">...</div><div class="note">catalogo_productos</div></div>
 <div class="card metric"><div class="label">Técnicas</div><div class="value" id="tecnicasCount">...</div><div class="note">catalogo_tecnicas</div></div>
 </div><br>
-<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V15 Catálogo masivo + etiquetas 2x1</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
+<div class="grid2"><div class="card"><h3>Estado técnico</h3><table><tbody><tr><th>Versión</th><td>V15.1 Etiquetas corregidas</td></tr><tr><th>Pedidos</th><td>Pedidos, muestras y guías marketplace</td></tr><tr><th>Configuración</th><td>Marketplace limpio + POD + catálogo visual</td></tr></tbody></table></div><div class="card"><h3>Regla de flujo</h3><p>Todo pedido inicia pendiente de aprobación del Director/Admin. Después se asigna al área definida por tipo de pedido.</p><div class="actions"><button onclick="showView('config')">Ir a Catálogos</button></div></div></div>
 </section>
 
 <section id="clientes" class="section">
@@ -1456,10 +1456,46 @@ function resetCatalogoImport(){catRows=[];catMap=null;catHeaders=[];if(document.
 function leerCsvCatalogoMarketplace(input){var f=input.files&&input.files[0];if(!f)return;var reader=new FileReader();reader.onload=function(e){try{var rows=parseCsvMarketplace(e.target.result);var detected=detectarMapaCatalogo(rows);catMap=detected.map;catHeaders=detected.headers||[];var data=rows.slice(detected.idx+1).filter(r=>r.some(c=>String(c).trim()!==''));catRows=data.map(r=>({sku:valor(r,catMap.sku),codigo_barras:valor(r,catMap.codigo_barras),descripcion:valor(r,catMap.descripcion),talla:valor(r,catMap.talla),imagen_url:valor(r,catMap.imagen_url),stock:numeroCatalogo(valor(r,catMap.stock)),categoria:valor(r,catMap.categoria)})).filter(x=>x.sku);renderPreviewCatalogo(detected)}catch(err){catMsg.style.color='var(--red)';catMsg.textContent='Error leyendo CSV de catálogo: '+err.message}};reader.readAsText(f,'UTF-8')}
 function renderPreviewCatalogo(detected){catImportStatus.classList.remove('hidden');catImportStatus.innerHTML='<b>Catálogo detectado.</b><br>Fila de encabezados: '+(detected.idx+1)+'<br>SKUs válidos: '+catRows.length;catPreviewTbody.innerHTML=catRows.slice(0,30).map(r=>'<tr><td><b>'+safe(r.sku)+'</b></td><td>'+safe(r.codigo_barras)+'</td><td>'+safe(r.descripcion)+'</td><td>'+safe(r.talla)+'</td><td>'+safe(r.imagen_url)+'</td><td>'+safe(r.stock===null?'':r.stock)+'</td><td>'+safe(r.categoria)+'</td></tr>').join('')||'<tr><td colspan="7">No se detectaron SKUs válidos.</td></tr>'}
 async function importarCatalogoMarketplace(){if(!catRows.length){catMsg.style.color='var(--red)';catMsg.textContent='Primero sube un CSV de catálogo válido.';return}catMsg.style.color='var(--muted)';catMsg.textContent='Importando '+catRows.length+' SKUs...';var modoStock=catStockModo.value;var registros=catRows.map(r=>{var obj={sku:r.sku,codigo_barras:r.codigo_barras||r.sku,descripcion:r.descripcion||r.sku,talla:r.talla||null,imagen_url:r.imagen_url||null,activo:true};if(modoStock==='actualizar_si_viene'&&r.stock!==null)obj.stock_actual=r.stock;return obj});var ok=0;for(const part of chunks(registros,300)){var up=await db.from('productos_marketplace').upsert(part,{onConflict:'sku'});if(up.error){catMsg.style.color='var(--red)';catMsg.textContent='Error importando catálogo: '+up.error.message;return}ok+=part.length}catMsg.style.color='var(--green)';catMsg.textContent='Catálogo actualizado: '+ok+' SKUs.';await iniciarModuloInventarioMarketplace()}
-async function buscarProductoEtiqueta(sku){var r=await db.from('productos_marketplace').select('*').or('sku.eq.'+sku+',codigo_barras.eq.'+sku).limit(1).maybeSingle();if(r.error)throw r.error;return r.data}
+async function buscarProductoEtiqueta(sku){
+  var valor=String(sku||'').trim();
+  var r=await db.from('productos_marketplace').select('*').eq('sku',valor).limit(1).maybeSingle();
+  if(r.error)throw r.error;
+  if(r.data)return r.data;
+  var b=await db.from('productos_marketplace').select('*').eq('codigo_barras',valor).limit(1).maybeSingle();
+  if(b.error)throw b.error;
+  return b.data;
+}
+
 async function generarEtiquetasSku(){var sku=labelSkuInput.value.trim();var cant=Number(labelCantidadInput.value||1)||1;if(!sku){labelMsg.style.color='var(--red)';labelMsg.textContent='Escribe o escanea un SKU.';return}var p=await buscarProductoEtiqueta(sku);if(!p){labelMsg.style.color='var(--red)';labelMsg.textContent='No encontré ese SKU/código.';return}imprimirEtiquetasProductos([{producto:p,cantidad:cant}])}
 async function generarEtiquetasProductoPorSku(sku){var p=await buscarProductoEtiqueta(sku);if(!p){alert('No encontré SKU '+sku);return}var cant=Number(prompt('¿Cuántas etiquetas quieres imprimir?', '1')||1)||1;imprimirEtiquetasProductos([{producto:p,cantidad:cant}])}
 async function generarEtiquetasFaltantes(){var r=await db.from('productos_marketplace').select('*').lt('stock_actual',0).order('sku',{ascending:true}).limit(200);if(r.error){labelMsg.style.color='var(--red)';labelMsg.textContent='Error: '+r.error.message;return}var packs=(r.data||[]).map(p=>({producto:p,cantidad:Math.abs(Number(p.stock_actual)||1)}));if(!packs.length){labelMsg.style.color='var(--muted)';labelMsg.textContent='No hay faltantes negativos.';return}imprimirEtiquetasProductos(packs)}
-function imprimirEtiquetasProductos(packs){var etiquetas=[];packs.forEach(pack=>{var p=pack.producto,c=Math.max(1,Math.round(Number(pack.cantidad)||1));for(var i=0;i<c;i++)etiquetas.push(p)});var labels=etiquetas.map((p,i)=>'<div class="label"><svg id="bc'+i+'"></svg><div class="sku">'+safe(p.sku)+'</div></div>').join('');var codes=etiquetas.map(p=>String(p.codigo_barras||p.sku));var w=window.open('','_blank');if(!w){alert('El navegador bloqueó la ventana. Permite popups para imprimir etiquetas.');return}w.document.open();w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Etiquetas 2x1</title><style>@page{size:2in 1in;margin:0}html,body{margin:0;padding:0;background:#fff}.label{width:2in;height:1in;box-sizing:border-box;padding:.07in .08in;display:flex;flex-direction:column;align-items:center;justify-content:center;page-break-after:always;overflow:hidden}.label svg{width:1.75in;height:.55in}.sku{font-family:Arial,sans-serif;font-size:9pt;font-weight:900;line-height:1;margin-top:.02in;text-align:center;white-space:nowrap;max-width:1.85in;overflow:hidden;text-overflow:ellipsis}</style></head><body>'+labels+'<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"><\\/script><script>var codes='+JSON.stringify(codes)+';window.onload=function(){codes.forEach(function(c,i){try{JsBarcode(\\'#bc\\'+i,c,{format:\\'CODE128\\',displayValue:false,margin:0,width:1.4,height:42})}catch(e){document.getElementById(\\'bc\\'+i).outerHTML=\\'<div>\\'+c+\\'</div>\\'}});setTimeout(function(){window.print()},500)}<\\/script></body></html>');w.document.close()}
+function escapeHtmlEtiqueta(v){
+  return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]});
+}
+function imprimirEtiquetasProductos(packs){
+  var etiquetas=[];
+  packs.forEach(function(pack){
+    var p=pack.producto||{};
+    var c=Math.max(1,Math.round(Number(pack.cantidad)||1));
+    for(var i=0;i<c;i++)etiquetas.push(p);
+  });
+  if(!etiquetas.length){alert('No hay etiquetas para imprimir.');return}
+  var labels=etiquetas.map(function(p,i){
+    return '<div class="label"><svg id="bc'+i+'"></svg><div class="sku">'+escapeHtmlEtiqueta(p.sku||p.codigo_barras||'SIN-SKU')+'</div></div>';
+  }).join('');
+  var codes=etiquetas.map(function(p){return String(p.codigo_barras||p.sku||'SIN-SKU')});
+  var w=window.open('','_blank');
+  if(!w){alert('El navegador bloqueó la ventana. Permite ventanas emergentes para imprimir etiquetas.');return}
+  var doc='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Etiquetas 2x1</title>'+
+  '<style>@page{size:2in 1in;margin:0}html,body{margin:0;padding:0;background:#fff}.label{width:2in;height:1in;box-sizing:border-box;padding:.07in .08in;display:flex;flex-direction:column;align-items:center;justify-content:center;page-break-after:always;overflow:hidden}.label svg{width:1.75in;height:.55in}.sku{font-family:Arial,sans-serif;font-size:9pt;font-weight:900;line-height:1;margin-top:.02in;text-align:center;white-space:nowrap;max-width:1.85in;overflow:hidden;text-overflow:ellipsis}</style>'+
+  '</head><body>'+labels+
+  '<scr'+'ipt src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></scr'+'ipt>'+
+  '<scr'+'ipt>var codes='+JSON.stringify(codes)+';window.onload=function(){codes.forEach(function(c,i){try{JsBarcode("#bc"+i,c,{format:"CODE128",displayValue:false,margin:0,width:1.4,height:42})}catch(e){document.getElementById("bc"+i).outerHTML="<div style=\\"font-family:Arial;font-weight:bold;font-size:10px\\">"+c+"</div>"}});setTimeout(function(){window.print()},500)}</scr'+'ipt>'+
+  '</body></html>';
+  w.document.open();
+  w.document.write(doc);
+  w.document.close();
+}
+
 initNavigation();document.querySelectorAll('section.section').forEach(s=>{if(!s.classList.contains('active'))s.style.display='none'});probarConexion();aplicarTipoPedido();
 </script></body></html>
